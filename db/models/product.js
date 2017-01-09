@@ -1,23 +1,23 @@
-const Sequelize = require('sequelize')
-const db = require('APP/db')
+const Sequelize = require('sequelize');
+const db = require('APP/db');
 
 const Product = db.define('product', {
   size: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   remaining: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   price: {
     // if we need a url path
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   photo: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
 }, {
   // TO DO: COME BACK AND UPDATE MEEEEEEEEEEE
   // hooks: {
@@ -25,6 +25,6 @@ const Product = db.define('product', {
   // }
 
   // We support oauth, so users may or may not have passwords.
-})
+});
 
-module.exports = Product
+module.exports = Product;
