@@ -1,3 +1,6 @@
+const Sequelize = require('sequelize')
+const db = require('APP/db')
+
 // USE EAGER LOADING!!
 
 const LineItem = db.define('lineitems', {
@@ -11,3 +14,5 @@ const LineItem = db.define('lineitems', {
   }
 }, {
 })
+
+module.exports = LineItem

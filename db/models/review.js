@@ -1,3 +1,6 @@
+const Sequelize = require('sequelize')
+const db = require('APP/db')
+
 const Review = db.define('reviews', {
   content: {
     type: Sequelize.TEXT,
@@ -9,3 +12,6 @@ const Review = db.define('reviews', {
   }
 }, {
 })
+
+
+module.exports = Review
