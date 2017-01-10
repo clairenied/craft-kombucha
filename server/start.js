@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const {resolve} = require('path');
+const { resolve } = require('path');
 const passport = require('passport');
 
 // Bones has a symlink from node_modules/APP to the root of the app.
@@ -8,7 +8,7 @@ const passport = require('passport');
 // saying require('APP/whatever').
 //
 // This next line requires our root index.js:
-const pkg = require('APP');
+const pkg = require('APP'); // eslint-disable-line
 
 const app = express();
 
