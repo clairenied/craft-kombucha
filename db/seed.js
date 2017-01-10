@@ -45,13 +45,13 @@ const seedLineItems = () => db.Promise.map([
 
 // orders
 const seedOrders = () => db.Promise.map([
-  { lineItemPrice: 'this product is tasty!', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: 'NOW' },
-  { lineItemPrice: 'idk about this one', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: 'NOW' },
+  { lineItemPrice: '2.50', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: null },
+  { lineItemPrice: '4.50', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: null },
 ], order => db.model('orders').create(order));
 
 const allPromises = () => 
 	Promise.all([
-		seedUsers(), seedProducts(), seedProductType(), seedLineItems(), seedReviews()
+		seedUsers(), seedProducts(), seedProductType(), seedLineItems(), seedReviews(), seedOrders()
 	])
 	.then(res => res)
 
