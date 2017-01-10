@@ -16,6 +16,7 @@ import SingleProduct from './components/SingleProduct'
 import SingleReview from './components/SingleReview'
 import Signup from './components/Signup'
 import Order from './components/Order'
+import Cart from './components/Cart'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -35,10 +36,11 @@ render (
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
         <Route path="/products" component={Products} />
-        <Route path="/product" component={SingleProduct} />
+        <Route path="/single-product" component={SingleProduct} />
         <Route path="/order" component={Order} />
         <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
+        <Route path="/cart" component={Cart} />
       </Route>
     </Router>
   </Provider>,

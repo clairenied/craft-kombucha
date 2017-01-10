@@ -6,7 +6,7 @@ const Navbar = (props) => {
 		<nav className="navbar navbar-default">
 		  <div className="container-fluid">
 		    <div className="navbar-header">
-		      <a className="navbar-brand" href="#">Craft Kombucha</a>
+		      <Link className="navbar-brand" to="/">Craft Kombucha</Link>
 		    </div>
 		    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul className="nav navbar-nav">
@@ -19,9 +19,8 @@ const Navbar = (props) => {
 			      </li>
 		      </ul>
 		      <ul className="nav navbar-nav navbar-right">
-		        <li><a href="#">Cart</a></li>
+		        <li><Link to="/cart">Cart</Link></li>
 		        <li><a href="#">Admin</a></li>
-		        <li><a href="#">My Account</a></li>
 		        <li><Link to="/">Log Out</Link></li>
 		      </ul>
 		    </div>
