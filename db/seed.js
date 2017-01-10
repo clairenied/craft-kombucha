@@ -17,22 +17,22 @@ const seedProducts = () => db.Promise.map([
   { size: 'medium', remaining: '0 units', price: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg' },
   { size: 'large', remaining: '5 units', price: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg' },
   { size: 'medium', remaining: '5 units', price: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg' },
-  { size: 'large', remaining: '10 units', price: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg' },
+  { size: 'large', remaining: '10 units', price: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg'},
 ], product => db.model('products').create(product));
 
 // product types
 const seedProductType = () => db.Promise.map([
-  { name: 'watermellon kombucha', description: 'created with mother #12345, watermellon flavor' },
-  { name: 'apple kombucha', description: 'created with mother #12345, watermellon flavor' },
-  { name: 'no flavor kombucha', description: 'created with mother #12345, watermellon flavor' },
-  { name: 't-shirt', description: 'hand knitted t-shirt. Material: cotton, spandex, kombucha mothers' },
+  { name: 'watermellon kombucha', description: 'created with mother #12345, watermellon flavor'},
+  { name: 'apple kombucha', description: 'created with mother #12345, watermellon flavor'},
+  { name: 'no flavor kombucha', description: 'created with mother #12345, watermellon flavor'},
+  { name: 't-shirt', description: 'hand knitted t-shirt. Material: cotton, spandex, kombucha mothers'},
   { name: 'sweatshirt', description: 'hand knitted sweatshirt. Material: cotton, spandex, kombucha mothers' },
 ], productType => db.model('producttypes').create(productType));
 
 // reviews
 const seedReviews = () => db.Promise.map([
-  { content: 'this product is tasty', starRating: '3' },
-  { content: 'idk about this one', starRating: '1' },
+  { content: 'this product is tasty', starRating: '3', producttype_id: '1' },
+  { content: 'idk about this one', starRating: '1', producttype_id: '3' },
 ], review => db.model('reviews').create(review));
 
 // line items
@@ -45,9 +45,20 @@ const seedLineItems = () => db.Promise.map([
 
 // orders
 const seedOrders = () => db.Promise.map([
-  { lineItemPrice: '2.50', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: null },
-  { lineItemPrice: '4.50', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: null },
+  { lineItemPrice: '2.50', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: null, },
+  { lineItemPrice: '4.50', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'air', orderPlacedDate: null },
+  { lineItemPrice: '5.50', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'air', orderPlacedDate: null },
+  { lineItemPrice: '1.50', status: 'cancelled', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: null },
 ], order => db.model('orders').create(order));
+
+//addresses
+const seedAddress = () => db.Promise.map([
+  { streetName: 'blue st', streetNumber: '1234', city: 'chicago', state: 'illinois', zip: '60601'},
+  { streetName: 'green st', streetNumber: '4321', city: 'chicago', state: 'illinois', zip: '60601'},
+  { streetName: 'red ave', streetNumber: '2468', city: 'chicago', state: 'illinois', zip: '60601'},
+  { streetName: 'yellow st', streetNumber: '8642', city: 'chicago', state: 'illinois', zip: '60601'},
+  { streetName: 'woof st', streetNumber: '1111', city: 'chicago', state: 'illinois', zip: '60601'},
+], address => db.model('addresss').create(address));
 
 const allPromises = () => 
 	Promise.all([
@@ -56,10 +67,38 @@ const allPromises = () =>
 	.then(res => res)
 
 // do a promise.all for users, products
+// db.didSync
+//   .then(() => db.sync({ force: true }))
+//   .then(allPromises)
+//   .then(promises => console.log('Seeded promises: ', promises))
+//   .catch(error => console.error(error))
+//   .finally(() => db.close());
+
+
 db.didSync
   .then(() => db.sync({ force: true }))
   .then(allPromises)
-  .then(promises => console.log('Seeded promises: ', promises))
+  .spread( (seedUsers, seedProducts, seedProductType, seedLineItems, seedReviews, seedOrders) => {
+    
+    // console.log('seedLineItems: ', seedLineItems[1].dataValues)
+    let lineId = seedLineItems[1].dataValues;
+    let productId = seedProducts[1].dataValues;
+    let productTypeId = seedProductType[1].dataValues;
+    let orderId = seedOrders[1].dataValues;
+
+    seedProducts.map(product => {
+      product.lineitem_id = lineId.id
+      product.product_id = productId.id
+    }) 
+
+    seedLineItems.map(lineItem => {
+      lineItem.order_id = orderId.id
+    }) 
+
+    seedReviews.map(review => {
+      review.producttype_id = productTypeId.id
+    })      
+  })
+  .then(allPromises => console.log('Seeded promises: ', allPromises) )
   .catch(error => console.error(error))
   .finally(() => db.close());
-
