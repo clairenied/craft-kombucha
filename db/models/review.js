@@ -6,8 +6,9 @@ const Review = db.define('reviews', {
     type: Sequelize.TEXT,
     allowNull: false,
   },
+  // not sure if we are using range correctly
   starRating: {
-    type: Sequelize.RANGE(Sequelize.INTEGER),
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
 }, {});

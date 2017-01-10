@@ -6,7 +6,9 @@ const Order = db.define('orders', {
     // WHO AM I
     // WHAT AM I
     // WHAT DO I DO HERE
-    type: Sequelize.ARRAY(Sequelize.DECIMAL),
+    //doesnt work w/ array
+    // type: Sequelize.ARRAY(Sequelize.DECIMAL),
+    type: Sequelize.DECIMAL,
     allowNull: false,
   },
   status: {
