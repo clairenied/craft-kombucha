@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('APP/db');
 
-const Address = db.define('address', {
+const Address = db.define('addresses', {
   streetNumber: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -23,6 +23,5 @@ const Address = db.define('address', {
     allowNull: false,
   },
 }, {});
-
 
 module.exports = Address;

@@ -45,7 +45,7 @@ OAuth.V2 = (accessToken, refreshToken, profile, done) =>
     }).then(user => db.Promise.props({
       user,
       _setOauthUser: oauth.setUser(user),
-    })),
+    }))
   )
   .then(({ user }) => done(null, user))
   .catch(done);

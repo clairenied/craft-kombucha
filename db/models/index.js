@@ -1,6 +1,3 @@
-const Sequelize = require('sequelize');
-const db = require('APP/db');
-
 // Require our models. Running each module registers the model into sequelize
 // so any other part of the application could call sequelize.model('User')
 // to get access to the User model.
@@ -16,20 +13,20 @@ const Review = require('./review');
 User.hasMany(Address);
 
 User.hasMany(Order);
-Order.hasOne(User);
+Order.belongsTo(User);
 
 User.hasMany(Review);
-Review.hasOne(User);
+Review.belongsTo(User);
 
 Order.hasMany(LineItem);
-LineItem.hasOne(Order);
+LineItem.belongsTo(Order);
 
 LineItem.hasOne(Product);
 
 ProductType.hasMany(Product);
-Product.hasOne(ProductType);
+Product.belongsTo(ProductType);
 
 ProductType.hasMany(Review);
-Review.hasOne(ProductType);
+Review.belongsTo(ProductType);
 
 module.exports = { User, Address, LineItem, Order, Product, ProductType, Review };
