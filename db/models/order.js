@@ -6,7 +6,7 @@ const Order = db.define('orders', {
     // WHO AM I
     // WHAT AM I
     // WHAT DO I DO HERE
-    type: Sequelize.ARRAY,
+    type: Sequelize.ARRAY(Sequelize.DECIMAL),
     allowNull: false,
   },
   status: {
@@ -21,7 +21,6 @@ const Order = db.define('orders', {
   orderPlacedDate: {
     type: Sequelize.DATE,
   },
-
 }, {});
 
 module.exports = Order;
