@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import SingleProduct from './SingleProduct';
+import ProductModule from './ProductModule';
 
-class Products extends Component{
-	render(){
-		return (
-			<div>
-				<large>All Products Page</large>
-			</div>
-		)
-	}
+const Products = (props) => {
+  return (
+    <div>
+  		<div className="page-header col-xs-12">
+        <h1>Products</h1>
+      </div>
+      <ProductModule/>
+    </div>
+  )
 }
 
 export default Products;

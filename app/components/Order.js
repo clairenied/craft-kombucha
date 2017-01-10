@@ -11,7 +11,7 @@ class Order extends Component{
 	}
 }
 
-export default Order;
+export default Order
 
 
 // function mapStateToProps(state){
