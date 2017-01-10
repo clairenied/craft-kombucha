@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('APP/db'); // eslint-disable-line
 
 const User = db.define('users', {
   name: Sequelize.STRING,

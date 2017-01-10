@@ -1,4 +1,4 @@
-const db = require('APP/db');
+const db = require('APP/db'); // eslint-disable-line
 const api = module.exports = require('express').Router();
 
 api

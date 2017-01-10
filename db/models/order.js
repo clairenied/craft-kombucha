@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('APP/db'); // eslint-disable-line
 
 const Order = db.define('orders', {
   lineItemPrice: {

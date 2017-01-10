@@ -1,6 +1,6 @@
 const debug = require('debug')('oauth');
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('APP/db'); // eslint-disable-line
 
 const OAuth = db.define('oauths', {
   uid: Sequelize.STRING,
