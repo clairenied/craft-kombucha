@@ -5,6 +5,23 @@ const Review = db.model('reviews');
 const User = db.model('users');
 
 module.exports = require('express').Router()
+  // Route parameter middleware for product id
+  .param('productId', (req, res, next, productId) => {
+    req.product = Product.findOne({
+      where: {
+        id: productId,
+      },
+      // Eagerly load product's type and reviews
+      include: [ProductType
+      // , {
+      //   model: Review,
+      //   // Eagerly load the user who wrote each review
+      //   include: [User],
+      // }
+      ],
+    });
+    next();
+  })
   // Get all products
   .get('/', (req, res, next) =>
     Product.findAll({
@@ -20,17 +37,13 @@ module.exports = require('express').Router()
     .then(product => res.status(201).json(product))
     .catch(next))
   // Get one product by ID
-  .get('/:id', (req, res, next) =>
-    Product.findOne({
-      where: {
-        id: req.params.id,
-      },
-      // Eagerly load product's type and reviews
-      include: [ProductType, {
-        model: Review,
-        // Eagerly load the user who wrote each review
-        include: [User],
-      }],
-    })
+  .get('/:productId', (req, res, next) => {
+    req.product
     .then(product => res.json(product))
+    .catch(next);
+  })
+  // Get reviews for one product
+  .get('/:productId/reviews', (req, res, next) =>
+    req.product
+    .then(product => res.json(product.reviews)) // to test when associations are complete
     .catch(next));

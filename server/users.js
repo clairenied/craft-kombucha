@@ -10,10 +10,11 @@ module.exports = require('express').Router()
   // Route parameter middleware for id
   .param('userId', (req, res, next, userId) => {
     req.user = User.findOne({
-      where: { userId },
+      where: { id: userId },
       // Eagerly load user's addresses, orders, and reviews
       include: [Address, Order, Review],
     });
+    next();
   })
   // Get all users
   .get('/', forbidden('only admins can list users'), (req, res, next) =>
@@ -26,19 +27,38 @@ module.exports = require('express').Router()
     .then(user => res.status(201).json(user))
     .catch(next))
   // Get one user by ID
-  .get('/:id', mustBeLoggedIn, (req, res, next) =>
+  .get('/:userId', mustBeLoggedIn, (req, res, next) =>
     req.user
     .then(user => res.json(user))
     .catch(next))
   // Get all orders of one user
-  .get('/:id/orders', mustBeLoggedIn, (req, res, next) =>
+  .get('/:userId/orders', (req, res, next) =>
     req.user
     .then(user =>
-      Order.findAll({
-        where: {
-          userId: user.id,
-        },
-      })
+    user.orders // if eager loading in .param works
+    //
+    // ONLY IF EAGER LOADING DOESN'T WORK
+    //   Order.findAll({
+    //     where: {
+    //       userId: user.id,
+    //     },
+    //   })
     )
+    .then(orders => res.json(orders))
+    .catch(next))
+  // Get all reviews written by one user
+  .get('/:userId/reviews', (req, res, next) =>
+    req.user
+    .then(user =>
+      user.reviews // if eager loading in .param works
+      //
+      // ONLY IF EAGER LOADING DOESN'T WORK
+      // Review.findAll({
+      //   where: {
+      //     userId: user.id,
+      //   },
+      // })
+    )
+    .then(reviews => res.json(reviews))
     .catch(next));
 
