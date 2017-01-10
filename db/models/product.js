@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('APP/db'); // eslint-disable-line
 
 const Product = db.define('products', {
   size: {
@@ -7,6 +7,7 @@ const Product = db.define('products', {
     allowNull: false,
   },
   remaining: {
+    // make an integer
     type: Sequelize.TEXT,
     allowNull: false,
   },

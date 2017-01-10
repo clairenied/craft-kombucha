@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('APP/db'); // eslint-disable-line
 
 // USE EAGER LOADING!!
+
 
 const LineItem = db.define('lineitems', {
   lineItemPrice: {
@@ -11,7 +12,8 @@ const LineItem = db.define('lineitems', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
-  }
+  },
 }, {});
 
+//change name to camel case
 module.exports = LineItem;

@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('APP/db'); // eslint-disable-line
 
 const Address = db.define('addresses', {
   streetNumber: {
