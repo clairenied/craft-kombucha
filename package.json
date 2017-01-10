@@ -8,7 +8,7 @@
     "test-watch": "check-node-version --node '>= 6.7.0' && bin/setup && mocha --compilers js:babel-register --watch app/**/*.test.js app/**/*.test.jsx db/**/*.test.js server/**/*.test.js",
     "build": "check-node-version --node '>= 6.7.0' && bin/setup && webpack",
     "build-watch": "check-node-version --node '>= 6.7.0' && bin/setup && webpack -w",
-    "start": "check-node-version --node '>= 6.7.0' && bin/setup && nodemon server/start.js",
+    "start": "check-node-version --node '>= 6.7.0' && bin/setup && nodemon server/start.js & webpack -w",
     "seed": "node db/seed.js"
   },
   "repository": {
@@ -29,6 +29,7 @@
   "dependencies": {
     "axios": "^0.15.2",
     "babel-preset-stage-2": "^6.18.0",
+    "basscss": "^8.0.2",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "chai-enzyme": "^0.5.2",
