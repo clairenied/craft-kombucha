@@ -7,6 +7,7 @@ const Product = db.define('products', {
     allowNull: false,
   },
   remaining: {
+    // make an integer
     type: Sequelize.TEXT,
     allowNull: false,
   },

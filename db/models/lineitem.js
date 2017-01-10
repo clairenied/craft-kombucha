@@ -3,6 +3,7 @@ const db = require('APP/db');
 
 // USE EAGER LOADING!!
 
+
 const LineItem = db.define('lineitems', {
   lineItemPrice: {
     type: Sequelize.DECIMAL,
@@ -14,4 +15,5 @@ const LineItem = db.define('lineitems', {
   }
 }, {});
 
+//change name to camel case
 module.exports = LineItem;
