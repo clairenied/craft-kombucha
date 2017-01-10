@@ -1,0 +1,45 @@
+import React from 'react'
+import { Link } from 'react-router'
+
+const Navbar = (props) => {
+	return (
+		<nav className="navbar navbar-default">
+		  <div className="container-fluid">
+		    <div className="navbar-header">
+		      <a className="navbar-brand" href="#">Craft Kombucha</a>
+		    </div>
+		    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul className="nav navbar-nav">
+		      	<li>
+				      <form className="navbar-form">
+				        <div className="form-group">
+				          <input type="text" className="form-control" placeholder="Search"/>
+				        </div>
+				      </form>
+			      </li>
+		      </ul>
+		      <ul className="nav navbar-nav navbar-right">
+		        <li><a href="#">Cart</a></li>
+		        <li><a href="#">Admin</a></li>
+		        <li><a href="#">My Account</a></li>
+		        <li><Link to="/">Log Out</Link></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+	)
+}
+
+export default Navbar
+
+
+		// <nav className="navbar navbar-default">
+		// 	<div className="container-fluid">
+		// 		<a className="navbar-brand" href="#">Artisan Kombucha</a>
+		// 		<input 
+		// 			type="text"
+		// 			className="form-control"
+		// 			placeholder="search" />
+
+		// 	</div>
+		// </nav>
