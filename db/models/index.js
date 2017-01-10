@@ -10,13 +10,19 @@ const Product = require('./product');
 const ProductType = require('./productType');
 const Review = require('./review');
 
-User.hasMany(Address);
-
 User.hasMany(Order);
 Order.belongsTo(User);
 
 User.hasMany(Review);
 Review.belongsTo(User);
+
+// Users have one shipping address and one billing address
+User.belongsTo(Address, { as: 'shippingAddress' });
+User.belongsTo(Address, { as: 'billingAddress' });
+
+// Orders also have a shipping address and billing address
+Order.belongsTo(Address, { as: 'shipTo' });
+Order.belongsTo(Address, { as: 'billTo' });
 
 Order.hasMany(LineItem);
 LineItem.belongsTo(Order);
