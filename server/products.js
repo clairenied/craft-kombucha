@@ -11,14 +11,14 @@ module.exports = require('express').Router()
       where: {
         id: productId,
       },
-      // Eagerly load product's type and reviews
-      include: [ProductType
-      // , {
-      //   model: Review,
-      //   // Eagerly load the user who wrote each review
-      //   include: [User],
-      // }
-      ],
+      // Eagerly load product's type and reviews (and authors of reviews)
+      include: [{
+        model: ProductType,
+        include: [{
+          model: Review,
+          include: [User]
+        }]
+      }]
     });
     next();
   })
@@ -45,5 +45,7 @@ module.exports = require('express').Router()
   // Get reviews for one product
   .get('/:productId/reviews', (req, res, next) =>
     req.product
-    .then(product => res.json(product.reviews)) // to test when associations are complete
+    .then(product => product.producttype)// to test when associations are complete
+    .then(pt=>pt.getReviews())
+    .then(reviews=>res.json(reviews))
     .catch(next));

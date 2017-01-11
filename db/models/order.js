@@ -3,11 +3,6 @@ const db = require('APP/db'); // eslint-disable-line
 
 const Order = db.define('orders', {
   lineItemPrice: {
-    // WHO AM I
-    // WHAT AM I
-    // WHAT DO I DO HERE
-    //doesnt work w/ array
-    // type: Sequelize.ARRAY(Sequelize.DECIMAL),
     type: Sequelize.DECIMAL,
     allowNull: false,
   },
