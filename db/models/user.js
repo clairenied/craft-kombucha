@@ -3,7 +3,14 @@ const Sequelize = require('sequelize');
 const db = require('APP/db'); // eslint-disable-line
 
 const User = db.define('users', {
-  name: Sequelize.STRING,
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   email: {
     type: Sequelize.STRING,
     validate: {
@@ -11,7 +18,6 @@ const User = db.define('users', {
       notEmpty: true,
     },
   },
-
   birthday: {
     type: Sequelize.DATEONLY,
   },
@@ -27,6 +33,11 @@ const User = db.define('users', {
   hooks: {
     beforeCreate: setEmailAndPassword,
     beforeUpdate: setEmailAndPassword,
+  },
+  getterMethods: {
+    fullName() {
+      return `${this.firstName} ${this.lastName}`;
+    },
   },
   instanceMethods: {
     authenticate(plaintext) {
