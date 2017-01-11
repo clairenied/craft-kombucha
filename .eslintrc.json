@@ -8,6 +8,8 @@
     ],
     "rules": {
       "comma-dangle": 0,
-      "import/no-extraneous-dependencies": 1
+      "import/no-extraneous-dependencies": 1,
+      "no-param-reassign": 1,
+      "quotes": 1
     }
 }
