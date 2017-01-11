@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-// import Reviews from './Reviews'
+import { Link } from 'react-router'
 
 class SingleProduct extends Component{
 	render(){
