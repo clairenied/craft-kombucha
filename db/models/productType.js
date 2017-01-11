@@ -13,8 +13,9 @@ const ProductType = db.define('producttypes', {
 }, {
    instanceMethods: {
     getRating: function(){
-      this.getReviews()
+      return this.getReviews()
       .then(reviews=>{
+        console.log(reviews.content)
         let sum = 0;
         reviews.forEach(review=>{
           sum+=review.starRating
