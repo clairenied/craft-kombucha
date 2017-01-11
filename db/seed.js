@@ -47,11 +47,11 @@ const seedReviews = () => db.Promise.map([
 
 // orders
 const seedOrders = () => db.Promise.map([
-  { lineItemPrice: '12.99', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: null, user_id: '1', ship_to_id: '1', bill_to_id: '1' },
-  { lineItemPrice: '24.99', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'air', orderPlacedDate: null, user_id: '1', ship_to_id: '1', bill_to_id: '2' },
-  { lineItemPrice: '32.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'air', orderPlacedDate: null, user_id: '2', ship_to_id: '4', bill_to_id: '3' },
-  { lineItemPrice: '20.00', status: 'cancelled', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: null, user_id: '4', ship_to_id: '4', bill_to_id: '4' },
-  { lineItemPrice: '10.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'snail', orderPlacedDate: null, user_id: '3', ship_to_id: '3', bill_to_id: '3' },
+  { lineItemPrice: '12.99', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: Date.now(), user_id: '1', ship_to_id: '1', bill_to_id: '1' },
+  { lineItemPrice: '24.99', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'air', orderPlacedDate: Date.now(), user_id: '1', ship_to_id: '1', bill_to_id: '2' },
+  { lineItemPrice: '32.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'air', orderPlacedDate: Date.now(), user_id: '2', ship_to_id: '4', bill_to_id: '3' },
+  { lineItemPrice: '20.00', status: 'cancelled', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: Date.now(), user_id: '4', ship_to_id: '4', bill_to_id: '4' },
+  { lineItemPrice: '10.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'snail', orderPlacedDate: Date.now(), user_id: '3', ship_to_id: '3', bill_to_id: '3' },
 ], order => db.model('orders').create(order));
 
 //addresses
