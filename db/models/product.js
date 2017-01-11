@@ -20,11 +20,8 @@ const Product = db.define('products', {
   },
 }, {
     getterMethods: {
-    getPrice: function(){
+    price: function(){
       let LS = 50, HS = 100;
-      return this.getProductType()
-      .then(PT=>PT.getRating())
-      .then(rating=>{
         let adjustFactor = this.basePrice
         if (this.remaining < LS){
           return adjustFactor*((this.remaining)*(1/(1-LS))+((1-2*LS)/(1-LS)))
