@@ -45,5 +45,7 @@ module.exports = require('express').Router()
   // Get reviews for one product
   .get('/:productId/reviews', (req, res, next) =>
     req.product
-    .then(product => res.json(product.reviews)) // to test when associations are complete
+    .then(product => product.producttype)// to test when associations are complete
+    .then(pt=>pt.getReviews())
+    .then(reviews=>res.json(reviews))
     .catch(next));
