@@ -29,7 +29,8 @@ module.exports = require('express').Router()
       // (Don't need reviews if rating is stored on product model)
       include: [ProductType],
     })
-    .then(products => res.json(products))
+    .then(products => {  
+      res.json(products)})
     .catch(next))
   // Add new product
   .post('/', (req, res, next) =>

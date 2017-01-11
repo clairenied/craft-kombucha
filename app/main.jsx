@@ -16,7 +16,6 @@ import SingleProduct from './components/SingleProduct'
 import SingleReview from './components/SingleReview'
 import Signup from './components/Signup'
 import Order from './components/Order'
-import Cart from './components/Cart'
 import Admin from './components/Admin'
 
 const ExampleApp = connect(
@@ -31,6 +30,15 @@ const ExampleApp = connect(
     </div>
 )
 
+import axios from 'axios'
+import {getAllOrders} from './reducers/orders';
+const onOrdersEnter = function() {
+  axios.get('/api/orders')
+  .then( res => {
+    store.dispatch(getAllOrders(res.data))
+  })
+}
+
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -38,10 +46,14 @@ render (
         <IndexRedirect to="/products" />
         <Route path="/products" component={Products} />
         <Route path="/single-product" component={SingleProduct} />
-        <Route path="/order" component={Order} />
         <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
-        <Route path="/cart" component={Cart} />
+
+        <Route path="/orders" component={Order} 
+               onEnter={onOrdersEnter}/>
+               
+        <Route path="/orders/:orderId" component={Order} />
+        
         <Route path="/admin" component={Admin} />
       </Route>
     </Router>
