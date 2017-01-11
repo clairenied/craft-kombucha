@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import Reviews from './Reviews'
+// import Reviews from './Reviews'
 
 class SingleProduct extends Component{
 	render(){
