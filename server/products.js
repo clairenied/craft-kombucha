@@ -11,14 +11,14 @@ module.exports = require('express').Router()
       where: {
         id: productId,
       },
-      // Eagerly load product's type and reviews
-      include: [ProductType
-      // , {
-      //   model: Review,
-      //   // Eagerly load the user who wrote each review
-      //   include: [User],
-      // }
-      ],
+      // Eagerly load product's type and reviews (and authors of reviews)
+      include: [{
+        model: ProductType,
+        include: [{
+          model: Review,
+          include: [User]
+        }]
+      }]
     });
     next();
   })
