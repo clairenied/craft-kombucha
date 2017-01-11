@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { Link } from 'react-router'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 const AdminModule = (props) => {
   return (
-    <div className="row col-xs-12">  
+    <div className="row col-xs-12">
       <div className="col-xs-12 col-sm-4">
         <address>
           <strong>Full Name</strong><br/>
@@ -23,7 +23,7 @@ const AdminModule = (props) => {
 
       <div className="col-xs-12 col-sm-4">
         <div>
-          <input type="radio" checked/> 
+          <input type="radio" checked/>
           <label>
             &emsp;Admin
           </label>
