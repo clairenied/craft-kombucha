@@ -11,7 +11,7 @@ const Product = db.define('products', {
     type: Sequelize.TEXT,
     allowNull: false,
   },
-  price: {
+  basePrice: {
     // if we need a url path
     type: Sequelize.DECIMAL,
     allowNull: false,
