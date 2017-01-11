@@ -7,8 +7,7 @@ const Product = db.define('products', {
     allowNull: false,
   },
   remaining: {
-    // make an integer
-    type: Sequelize.TEXT,
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
   basePrice: {
@@ -28,10 +27,10 @@ const Product = db.define('products', {
       .then(rating=>{
         let adjustFactor = this.basePrice
         if (this.remaining < LS){
-          return adjustFactor*((this.remaining)*(1/(1-LS))+((1-2*LS)/(1-LS)))  
+          return adjustFactor*((this.remaining)*(1/(1-LS))+((1-2*LS)/(1-LS)))
         }else if (this.remaining > HS && this.remaining < 2*HS){
           return adjustFactor*((this.remaining*(-1/(2*HS))+3/2))
-        }else if (this.remaining > 2*HS) { 
+        }else if (this.remaining > 2*HS) {
           return adjustFactor/2
         }else return this.basePrice
       })
