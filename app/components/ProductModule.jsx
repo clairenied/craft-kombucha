@@ -6,7 +6,7 @@ import SingleProduct from './SingleProduct';
 
 const ProductModule = (props) => {
   return (
-    <div className="col-xs-6 col-s-3 col-md-2 col-lg-2 col-xl-2">
+    <div className="col-xs-6 col-sm-3">
       <Link to="/single-product">
         <img src="http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png" className="img-responsive"/>
       </Link>

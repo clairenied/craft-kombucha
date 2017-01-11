@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 const AdminModule = (props) => {
   return (
-    <div className="row">  
+    <div className="row col-xs-12">  
       <div className="col-xs-12 col-sm-4">
         <address>
           <strong>Full Name</strong><br/>

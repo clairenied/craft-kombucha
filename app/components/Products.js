@@ -9,6 +9,14 @@ const Products = (props) => {
         <h1>Products</h1>
       </div>
       <ProductModule/>
+      <ProductModule/>
+      <ProductModule/>
+      <ProductModule/>
+      <ProductModule/>
+      <ProductModule/>
+      <ProductModule/>
+      <ProductModule/>
+      <ProductModule/>
     </div>
   )
 }
