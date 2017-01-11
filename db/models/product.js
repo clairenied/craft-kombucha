@@ -29,9 +29,8 @@ const Product = db.define('products', {
           return adjustFactor*((this.remaining*(-1/(2*HS))+3/2))
         }else if (this.remaining > 2*HS) {
           return adjustFactor/2
-        }else return this.basePrice
-      })
-    }
+        }else return this.basePrice;
+      }
   }
   // TO DO: COME BACK AND UPDATE MEEEEEEEEEEE
   // hooks: {
