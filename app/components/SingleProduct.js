@@ -32,15 +32,3 @@ const SingleProduct = (props) => {
 }
 
 export default SingleProduct;
-
-
-// function mapStateToProps(state){
-// 	return {
-// 	}
-// }
-// function mapDispatchToProps(dispatch){
-// 	return{
-
-// 	}
-// }
-// export default connect(mapStateToProps,mapStateToProps)(SingleProduct)

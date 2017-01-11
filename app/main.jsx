@@ -17,6 +17,7 @@ import SingleReview from './components/SingleReview'
 import Signup from './components/Signup'
 import Order from './components/Order'
 import Cart from './components/Cart'
+import Admin from './components/Admin'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -41,6 +42,7 @@ render (
         <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
         <Route path="/cart" component={Cart} />
+        <Route path="/admin" component={Admin} />
       </Route>
     </Router>
   </Provider>,

@@ -20,7 +20,7 @@ const Navbar = (props) => {
 		      </ul>
 		      <ul className="nav navbar-nav navbar-right">
 		        <li><Link to="/cart">Cart</Link></li>
-		        <li><a href="#">Admin</a></li>
+		        <li><Link to="/admin">Admin</Link></li>
 		        <li><Link to="/">Log Out</Link></li>
 		      </ul>
 		    </div>
@@ -30,15 +30,3 @@ const Navbar = (props) => {
 }
 
 export default Navbar
-
-
-		// <nav className="navbar navbar-default">
-		// 	<div className="container-fluid">
-		// 		<a className="navbar-brand" href="#">Artisan Kombucha</a>
-		// 		<input 
-		// 			type="text"
-		// 			className="form-control"
-		// 			placeholder="search" />
-
-		// 	</div>
-		// </nav>
