@@ -13,7 +13,7 @@ const SingleProduct = (props) => {
         <h1>{singleProduct.producttype.name}</h1>
       </div>
       <div className="col-xs-12 col-sm-4">
-        <img src="http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png" className="img-responsive"/>
+        <img src={singleProduct.photo} className="img-responsive"/>
       </div>
       <div className="col-xs-12 col-sm-8">
         <h4 className="text-uppercase">Product Description</h4>

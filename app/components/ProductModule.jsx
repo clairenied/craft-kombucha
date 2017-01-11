@@ -6,7 +6,6 @@ import SingleProduct from './SingleProduct';
 
 const ProductModule = (props) => {
   const singleProduct = props.singleProduct
-  console.log('SINGLE PRODUCT', singleProduct)
   return (
     <div className="row">
       <Link to={`/products/${singleProduct.id}`}>
