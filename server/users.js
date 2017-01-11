@@ -12,13 +12,18 @@ module.exports = require('express').Router()
     req.user = User.findOne({
       where: { id: userId },
       // Eagerly load user's addresses, orders, and reviews
-      include: [Address, Order, Review],
+      include: [
+        { model: Address, as: 'billingAddress' },
+        { model: Address, as: 'shippingAddress' },
+        Order,
+        Review
+      ],
     });
     next();
   })
   // Get all users
-  .get('/', forbidden('only admins can list users'), (req, res, next) =>
-    User.findAll()
+  .get('/', (req, res, next) =>
+    User.findAll({ include: [{ model: Address, as: 'billingAddress' }] })
     .then(users => res.json(users))
     .catch(next))
   // Add new user

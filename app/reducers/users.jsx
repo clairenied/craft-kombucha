@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const initialState = {
-  allUsers: [],
-};
+// const initialState = {
+//   allUsers: [],
+// };
 
 const FETCH_USERS = 'FETCH_USERS';
 export const fetchUsers = () =>
@@ -18,14 +18,26 @@ export const fetchUsers = () =>
   };
 
 // Reducer
-export default (state = initialState, action) => {
-  const newState = Object.assign({}, state);
+export default (state = [], action) => {
+  let newState;
   switch (action.type) {
     case FETCH_USERS:
-      newState.allUsers = action.payload;
+      newState = action.payload;
       break;
     default:
       return state;
   }
   return newState;
 };
+
+// export default (state = initialState, action) => {
+//   const newState = Object.assign({}, state);
+//   switch (action.type) {
+//     case FETCH_USERS:
+//       newState.allUsers = action.payload;
+//       break;
+//     default:
+//       return state;
+//   }
+//   return newState;
+// };
