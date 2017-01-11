@@ -13,7 +13,7 @@ const CartModule = (props) => {
       <div className="col-xs-12 col-sm-10">
         <h4>Product name</h4>    
         <p>Some quick example text to build on the card title and make up the bulk of the cards content.</p>
-        <a href="#" className="btn btn-primary">Delete</a>
+        <a href="#" className="btn btn-default">Delete</a>
       </div>
     </div>
   )
