@@ -10,14 +10,14 @@ const seedUsers = () => db.Promise.map([
 
 const seedProducts = () => db.Promise.map([
   // kombucha
-  { size: '6-pack', remaining: '4 units', price: '12.99', photo: 'https://images-na.ssl-images-amazon.com/images/I/91Vq1UyGH-L._SY355_.jpg', lineitem_id: '1', producttype_id:'3' },
-  { size: '12-pack', remaining: '12 units', price: '24.99', photo: 'https://btbeverage.com/image/cache/catalog/product_pictures/SEO%20Ready/12%20pack%208%20oz/b-tea-kombucha-8-oz-lemon-balm-12-pack-600x600.jpg', lineitem_id: '2', producttype_id:'1' },
-  { size: 'keg', remaining: '0 units', price: '32.00', photo: 'http://cdn4.beveragefactory.com/grid_KOM-3SH060515141631.jpg', lineitem_id: '3', producttype_id:'2' },
+  { size: '6-pack', remaining: '4 units', basePrice: '12.99', photo: 'https://images-na.ssl-images-amazon.com/images/I/91Vq1UyGH-L._SY355_.jpg', lineitem_id: '1', producttype_id:'3' },
+  { size: '12-pack', remaining: '12 units', basePrice: '24.99', photo: 'https://btbeverage.com/image/cache/catalog/product_pictures/SEO%20Ready/12%20pack%208%20oz/b-tea-kombucha-8-oz-lemon-balm-12-pack-600x600.jpg', lineitem_id: '2', producttype_id:'1' },
+  { size: 'keg', remaining: '0 units', basePrice: '32.00', photo: 'http://cdn4.beveragefactory.com/grid_KOM-3SH060515141631.jpg', lineitem_id: '3', producttype_id:'2' },
   // shirts
-  { size: 'medium', remaining: '0 units', price: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id:'5' },
-  { size: 'large', remaining: '5 units', price: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id:'5' },
-  { size: 'medium', remaining: '5 units', price: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id:'4' },
-  { size: 'large', remaining: '10 units', price: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id:'4' },
+  { size: 'medium', remaining: '0 units', basePrice: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id:'5' },
+  { size: 'large', remaining: '5 units', basePrice: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id:'5' },
+  { size: 'medium', remaining: '5 units', basePrice: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id:'4' },
+  { size: 'large', remaining: '10 units', basePrice: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id:'4' },
 ], product => db.model('products').create(product));
 
 // line items
