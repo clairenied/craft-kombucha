@@ -53,11 +53,11 @@ const seedReviews = () => db.Promise.map([
 
 // orders
 const seedOrders = () => db.Promise.map([
-  { lineItemPrice: '12.99', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: new Date(2015, 2, 3, 1, 10, 5, 5), user_id: '1', ship_to_id: '1', bill_to_id: '1' },
-  { lineItemPrice: '24.99', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 11, 22, 12, 33, 5, 5), user_id: '1', ship_to_id: '1', bill_to_id: '2' },
-  { lineItemPrice: '32.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 6, 23, 9, 3, 5, 5), user_id: '2', ship_to_id: '4', bill_to_id: '3' },
-  { lineItemPrice: '20.00', status: 'cancelled', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: new Date(2014, 6, 4, 10, 10, 5, 5), user_id: '4', ship_to_id: '4', bill_to_id: '4' },
-  { lineItemPrice: '10.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'snail', orderPlacedDate: Date.now(), user_id: '3', ship_to_id: '3', bill_to_id: '3' },
+  { price: '12.99', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: new Date(2015, 2, 3, 1, 10, 5, 5), user_id: '1', shipping_address_id: '1', billing_address_id: '1' },
+  { price: '24.99', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 11, 22, 12, 33, 5, 5), user_id: '1', shipping_address_id: '1', billing_address_id: '2' },
+  { price: '32.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 6, 23, 9, 3, 5, 5), user_id: '2', shipping_address_id: '4', billing_address_id: '3' },
+  { price: '20.00', status: 'cancelled', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: new Date(2014, 6, 4, 10, 10, 5, 5), user_id: '4', shipping_address_id: '4', billing_address_id: '4' },
+  { price: '10.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'snail', orderPlacedDate: Date.now(), user_id: '3', shipping_address_id: '3', billing_address_id: '3' },
 ], order => db.model('orders').create(order));
 
 // addresses
