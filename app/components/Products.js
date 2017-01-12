@@ -3,35 +3,20 @@ import {connect} from 'react-redux';
 import ProductModule from './ProductModule';
 
 const Products = (props) => {
+  const allProducts = props.products.allProducts
+
   return (
     <div>
   		<div className="page-header col-xs-12">
         <h1>Products</h1>
       </div>
-      <ProductModule/>
-      <ProductModule/>
-      <ProductModule/>
-      <ProductModule/>
-      <ProductModule/>
-      <ProductModule/>
-      <ProductModule/>
-      <ProductModule/>
-      <ProductModule/>
+
+      {allProducts.map((singleProduct, i) => {
+        return (<ProductModule key={i} singleProduct={singleProduct}/>)
+      })}
     </div>
   )
 }
 
 export default Products;
-
-// function mapStateToProps(state){
-// 	return {
-
-// 	}
-// }
-// function mapDispatchToProps(dispatch){
-// 	return{
-
-// 	}
-// }
-// export default connect(mapStateToProps,mapStateToProps)(Products)
 
