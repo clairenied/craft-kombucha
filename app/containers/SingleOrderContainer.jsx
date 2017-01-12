@@ -4,7 +4,7 @@ import SingleOrder from '../components/SingleOrder'
 function mapStateToProps(state){
 	// console.log('state: ', state)
     return {
-        singleOrder: state.orders
+        singleOrder: state.orders,
     }
 }
 

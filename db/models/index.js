@@ -27,7 +27,7 @@ Order.belongsTo(Address, { as: 'billTo' });
 Order.hasMany(LineItem);
 LineItem.belongsTo(Order);
 
-LineItem.hasOne(Product);
+LineItem.hasOne(Product);  //can this be changed?
 
 ProductType.hasMany(Product);
 Product.belongsTo(ProductType);

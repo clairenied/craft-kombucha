@@ -2,9 +2,22 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router'
 
-const OrderModule = (props) => {
+import SingleOrder from './SingleOrder'
+import Product from './SingleProduct';
+import Products from './Products'
 
+const SingleOrderModule = (props) => {
+
+  console.log('props: ', props)
+  
   let order = props.order;
+  let quantity = order.quantity;
+  let product = order.product;
+  let productPhoto = product.photo;
+  let productSize = product.size;
+  let productName = product.producttype.name;
+
+  //remove after refactoring
   let orderId = order.id;
   let price = order.lineItemPrice;
   let datePlaced = order.orderPlacedDate;
@@ -42,4 +55,25 @@ const OrderModule = (props) => {
   )
 }
 
-export default OrderModule;
+export default SingleOrderModule;
+
+
+ /*TO DO: 
+    - convert address id's (need to import address mod)
+    - get image, product name from products/single product
+  */
+
+
+//for products
+// </div>
+//       <br/>
+//       <div className="col-xs-6 col-sm-2">
+//         <Link to="/single-product">
+//           <img src="http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png" className="img-responsive"/>
+//         </Link>
+//       </div>
+//       <div className="col-xs-12 col-sm-10">
+//         <h4>Product name</h4>    
+//         <p>Some quick example text to build on the card title and make up the bulk of the cards content.</p>
+//         <a href="#" className="btn btn-default">Delete</a>
+//       </div>

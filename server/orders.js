@@ -43,21 +43,19 @@ module.exports = require('express').Router()
       include: [
         { model: LineItem, 
           where: {order_id: req.params.orderId},
-          include: [
+          include: [ 
             { model: Product, 
-              where: {lineitem_id: 1}}
+              include: [ProductType]
+            }
           ]
         }
       ]
     })
     .then( order => {
-      let lineItems = order.dataValues.lineitems;
-      console.log('lineitems: ', order.dataValues.lineitems)
-
-      // console.log('lineitems: ', lineItems)
-      let orderId = order.dataValues.id;
-
-
+      // let orderId = order.dataValues.id;
+      // let lineItems = order.dataValues.lineitems;
+      // let product = lineItems[0].dataValues.product;
+      // let productType = product.dataValues.producttype
       res.json(order)
     })
     .catch(next)
