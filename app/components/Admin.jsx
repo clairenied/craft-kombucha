@@ -11,8 +11,6 @@ class Admin extends Component {
   render() {
     // Users array is sorted first by type (admins first), then last and first name
     const users = _.sortBy(this.props.users, ['type', 'lastName', 'firstName']);
-    console.log('got users from store:', users);
-
     return (
       <div>
         <div className="page-header col-xs-12">
@@ -27,7 +25,6 @@ class Admin extends Component {
 
 const mapStateToProps = (state) => {
   const { users } = state;
-  console.log('here are your users:', users);
   return { users };
 };
 
