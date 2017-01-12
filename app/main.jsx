@@ -18,6 +18,8 @@ import Admin from './components/Admin'
 //Containers
 import ProductsContainer from './containers/ProductsContainer'
 import SingleProductContainer from './containers/SingleProductContainer'
+import OrdersContainer from './containers/OrdersContainer'
+import SingleOrderContainer from './containers/SingleOrderContainer'
 
 //Actions
 import { fetchUsers } from './reducers/users';
@@ -64,9 +66,9 @@ render (
         <IndexRedirect to="/products" />
         <Route path="/signup" component={Signup} />
         
-        <Route path="/orders" component={Orders} 
-               onEnter={onOrdersEnter}/>      
-        <Route path="/orders/:orderId" component={Orders} />       
+        <Route path="/orders" component={OrdersContainer} onEnter={onOrdersEnter}/>      
+        <Route path="/orders/:orderId" component={OrdersContainer} /> 
+
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         

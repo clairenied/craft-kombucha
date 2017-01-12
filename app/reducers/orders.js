@@ -24,7 +24,6 @@ const orderReducer = (state=initialOrderState, action) => {
   return state;
 };
 
-
 //All Orders
 const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
 export const allOrders = orders => ({
@@ -33,7 +32,7 @@ export const allOrders = orders => ({
 
 //add axios calls
 export const getAllOrders = () => {
-	//console.log('called allOrders') //working
+	// console.log('called allOrders') //working
 	return dispatch => {
 		 axios.get('/api/orders')
 		.then(res => {
@@ -60,6 +59,7 @@ export const getSingleOrder = (orderId) => {
 	}
 }
 
+export default orderReducer;
 // //Create Order
 // const CREATE_ORDER = 'CREATE_ORDER';
 // export const newOrder = () => {
@@ -79,7 +79,6 @@ export const getSingleOrder = (orderId) => {
 // 	}
 // }
 
-export default orderReducer;
 
 //Add product to order ===> need to fetch line items
 //then set orderId of line item
