@@ -11,34 +11,34 @@ const seedUsers = () => db.Promise.map([
 
 const seedProducts = () => db.Promise.map([
   // kombucha
-
-  { size: '6-pack', remaining: '4', basePrice: '12.99', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '1', producttype_id:'3' },
-  { size: '12-pack', remaining: '12', basePrice: '24.99', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '2', producttype_id:'1' },
-  { size: 'keg', remaining: '0', basePrice: '32.00', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '3', producttype_id:'2' },
+  { size: '6-pack', remaining: '4', basePrice: '1299', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '1', producttype_id:'3' },
+  { size: '12-pack', remaining: '12', basePrice: '2499', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '2', producttype_id:'1' },
+  { size: 'keg', remaining: '0', basePrice: '3200', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '3', producttype_id:'2' },
   // shirts
-  { size: 'medium', remaining: '0', basePrice: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id: '5' },
-  { size: 'large', remaining: '5', basePrice: '20.00', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id: '5' },
-  { size: 'medium', remaining: '5', basePrice: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id: '4' },
-  { size: 'large', remaining: '10', basePrice: '10.00', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id: '4' },
+  { size: 'medium', remaining: '0', basePrice: '2000', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id: '5' },
+  { size: 'large', remaining: '5', basePrice: '2000', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id: '5' },
+  { size: 'medium', remaining: '5', basePrice: '1000', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id: '4' },
+  { size: 'large', remaining: '10', basePrice: '1000', photo: 'https://s-media-cache-ak0.pinimg.com/236x/01/d6/50/01d650b08d892885c8d8b36469abec26.jpg', lineitem_id: '5', producttype_id: '4' },
 ], product => db.model('products').create(product));
 
 // line items
 const seedLineItems = () => db.Promise.map([
-  { lineItemPrice: '12.99', quantity: '2', order_id:'1' },
-  { lineItemPrice: '12.99', quantity: '1', order_id:'1' },
-  { lineItemPrice: '24.99', quantity: '3', order_id:'2' },
-  { lineItemPrice: '32.00', quantity: '1', order_id:'3' },
-  { lineItemPrice: '20.00', quantity: '1', order_id:'5' },
-  { lineItemPrice: '10.00', quantity: '5', order_id:'4' },
+  { lineItemPrice: '1299', quantity: '2', order_id:'1' },
+  { lineItemPrice: '1299', quantity: '1', order_id:'1' },
+  { lineItemPrice: '2499', quantity: '3', order_id:'2' },
+  { lineItemPrice: '3200', quantity: '1', order_id:'3' },
+  { lineItemPrice: '2000', quantity: '1', order_id:'5' },
+  { lineItemPrice: '1000', quantity: '5', order_id:'4' },
 ], lineItem => db.model('lineitems').create(lineItem));
 
 // product types
 const seedProductType = () => db.Promise.map([
-  { name: 'watermelon kombucha', description: 'Brewed from our Avalon strain (#398), flavored with fresh watermelon.' },
-  { name: 'strawberry basil kombucha', description: 'Brewed from our Timbre strain (#441), flavored with fresh strawberries and basil.' },
-  { name: 'blueberry ginger kombucha', description: 'Brewed from our Dakota strain (#1083), flavored with fresh blueberries and ginger.' },
-  { name: 't-shirt', description: 'Hand-knitted t-shirt. Materials: cotton, spandex, kombucha mothers' },
-  { name: 'sweatshirt', description: 'Hand-knitted sweatshirt. Materials: cotton, spandex, kombucha mothers' },
+  { name: 'watermelon kombucha', description: 'Brewed from our Avalon strain (#398), flavored with fresh watermelon.', category:'kombucha', },
+  { name: 'strawberry basil kombucha', description: 'Brewed from our Timbre strain (#441), flavored with fresh strawberries and basil.', category:'kombucha', },
+  { name: 'blueberry ginger kombucha', description: 'Brewed from our Dakota strain (#1083), flavored with fresh blueberries and ginger.', category:'kombucha', },
+  
+  { name: 't-shirt', description: 'Hand-knitted t-shirt. Materials: cotton, spandex, kombucha mothers', category:'merch', },
+  { name: 'sweatshirt', description: 'Hand-knitted sweatshirt. Materials: cotton, spandex, kombucha mothers', category:'mother', },
 ], productType => db.model('producttypes').create(productType));
 
 // reviews
@@ -53,11 +53,11 @@ const seedReviews = () => db.Promise.map([
 
 // orders
 const seedOrders = () => db.Promise.map([
-  { lineItemPrice: '12.99', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: new Date(2015, 2, 3, 1, 10, 5, 5), user_id: '1', ship_to_id: '1', bill_to_id: '1' },
-  { lineItemPrice: '24.99', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 11, 22, 12, 33, 5, 5), user_id: '1', ship_to_id: '1', bill_to_id: '2' },
-  { lineItemPrice: '32.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 6, 23, 9, 3, 5, 5), user_id: '2', ship_to_id: '4', bill_to_id: '3' },
-  { lineItemPrice: '20.00', status: 'cancelled', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: new Date(2014, 6, 4, 10, 10, 5, 5), user_id: '4', ship_to_id: '4', bill_to_id: '4' },
-  { lineItemPrice: '10.00', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'snail', orderPlacedDate: Date.now(), user_id: '3', ship_to_id: '3', bill_to_id: '3' },
+  { price: '1299', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'ground', orderPlacedDate: new Date(2015, 2, 3, 1, 10, 5, 5), user_id: '1', shipping_address_id: '1', billing_address_id: '1' },
+  { price: '2499', status: 'complete', paymentMethod: 'gift card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 11, 22, 12, 33, 5, 5), user_id: '1', shipping_address_id: '1', billing_address_id: '2' },
+  { price: '3200', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'air', orderPlacedDate: new Date(2016, 6, 23, 9, 3, 5, 5), user_id: '2', shipping_address_id: '4', billing_address_id: '3' },
+  { price: '2000', status: 'cancelled', paymentMethod: 'gift card', shippingMethod: 'ground', orderPlacedDate: new Date(2014, 6, 4, 10, 10, 5, 5), user_id: '4', shipping_address_id: '4', billing_address_id: '4' },
+  { price: '1000', status: 'processing', paymentMethod: 'credit card', shippingMethod: 'snail', orderPlacedDate: Date.now(), user_id: '3', shipping_address_id: '3', billing_address_id: '3' },
 ], order => db.model('orders').create(order));
 
 // addresses

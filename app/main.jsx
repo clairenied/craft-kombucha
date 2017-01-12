@@ -23,7 +23,7 @@ import SingleOrderContainer from './containers/SingleOrderContainer';
 
 // Actions
 import { fetchUsers } from './reducers/users';
-import { getAllProducts, getSingleProduct } from './reducers/products';
+import { getAllProducts, getSingleProduct, getAllProductsKombucha, getAllProductsMerch, getAllProductsMother } from './reducers/products'
 import { getAllOrders, getSingleOrder } from './reducers/orders';
 import { fetchSingleReview, fetchReviews } from './reducers/reviews';
 
@@ -51,6 +51,18 @@ const onSingleOrderEnter = function(nextRouterState) {
 const loadAllProducts = () => {
   return store.dispatch(getAllProducts());
 };
+
+const loadAllProductsKombucha = () => {
+  return store.dispatch(getAllProductsKombucha()) 
+}
+
+const loadAllProductsMerch = () => {
+  return store.dispatch(getAllProductsMerch()) 
+}
+
+const loadAllProductsMother = () => {
+  return store.dispatch(getAllProductsMother()) 
+}
 
 const loadSingleProduct = (nextRouterState) => {
   const productId = nextRouterState.params.productId;
@@ -90,10 +102,13 @@ render (
         <Route path="/orders" component={OrdersContainer} onEnter={onOrdersEnter}/>
         <Route path="/orders/:orderId" component={SingleOrderContainer} onEnter={onSingleOrderEnter}/>
 
+        <Route path="/products-kombucha" component={ProductsContainer} onEnter={loadAllProductsKombucha} />
+        <Route path="/products-merch" component={ProductsContainer} onEnter={loadAllProductsMerch} />
+        <Route path="/products-mother" component={ProductsContainer} onEnter={loadAllProductsMother} />
+            
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
-
 
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />

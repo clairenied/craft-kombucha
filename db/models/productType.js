@@ -10,6 +10,10 @@ const ProductType = db.define('producttypes', {
     type: Sequelize.TEXT,
     allowNull: false,
   },
+  category: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
 }, {
    instanceMethods: {
     getRating: function(){
