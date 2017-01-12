@@ -102,19 +102,13 @@ render (
         <Route path="/orders" component={OrdersContainer} onEnter={onOrdersEnter}/>
         <Route path="/orders/:orderId" component={SingleOrderContainer} onEnter={onSingleOrderEnter}/>
 
-<<<<<<< HEAD
         <Route path="/products-kombucha" component={ProductsContainer} onEnter={loadAllProductsKombucha} />
         <Route path="/products-merch" component={ProductsContainer} onEnter={loadAllProductsMerch} />
         <Route path="/products-mother" component={ProductsContainer} onEnter={loadAllProductsMother} />
-        
-        <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
-        <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />    
-=======
+            
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
-
->>>>>>> master
 
         <Route path="/signup" component={Signup} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
