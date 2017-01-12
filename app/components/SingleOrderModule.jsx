@@ -8,7 +8,7 @@ import Products from './Products'
 
 const SingleOrderModule = (props) => {
 
-  console.log('props: ', props)
+  // console.log('props: ', props)
   
   let order = props.order;
   let quantity = order.quantity;
@@ -17,37 +17,29 @@ const SingleOrderModule = (props) => {
   let productSize = product.size;
   let productName = product.producttype.name;
 
-  //remove after refactoring
-  let orderId = order.id;
-  let price = order.lineItemPrice;
-  let datePlaced = order.orderPlacedDate;
-  let status = order.status;
-  let payment = order.paymentMethod;
-  let shipping = order.shippingMethod;
-
   return (
     <div>
+      <br/>
       <div className="row" >
-        <Link to={`/orders/${orderId}`}>
+        <Link to={`/products/${product.id}`}>
           <div className="col-xs-12 col-sm-2">
-            <small>Order #{orderId}</small>
-            {/*insert product name and image*/}
-          </div>
-          <div className="col-xs-12 col-sm-2">
-            <small>{order.lineItemPrice}</small>
-          </div>
-          <div className="col-xs-12 col-sm-2">
-            <small>{order.orderPlacedDate}</small>
-          </div>
-          <div className="col-xs-12 col-sm-2">
-             <small>{order.status}</small>
-          </div>
-          <div className="col-xs-12 col-sm-2">
-             <small>{order.paymentMethod}</small>
+            <img src={productPhoto} className="img-responsive"/>
           </div>
         </Link>
         <div className="col-xs-12 col-sm-2">
-          <a href="#" className="btn btn-default">Delete</a>
+          <small>{productName}</small>
+        </div>
+        <div className="col-xs-12 col-sm-2">
+          <small>{productSize}</small>
+        </div>
+        <div className="col-xs-12 col-sm-2">
+          <small>{product.basePrice}</small>
+        </div>
+        <div className="col-xs-12 col-sm-2">
+           <small>{quantity}</small>
+        </div>
+        <div className="col-xs-12 col-sm-2">
+          <a href="#" className="btn btn-default">Remove</a>
         </div>
       </div>
       <br/>
