@@ -67,9 +67,7 @@ render (
         <Route path="/signup" component={Signup} />
         <Route path="/orders" component={Orders} 
                onEnter={onOrdersEnter}/>      
-        <Route path="/orders/:orderId" component={Orders} />
-               onEnter={onOrdersEnter}/>         
-        <Route path="/orders/:orderId" component={Orders} />
+        <Route path="/orders/:orderId" component={Orders} />       
         
         <Route path="/admin" component={Admin} />
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
