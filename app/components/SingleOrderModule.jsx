@@ -7,15 +7,13 @@ import Product from './SingleProduct';
 import Products from './Products'
 
 const SingleOrderModule = (props) => {
-
-  // console.log('props: ', props)
   
   let order = props.order;
   let quantity = order.quantity;
   let product = order.product;
   let productPhoto = product.photo;
   let productSize = product.size;
-  let productName = product.producttype.name;
+  let productName = product.producttype.name; 
 
   return (
     <div>
@@ -33,7 +31,7 @@ const SingleOrderModule = (props) => {
           <small>{productSize}</small>
         </div>
         <div className="col-xs-12 col-sm-2">
-          <small>{product.basePrice}</small>
+          <small>${product.basePrice}</small>
         </div>
         <div className="col-xs-12 col-sm-2">
            <small>{quantity}</small>

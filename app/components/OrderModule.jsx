@@ -33,7 +33,7 @@ const OrderModule = (props) => {
           </div>
         </Link>
         <div className="col-xs-12 col-sm-2">
-          <a href="#" className="btn btn-default">Delete</a>
+          <a href="#" className="btn btn-default">Cancel</a>
         </div>
       </div>
       <br/>
