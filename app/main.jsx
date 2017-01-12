@@ -77,6 +77,7 @@ render (
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
         <Route path="/signup" component={Signup} />
+        
         <Route path="/orders" component={Orders} 
                onEnter={onOrdersEnter}/>      
         <Route path="/orders/:orderId" component={Orders} />
@@ -87,6 +88,7 @@ render (
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
         <Route path="/single-review/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview}/>
         <Route path="/signup" component={Signup} />
+        <Route path="/orders/:orderId" component={Orders} />      
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
     </Router>

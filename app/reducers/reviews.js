@@ -26,7 +26,6 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
-  console.log("nextState", next)
   return nextState;
 }
 
