@@ -22,7 +22,7 @@ import SingleProductContainer from './containers/SingleProductContainer'
 //Actions
 import { fetchUsers } from './reducers/users';
 import { getAllProducts, getSingleProduct } from './reducers/products'
-import {getAllOrders} from './reducers/orders';
+import { getAllOrders } from './reducers/orders';
 
 //On-Enter Hooks
 const adminOnEnter = (nextRouterState) => {
@@ -62,21 +62,14 @@ render (
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
-        <Route path="/products" component={Products} />
-        <Route path="/single-product" component={SingleProduct} />
+        <Route path="/products" component={ProductsContainer} />
         <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
-
-<<<<<<< HEAD
         <Route path="/orders" component={Orders} 
-               onEnter={onOrdersEnter}/>
-               
+               onEnter={onOrdersEnter}/>      
         <Route path="/orders/:orderId" component={Orders} />
-=======
-        <Route path="/orders" component={Order} 
                onEnter={onOrdersEnter}/>         
         <Route path="/orders/:orderId" component={Order} />
->>>>>>> 07c3d70deb0c24bda7e0fb221620a2c43457577d
         
         <Route path="/admin" component={Admin} />
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
