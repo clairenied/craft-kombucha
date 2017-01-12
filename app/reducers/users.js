@@ -17,6 +17,19 @@ export const fetchUsers = () =>
       });
   };
 
+export const switchRole = (userId, newRole) =>
+  (dispatch) => {
+    axios.put(`/api/users/${userId}`, { type: newRole })
+      .then(res => res.data)
+      .then((payload) => {
+        console.log('payload:', payload);
+        dispatch(fetchUsers());
+      })
+      .catch((err) => {
+        console.error('Error updating user role reducers/users.jsx:', err);
+      });
+  };
+
 // Reducer
 export default (state = [], action) => {
   let newState;

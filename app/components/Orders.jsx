@@ -1,52 +1,31 @@
-import React from 'react';
-import store from '../store'
-import {connect} from 'react-redux'
-import {getSingleOrder, getAllOrders} from '../reducers/orders'; 
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import OrderModule from './OrderModule';
+
 /*
   get product methods to load product info 
   import {getSingleOrder, getAllOrders} from '../reducers/orders'; 
 */
 
-import OrderModule from './OrderModule';
-
-
-// const Order = (props) => {
-//   // console.log('store: ', store)
-//   // console.log('order props: ', props)
-//   return (
-//     <div>
-//       <div className="page-header col-xs-12">
-//         <h1>Order</h1>
-//       </div>
-//       <OrderModule/>
-//       <div className="row col-xs-12">
-//         <a href="#" className="btn btn-default">Check Out</a>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Order;
-
-//map dispatch to props
-function mapStateToProps(state){
-    // console.log('state: ', state)
-    return {
-        singleOrder: state.ordersReducer.singleOrder,
-        allOrders: state.ordersReducer
-    }
+const Order = (props) => {
+  
+  const allOrders = props.allOrders;  
+  return (
+    <div>
+      <div className="page-header col-xs-12">
+        <h1>Orders</h1>
+      </div>
+      {
+        allOrders && Object.values(allOrders).map((singleOrder, i) => {
+            return (<OrderModule key={i} order={singleOrder}/>)
+        })
+      }
+      <div className="row col-xs-12">
+        <a href="#" className="btn btn-default">Check Out</a>
+      </div>
+    </div>
+  )
 }
 
-//map dispatch to props
-function mapDispatchToProps(dispatch){
-    return {
-        getSingleOrder: function(order){
-            dispatch(getSingleOrder(order));
-        }, 
-        getAllOrders: function(){
-          dispatch(getAllOrders())
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderModule);
+export default Order;

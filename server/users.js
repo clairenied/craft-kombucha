@@ -55,6 +55,16 @@ module.exports = require('express').Router()
     .then(user => res.json(user))
     .catch(next))
 
+  // Update one user by ID
+  // TODO: ADD AS SECOND ARGUMENT mustBeLoggedInAsAdmin
+  .put('/:userId', (req, res, next) =>
+    req.user
+    .then(user => user.update(req.body))
+    .then(() => {
+      res.status(201).send();
+    })
+    .catch(next))
+
   // Get all orders of one user
   .get('/:userId/orders', (req, res, next) =>
     req.user
