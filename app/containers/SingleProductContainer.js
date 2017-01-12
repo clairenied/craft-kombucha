@@ -10,6 +10,10 @@ function mapStateToProps(state, ownProps){
 
 function mapDispatchToProps(dispatch, ownProps){
  return{
+  generateReviewTitle: (reviewString) => {
+    let reviewArr = reviewString.split(' ').slice(0, 7)
+    return reviewArr.join(' ')
+  }
  }
 }
 
