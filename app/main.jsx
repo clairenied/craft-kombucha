@@ -29,12 +29,12 @@ const adminOnEnter = (nextRouterState) => {
   store.dispatch(fetchUsers());
 };
 
-const onOrdersEnter = function() {
-  axios.get('/api/orders')
-  .then( res => {
-    store.dispatch(getAllOrders(res.data))
-  })
-}
+// const onOrdersEnter = function() {
+//   axios.get('/api/orders')
+//   .then( res => {
+//     store.dispatch(getAllOrders(res.data))
+//   })
+// }
 
 const loadAllProducts = () => {
   return store.dispatch(getAllProducts()) 
@@ -68,11 +68,6 @@ render (
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         
         <Route path="/single-review" component={SingleReview} />
-
-        <Route path="/orders" component={Order} 
-               onEnter={onOrdersEnter}/>         
-        <Route path="/orders/:orderId" component={Order} />
-        <Route path="/cart" component={Cart} />
         
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
@@ -80,3 +75,8 @@ render (
   </Provider>,
   document.getElementById('main')
 );
+
+// <Route path="/orders" component={Order} 
+//        onEnter={onOrdersEnter}/>         
+// <Route path="/orders/:orderId" component={Order} />
+// <Route path="/cart" component={Cart} />

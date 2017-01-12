@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+
 import ProductModule from './ProductModule';
 
 const Products = (props) => {
@@ -17,6 +18,14 @@ const Products = (props) => {
     </div>
   )
 }
+
+// const Products = (props) => {
+//   return (
+//     <div>
+//       Do I work.
+//     </div>
+//   )
+// }
 
 export default Products;
 
