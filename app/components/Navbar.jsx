@@ -19,7 +19,7 @@ const Navbar = (props) => {
 			      </li>
 		      </ul>
 		      <ul className="nav navbar-nav navbar-right">
-		        <li><Link to="/cart">Cart</Link></li>
+		        <li><Link to="/order">Order</Link></li>
 		        <li><Link to="/admin">Admin</Link></li>
 		        <li><Link to="/">Log Out</Link></li>
 		      </ul>
