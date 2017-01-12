@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import AdminModule from './AdminModule';
 
 class Admin extends Component {
@@ -8,7 +9,8 @@ class Admin extends Component {
   }
 
   render() {
-    const { users } = this.props;
+    // const users = _.sortBy(this.props.users, 'lastName');
+
     console.log('got users from store:', users);
     return (
       <div>
@@ -24,16 +26,12 @@ class Admin extends Component {
 
 const mapStateToProps = (state) => {
   const { users } = state;
-  console.log('heres users', users);
+  console.log('here are your users:', users);
   return { users };
 };
 
+Admin.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.object)
+};
+
 export default connect(mapStateToProps)(Admin);
-
-
-// Admin.propTypes = {
-//   users: PropTypes.array,
-// };
-    // {
-    //   props.users.map((user, i) => <AdminModule key={i} user={user} />)
-    // }
