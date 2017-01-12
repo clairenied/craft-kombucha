@@ -12,7 +12,7 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import SingleReview from './components/SingleReview'
 import Signup from './components/Signup'
-import OrderModule from './components/OrderModule'
+import Orders from './components/Orders'
 import Admin from './components/Admin'
 
 //Containers
@@ -64,11 +64,16 @@ render (
         <IndexRedirect to="/products" />
         <Route path="/signup" component={Signup} />
         
+        <Route path="/orders" component={Orders} 
+               onEnter={onOrdersEnter}/>      
+        <Route path="/orders/:orderId" component={Orders} />
+               onEnter={onOrdersEnter}/>         
+        
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         
         <Route path="/single-review" component={SingleReview} />
-        
+
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
     </Router>
