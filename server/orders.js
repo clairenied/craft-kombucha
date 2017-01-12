@@ -4,6 +4,7 @@ const ProductType = db.model('producttypes');
 const Review = db.model('reviews');
 const User = db.model('users');
 const Order = db.model('orders');
+const LineItem = db.model('lineitems');
 // const Order = require('../db/models/order');
 
 module.exports = require('express').Router()
@@ -38,9 +39,25 @@ module.exports = require('express').Router()
     Order.findOne({
       where:{
         id: req.params.orderId
-      }
+      }, 
+      include: [
+        { model: LineItem, 
+          where: {order_id: req.params.orderId},
+          include: [
+            { model: Product, 
+              where: {lineitem_id: 1}}
+          ]
+        }
+      ]
     })
     .then( order => {
+      let lineItems = order.dataValues.lineitems;
+      console.log('lineitems: ', order.dataValues.lineitems)
+
+      // console.log('lineitems: ', lineItems)
+      let orderId = order.dataValues.id;
+
+
       res.json(order)
     })
     .catch(next)

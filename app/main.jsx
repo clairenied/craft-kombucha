@@ -24,7 +24,7 @@ import SingleOrderContainer from './containers/SingleOrderContainer'
 //Actions
 import { fetchUsers } from './reducers/users';
 import { getAllProducts, getSingleProduct } from './reducers/products'
-import { getAllOrders } from './reducers/orders';
+import { getAllOrders, getSingleOrder } from './reducers/orders';
 
 //On-Enter Hooks
 const adminOnEnter = (nextRouterState) => {
@@ -36,6 +36,15 @@ const onOrdersEnter = function() {
   .then( res => {
     store.dispatch(getAllOrders(res.data))
   })
+}
+
+const onSingleOrderEnter = function(nextRouterState){
+  const orderId = nextRouterState.params.orderId
+  return store.dispatch(getSingleOrder(orderId))
+  // axios.get(`/api/orders/${orderId}`)
+  // .then( res => {
+  //   store.dispatch(getSingleOrder(res.data))
+  // })
 }
 
 const loadAllProducts = () => {
@@ -67,7 +76,7 @@ render (
         <Route path="/signup" component={Signup} />
         
         <Route path="/orders" component={OrdersContainer} onEnter={onOrdersEnter}/>      
-        <Route path="/orders/:orderId" component={OrdersContainer} /> 
+        <Route path="/orders/:orderId" component={SingleOrderContainer} onEnter={onSingleOrderEnter}/> 
 
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
