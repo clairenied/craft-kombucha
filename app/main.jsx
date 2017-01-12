@@ -13,7 +13,7 @@ import WhoAmI from './components/WhoAmI'
 import SingleReviewContainer from './containers/SingleReviewContainer'
 import ReviewsContainer from './containers/ReviewsContainer'
 import Signup from './components/Signup'
-import Order from './components/Order'
+import Orders from './components/Orders'
 import Admin from './components/Admin'
 
 //Containers
@@ -23,7 +23,7 @@ import SingleProductContainer from './containers/SingleProductContainer'
 //Actions
 import { fetchUsers } from './reducers/users';
 import { getAllProducts, getSingleProduct } from './reducers/products'
-import {getAllOrders} from './reducers/orders';
+import { getAllOrders } from './reducers/orders';
 
 //On-Enter Hooks
 const adminOnEnter = (nextRouterState) => {
@@ -86,14 +86,14 @@ render (
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
-        <Route path="/products" component={Products} />
-        <Route path="/single-product" component={SingleProduct} />
+        <Route path="/products" component={ProductsContainer} />
         <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
-
-        <Route path="/orders" component={Order} 
+        <Route path="/orders" component={Orders} 
+               onEnter={onOrdersEnter}/>      
+        <Route path="/orders/:orderId" component={Orders} />
                onEnter={onOrdersEnter}/>         
-        <Route path="/orders/:orderId" component={Order} />
+        <Route path="/orders/:orderId" component={Orders} />
         
         <Route path="/admin" component={Admin} />
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
@@ -103,7 +103,6 @@ render (
         <Route path="/single-review/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview}/>
         <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
-        <Route path="/cart" component={Cart} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
     </Router>
