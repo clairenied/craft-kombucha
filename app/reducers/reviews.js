@@ -13,18 +13,20 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+  console.log("actionT", action.type)
   const nextState = Object.assign({}, state);
-  
   switch (action.type) {
     case SET_SINGLE_REVIEW:
       nextState.singleReview = action.singleReview;
       break;
     case SET_ALL_REVIEWS:
+    console.log("sdds")
       nextState.product = action.product
       break;
     default:
       return state;
   }
+  console.log("nextState", next)
   return nextState;
 }
 
@@ -41,7 +43,7 @@ export const setAllReviews = product => ({
 export const fetchSingleReview = (reviewId) => 
   dispatch => 
     axios.get(`/api/products/${productId}/reviews/`)
-      .then( (res) => dispatch(setAllReviews(res.data)) )
+      .then( (res) => dispatch(setSingleReviews(res.data)) )
 
 
 export const fetchReviews = (productId) => 

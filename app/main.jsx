@@ -30,24 +30,14 @@ const adminOnEnter = (nextRouterState) => {
   store.dispatch(fetchUsers());
 };
 
-<<<<<<< HEAD
-
-//Containers
-import ProductsContainer from './containers/ProductsContainer'
-import SingleProductContainer from './containers/SingleProductContainer'
-
-
 //action creators
-import { getAllProducts, getSingleProduct } from './reducers/products'
 import { fetchSingleReview, fetchReviews } from './reducers/reviews'
-=======
 const onOrdersEnter = function() {
   axios.get('/api/orders')
   .then( res => {
     store.dispatch(getAllOrders(res.data))
   })
 }
->>>>>>> 658d02ded1d311607199a428295d4128eed05cb1
 
 const loadAllProducts = () => {
   return store.dispatch(getAllProducts()) 
@@ -86,22 +76,16 @@ render (
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
-        <Route path="/products" component={ProductsContainer} />
-        <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
         <Route path="/orders" component={Orders} 
                onEnter={onOrdersEnter}/>      
         <Route path="/orders/:orderId" component={Orders} />
-               onEnter={onOrdersEnter}/>         
-        <Route path="/orders/:orderId" component={Orders} />
-        
+               onEnter={onOrdersEnter}/>                 
         <Route path="/admin" component={Admin} />
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
-        <Route path="/order" component={Order} />
         <Route path="/single-review/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview}/>
-        <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
