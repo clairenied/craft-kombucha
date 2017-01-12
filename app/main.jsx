@@ -62,20 +62,18 @@ render (
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRedirect to="/products" />
-        <Route path="/products" component={ProductsContainer} />
-        <Route path="/single-review" component={SingleReview} />
         <Route path="/signup" component={Signup} />
-
-        // <Route path="/orders" component={Order} 
-               onEnter={onOrdersEnter}/>         
-        <Route path="/orders/:orderId" component={Order} />
         
-        <Route path="/admin" component={Admin} />
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
+        
         <Route path="/single-review" component={SingleReview} />
-        <Route path="/signup" component={Signup} />
+
+        <Route path="/orders" component={Order} 
+               onEnter={onOrdersEnter}/>         
+        <Route path="/orders/:orderId" component={Order} />
         <Route path="/cart" component={Cart} />
+        
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
     </Router>
