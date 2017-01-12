@@ -95,7 +95,7 @@ render (
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
 
 
-        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
     </Router>
