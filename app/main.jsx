@@ -29,12 +29,12 @@ const adminOnEnter = (nextRouterState) => {
   store.dispatch(fetchUsers());
 };
 
-// const onOrdersEnter = function() {
-//   axios.get('/api/orders')
-//   .then( res => {
-//     store.dispatch(getAllOrders(res.data))
-//   })
-// }
+const onOrdersEnter = function() {
+  axios.get('/api/orders')
+  .then( res => {
+    store.dispatch(getAllOrders(res.data))
+  })
+}
 
 const loadAllProducts = () => {
   return store.dispatch(getAllProducts()) 
