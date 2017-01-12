@@ -7,6 +7,8 @@ const initialState = {
       name: "",
       reviews: [{
         content: "",
+        starRating: 0,
+        created_at: "",
         user: {
           id: 0
         }

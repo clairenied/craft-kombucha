@@ -36,7 +36,9 @@ const SingleProduct = (props) => {
         <div className="col-xs-12">
           { reviews.map((review, i) => {
               return <ReviewModule 
-                key={i}/>
+                key={i}
+                review={review}
+                generateReviewTitle={props.generateReviewTitle}/>
             })
           }
         </div>
