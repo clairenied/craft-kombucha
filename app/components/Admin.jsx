@@ -9,9 +9,10 @@ class Admin extends Component {
   }
 
   render() {
-    // const users = _.sortBy(this.props.users, 'lastName');
-
+    // Users array is sorted first by type (admins first), then last and first name
+    const users = _.sortBy(this.props.users, ['type', 'lastName', 'firstName']);
     console.log('got users from store:', users);
+
     return (
       <div>
         <div className="page-header col-xs-12">
