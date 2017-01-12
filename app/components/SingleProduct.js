@@ -6,7 +6,6 @@ import ReviewModule from './ReviewModule'
 
 const SingleProduct = (props) => {
   const singleProduct = props.products.singleProduct
-  console.log('PROOOOOOPS', props)
   return(
 		<div>
 			<div className="page-header col-xs-12">
