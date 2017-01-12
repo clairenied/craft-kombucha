@@ -1,10 +1,16 @@
 import axios from 'axios'
 
 const initialState = {
-  allProducts: [],
+  allProducts: [{
+    photo: "",
+    producttype: {
+      category: "",
+    }  
+  }],
   singleProduct: {
     producttype: {
       name: "",
+      category: "",
       reviews: [{
         content: "",
         starRating: 0,
@@ -46,6 +52,21 @@ export const setSingleProduct = singleProduct => ({
 export const getAllProducts = () => 
   dispatch => 
     axios.get('/api/products/')
+      .then( (res) => dispatch(setAllProducts(res.data)) )
+
+export const getAllProductsKombucha = () => 
+  dispatch => 
+    axios.get('/api/products/kombucha')
+      .then( (res) => dispatch(setAllProducts(res.data)) )
+
+export const getAllProductsMerch = () => 
+  dispatch => 
+    axios.get('/api/products/merch')
+      .then( (res) => dispatch(setAllProducts(res.data)) )
+
+export const getAllProductsMother = () => 
+  dispatch => 
+    axios.get('/api/products/mother')
       .then( (res) => dispatch(setAllProducts(res.data)) )
 
 export const getSingleProduct = (productId) => 
