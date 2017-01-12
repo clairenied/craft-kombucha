@@ -3,7 +3,8 @@ import SingleProduct from '../components/SingleProduct'
 
 function mapStateToProps(state, ownProps){
   return {
-    products: state.products
+    products: state.products,
+    reviews: state.products.singleProduct.producttype.reviews
   }
 }
 

@@ -54,10 +54,10 @@ const loadSingleReview = (nextRouterState) => {
   return store.dispatch(fetchSingleReview(productId, reviewId))
 }
 
-const loadAllReviews = (nextRouterState) => {
-  const productId = nextRouterState.params.productId
-  return store.dispatch(fetchReviews(productId))
-}
+// const loadAllReviews = (nextRouterState) => {
+//   const productId = nextRouterState.params.productId
+//   return store.dispatch(fetchReviews(productId))
+// }
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -83,15 +83,16 @@ render (
         <Route path="/orders/:orderId" component={Orders} />
                onEnter={onOrdersEnter}/>                 
         <Route path="/admin" component={Admin} />
+        
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
-        <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
-        <Route path="/single-review/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview}/>
+        
+        
         <Route path="/signup" component={Signup} />
-        <Route path="/orders/:orderId" component={Orders} />      
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
     </Router>
   </Provider>,
   document.getElementById('main')
 );
+        // <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />

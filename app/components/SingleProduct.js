@@ -6,6 +6,8 @@ import ReviewModule from './ReviewModule'
 
 const SingleProduct = (props) => {
   const singleProduct = props.products.singleProduct
+  const reviews = props.reviews
+  
   return(
 		<div>
 			<div className="page-header col-xs-12">
@@ -32,7 +34,11 @@ const SingleProduct = (props) => {
           <h2>Reviews</h2>
         </div>
         <div className="col-xs-12">
-          <ReviewModule/>
+          { reviews.map((review, i) => {
+              return <ReviewModule 
+                key={i}/>
+            })
+          }
         </div>
       </div>
 		</div>
