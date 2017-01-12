@@ -16,7 +16,7 @@ module.exports = require('express').Router()
         model: ProductType,
         include: [{
           model: Review,
-          include: [User]
+          include: [{all:true}]
         }]
       }]
     });
