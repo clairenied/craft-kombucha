@@ -8,8 +8,6 @@ const SingleOrder = (props) => {
 	const order = props.singleOrder;
 	const lineItems = order.lineitems
 	const price = order.price
-	// const totalPrice = props.order.price;
-	console.log('price: ', price)
 
 	return (
 		<div>

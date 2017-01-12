@@ -68,19 +68,15 @@ export const newOrder = () => {
 //add axios calls
 export const createOrder = () => {
 	return dispatch => {
-		return axios.post('/api/order/')
+		axios.post('/api/order/')
 		.then(res => {
 			dispatch(newOrder(res.data)) 
 		})
 	}
 }
 
-
-export default orderReducer;
-
-
-//Add product to order ===> need to fetch line items
-//then set orderId of line item
+// Add product to order ===> need to fetch line items
+// then set orderId of line item
 // const ADD_PRODUCT = 'ADD_PRODUCT';
 // export const fillOrder = (orderId, product) => {
 // 	return {
@@ -89,11 +85,16 @@ export default orderReducer;
 // 	} 
 // };
 // //add axios calls
-// export const fillOrder = (product) => {
+// export const fillOrder = (orderId, product) => {
 // 	return dispatch => {
-// 		return axios.post(`/api/order/${orderId}`, orderId: )
+// 		axios.post(`/api/order/${orderId}`, 
+// 			{orderId: orderId})
 // 		.then(res => {
 // 			dispatch(fillOrder(res.data)) 
 // 		})
 // 	}
 // }
+
+export default orderReducer;
+
+
