@@ -19,18 +19,17 @@ const Product = db.define('products', {
     type: Sequelize.STRING,
   },
 }, {
-
     getterMethods: {
       price: function(){
         let LS = 10, HS = 50;
           let adjustFactor = this.basePrice
           if (this.remaining < LS){
-            return adjustFactor*((this.remaining)*(1/(1-LS))+((1-2*LS)/(1-LS)))/100
+            return (adjustFactor*((this.remaining)*(1/(1-LS))+((1-2*LS)/(1-LS)))/100).toFixed(2)
           }else if (this.remaining > HS && this.remaining < 2*HS){
-            return adjustFactor*((this.remaining*(-1/(2*HS))+3/2))/100
+            return (adjustFactor*((this.remaining*(-1/(2*HS))+3/2))/100).toFixed(2)
           }else if (this.remaining > 2*HS) {
-            return adjustFactor/200
-          }else return this.basePrice/100;
+            return (adjustFactor/200).toFixed(2)
+          }else return (this.basePrice/100).toFixed(2);
       }
   }
   // TO DO: COME BACK AND UPDATE MEEEEEEEEEEE
