@@ -56,10 +56,10 @@ const loadSingleReview = (nextRouterState) => {
   return store.dispatch(fetchSingleReview(productId, reviewId))
 }
 
-// const loadAllReviews = (nextRouterState) => {
-//   const productId = nextRouterState.params.productId
-//   return store.dispatch(fetchReviews(productId))
-// }
+const loadAllReviews = (nextRouterState) => {
+  const productId = nextRouterState.params.productId
+  return store.dispatch(fetchReviews(productId))
+}
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -85,6 +85,7 @@ render (
 
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
+        <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
         
         
         <Route path="/signup" component={Signup} />
@@ -94,4 +95,3 @@ render (
   </Provider>,
   document.getElementById('main')
 );
-        // <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />

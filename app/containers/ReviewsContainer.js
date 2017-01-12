@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import Reviews from '../components/Reviews'
+import Reviews from '../components/Reviews.js'
 
 function mapStateToProps(state){
   return {
-    product: state.reviews.product
+    reviews: state.reviews
   }
 }
 
