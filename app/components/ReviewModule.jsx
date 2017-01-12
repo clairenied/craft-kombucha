@@ -6,6 +6,10 @@ const ReviewModule = (props) => {
   console.log('SINGLE REVIEW PROPS', props)
 	return (
 		<div>
+			<h4><b>Title</b></h4>
+			<p><b>{props.review.content}</b></p>
+			<p>{Date(Date.parse(props.review.created_at.replace(/( +)/, ' UTC$1')))}</p>
+			<b>{"*".repeat(props.review.starRating)}</b>
 			<h4><b>{props.generateReviewTitle(review.content)}...</b></h4>
 			<p><b>{review.user.firstName}</b></p>
 			<b>{"*".repeat(review.starRating)}</b>
