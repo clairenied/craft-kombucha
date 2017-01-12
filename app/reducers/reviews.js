@@ -6,11 +6,14 @@ const initialState = {
     rating: 0
   },
   reviews: [{
+    content: "",
     created_at: "",
-    user:{
-    name: "",
     id: 0,
-  }}]
+    user:{
+    fullName: "",
+    id: 0,
+    }
+  }]
 }
 
 const reducer = (state = initialState, action) => {
