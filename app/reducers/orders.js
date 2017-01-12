@@ -56,25 +56,27 @@ export const getSingleOrder = (orderId) => {
 	}
 }
 
-export default orderReducer;
-// //Create Order
-// const CREATE_ORDER = 'CREATE_ORDER';
-// export const newOrder = () => {
-// 	return {
-// 		type: CREATE_ORDER,
-// 		products
-// 	} 
-// };
+//Create Order
+const CREATE_ORDER = 'CREATE_ORDER';
+export const newOrder = () => {
+	return {
+		type: CREATE_ORDER,
+		products
+	} 
+};
 
-// //add axios calls
-// export const createOrder = () => {
-// 	return dispatch => {
-// 		return axios.post('/api/order/')
-// 		.then(res => {
-// 			dispatch(newOrder(res.data)) 
-// 		})
-// 	}
-// }
+//add axios calls
+export const createOrder = () => {
+	return dispatch => {
+		return axios.post('/api/order/')
+		.then(res => {
+			dispatch(newOrder(res.data)) 
+		})
+	}
+}
+
+
+export default orderReducer;
 
 
 //Add product to order ===> need to fetch line items
