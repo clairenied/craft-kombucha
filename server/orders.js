@@ -53,44 +53,10 @@ module.exports = require('express').Router()
     .then( order => {
       let orderId = order.dataValues.id;
       let lineItems = order.dataValues.lineitems;
-      // console.log('lineItems: ', lineItems[0].product.price)
-      // console.log('server order: ', order)
-      // console.log('order: ', order)
-      Order.totalPrice(order)
-      
+
+      Order.totalPrice(order)      
       res.json(order)
     })
     .catch(next)
   })
 
-
-// const router = require('express').Router()
-// router.get('/', (req, res, next) => {
-//   console.log('order route hit')
-//   Order.findAll({
-//       include: [Product]
-//     })
-//     .then(orders => res.json(orders))
-//     .catch(next)
-// })
-// router.get('/:orderId', (req, res, next) => {
-//   Order.findOne({
-//       where:{
-//         id: orderId
-//       }
-//     })
-//     .then( order => {
-//       console.log('order server: ', order)
-//       res.json(order)
-//     })
-//     .catch(next)
-// })
-// router.post('/', (req, res, next) => {
-//   Order.create(req.body)
-//     .then( newOrder => {
-//       res.status(201).json(order)
-//     })
-//     .catch(next)
-// })
-
-// module.exports = router
