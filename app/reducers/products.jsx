@@ -4,7 +4,15 @@ const initialState = {
   allProducts: [],
   singleProduct: {
     producttype: {
-      name: ""
+      name: "",
+      reviews: [{
+        content: "",
+        starRating: 0,
+        created_at: "",
+        user: {
+          id: 0
+        }
+      }]
     }
   }
 }
