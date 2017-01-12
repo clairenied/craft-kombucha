@@ -1,9 +1,17 @@
 const Sequelize = require('sequelize');
 const db = require('APP/db'); // eslint-disable-line
 
+// const LineItem = db.model('lineitems');
+// const Product = db.model('products');
+
+const LineItem = require('./lineitem');
+const Product = require('./product');
+
 const Order = db.define('orders', {
-  lineItemPrice: {
-    type: Sequelize.DECIMAL,
+  //why is this here again??
+  //Do we need to list each lineItem price per item in the order??? - NVM
+  price: {
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
   status: {
@@ -18,6 +26,26 @@ const Order = db.define('orders', {
   orderPlacedDate: {
     type: Sequelize.DATE,
   },
-}, {});
+}, {
+  classMethods: {
+    totalPrice: (order) => {
+      let totalPrice = 0;
+
+      LineItem.findAll({ 
+        where: {order_id: order.id},
+        include: [Product] 
+      })
+      .then(items => {
+        items.map( item => {
+          totalPrice += (item.dataValues.product.price)
+        })
+        
+        order.update({
+          price: totalPrice
+        })
+      })
+    }
+  }
+});
 
 module.exports = Order;

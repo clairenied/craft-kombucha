@@ -5,12 +5,12 @@ const Order = db.model('orders');
 const LineItem = db.model('lineitems');
 const Review = db.model('reviews');
 
-const { mustBeLoggedIn, forbidden } = require('./auth.filters');
+const { mustBeLoggedIn, mustBeAdmin, forbidden } = require('./auth.filters');
 
 module.exports = require('express').Router()
   // Route parameter middleware for user id
   .param('userId', (req, res, next, userId) => {
-    req.user = User.findOne({
+    req.oneUser = User.findOne({
       where: { id: userId },
       // Eagerly load user's addresses, orders, and reviews
       include: [
@@ -51,14 +51,13 @@ module.exports = require('express').Router()
 
   // Get one user by ID
   .get('/:userId', mustBeLoggedIn, (req, res, next) =>
-    req.user
+    req.oneUser
     .then(user => res.json(user))
     .catch(next))
 
   // Update one user by ID
-  // TODO: ADD AS SECOND ARGUMENT mustBeLoggedInAsAdmin
-  .put('/:userId', (req, res, next) =>
-    req.user
+  .put('/:userId', mustBeAdmin, (req, res, next) =>
+    req.oneUser
     .then(user => user.update(req.body))
     .then(() => {
       res.status(201).send();
@@ -67,7 +66,7 @@ module.exports = require('express').Router()
 
   // Get all orders of one user
   .get('/:userId/orders', (req, res, next) =>
-    req.user
+    req.oneUser
     .then(user => user.orders)
     .then(orders => res.json(orders))
     .catch(next))
@@ -80,7 +79,7 @@ module.exports = require('express').Router()
 
   // Get all reviews written by one user
   .get('/:userId/reviews', (req, res, next) =>
-    req.user
+    req.oneUser
     .then(user => user.reviews)
     .then(reviews => res.json(reviews))
     .catch(next));

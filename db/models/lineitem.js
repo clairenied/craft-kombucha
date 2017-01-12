@@ -2,8 +2,6 @@ const Sequelize = require('sequelize');
 const db = require('APP/db'); // eslint-disable-line
 
 // USE EAGER LOADING!!
-
-
 const LineItem = db.define('lineitems', {
   lineItemPrice: {
     type: Sequelize.DECIMAL,

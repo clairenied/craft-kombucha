@@ -10,9 +10,6 @@ function mapStateToProps(state){
 //map dispatch to props
 function mapDispatchToProps(dispatch){
     return {
-        getSingleOrder: function(order){
-            dispatch(getSingleOrder(order));
-        }, 
         getAllOrders: function(){
           dispatch(getAllOrders())
         }

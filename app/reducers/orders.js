@@ -48,12 +48,9 @@ export const singleOrder = (order) => ({
 
 //add axios calls  ==> get axios calls working
 export const getSingleOrder = (orderId) => {
-	console.log('called single Order')
-
-	dispatch => {
+	return dispatch => {
 		axios.get(`/api/orders/${orderId}`)
 		.then(res => {
-			console.log('reducer res: ', res)
 			dispatch(singleOrder(res.data)) 
 		})
 	}
