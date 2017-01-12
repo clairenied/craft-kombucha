@@ -66,9 +66,7 @@ render (
         
         <Route path="/orders" component={Orders} 
                onEnter={onOrdersEnter}/>      
-        <Route path="/orders/:orderId" component={Orders} />
-               onEnter={onOrdersEnter}/>         
-        
+        <Route path="/orders/:orderId" component={Orders} />       
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         
@@ -80,8 +78,3 @@ render (
   </Provider>,
   document.getElementById('main')
 );
-
-// <Route path="/orders" component={Order} 
-//        onEnter={onOrdersEnter}/>         
-// <Route path="/orders/:orderId" component={Order} />
-// <Route path="/cart" component={Cart} />
