@@ -9,12 +9,6 @@ const LineItem = db.model('lineitems');
 
 module.exports = require('express').Router()
   .param('orderId', (req, res, next, orderId) => {
-    //gets single order
-    req.order = Order.findOne({
-      where: {
-        id: orderId
-      }
-    })
     next();
   })
   //get all orders
@@ -23,14 +17,6 @@ module.exports = require('express').Router()
     .then(orders => {
       // console.log('server orders: ', orders)
       res.json(orders)
-    })
-    .catch(next)
-  })
-  //create new order
-  .post('/', (req, res, next) => {
-    Order.create(req.body)
-    .then( newOrder => {
-      res.status(201).json(order)
     })
     .catch(next)
   })
@@ -56,6 +42,15 @@ module.exports = require('express').Router()
 
       Order.totalPrice(order)      
       res.json(order)
+    })
+    .catch(next)
+  })
+  //update order with product
+  .post('/:orderId', (req, res, next) => {
+    Order.findOne({ where: {id: req.params.orderId} })
+    .then( order => {
+      //order.update()
+      res.status(201).json(order)
     })
     .catch(next)
   })

@@ -48,6 +48,18 @@ const Order = db.define('orders', {
         })
       })
     }
+  }, 
+  instanceMethods: {
+    setOrderPlacedDate: () => {
+      if(this.status === 'processing'){
+        this.set(orderPlacedDate, date.now())
+      }
+    }
+  }, 
+  hooks: {
+    beforeValidate: function(order){
+      order.setOrderPlacedDate()
+    }
   }
 });
 
