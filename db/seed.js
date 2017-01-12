@@ -12,9 +12,16 @@ const seedUsers = () => db.Promise.map([
 const seedProducts = () => db.Promise.map([
   // kombucha
 
+<<<<<<< HEAD
+  { size: '6-pack', remaining: '4', basePrice: '12.99', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '1', producttype_id:'3' },
+  { size: '12-pack', remaining: '12', basePrice: '24.99', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '2', producttype_id:'1' },
+  { size: 'keg', remaining: '0', basePrice: '32.00', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '3', producttype_id:'2' },
+  
+=======
   { size: '6-pack', remaining: '4', basePrice: '1299', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '1', producttype_id:'3' },
   { size: '12-pack', remaining: '12', basePrice: '2499', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '2', producttype_id:'1' },
   { size: 'keg', remaining: '0', basePrice: '3200', photo: 'http://brewdrkombucha.com/2016/wp-content/uploads/2016/04/organic-raw-brew-dr-kombucha-clear-mind.png', lineitem_id: '3', producttype_id:'2' },
+>>>>>>> master
   // shirts
   { size: 'medium', remaining: '0', basePrice: '2000', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id: '5' },
   { size: 'large', remaining: '5', basePrice: '2000', photo: 'https://img1.etsystatic.com/159/1/10519821/il_340x270.1120657157_53nj.jpg', lineitem_id: '4', producttype_id: '5' },
@@ -34,11 +41,12 @@ const seedLineItems = () => db.Promise.map([
 
 // product types
 const seedProductType = () => db.Promise.map([
-  { name: 'watermelon kombucha', description: 'Brewed from our Avalon strain (#398), flavored with fresh watermelon.' },
-  { name: 'strawberry basil kombucha', description: 'Brewed from our Timbre strain (#441), flavored with fresh strawberries and basil.' },
-  { name: 'blueberry ginger kombucha', description: 'Brewed from our Dakota strain (#1083), flavored with fresh blueberries and ginger.' },
-  { name: 't-shirt', description: 'Hand-knitted t-shirt. Materials: cotton, spandex, kombucha mothers' },
-  { name: 'sweatshirt', description: 'Hand-knitted sweatshirt. Materials: cotton, spandex, kombucha mothers' },
+  { name: 'watermelon kombucha', description: 'Brewed from our Avalon strain (#398), flavored with fresh watermelon.', category:'kombucha', },
+  { name: 'strawberry basil kombucha', description: 'Brewed from our Timbre strain (#441), flavored with fresh strawberries and basil.', category:'kombucha', },
+  { name: 'blueberry ginger kombucha', description: 'Brewed from our Dakota strain (#1083), flavored with fresh blueberries and ginger.', category:'kombucha', },
+  
+  { name: 't-shirt', description: 'Hand-knitted t-shirt. Materials: cotton, spandex, kombucha mothers', category:'merch', },
+  { name: 'sweatshirt', description: 'Hand-knitted sweatshirt. Materials: cotton, spandex, kombucha mothers', category:'mother', },
 ], productType => db.model('producttypes').create(productType));
 
 // reviews

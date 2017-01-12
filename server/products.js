@@ -6,6 +6,36 @@ const User = db.model('users');
 
 module.exports = require('express').Router()
   // Route parameter middleware for product id
+  .get('/kombucha', (req, res, next) => 
+    Product.findAll({
+      include: [{
+        model: ProductType,
+        where: { category: "kombucha" },
+      }],
+    })
+    .then(products => res.json(products))
+    .catch(next))
+
+  .get('/merch', (req, res, next) => 
+    Product.findAll({
+      include: [{
+        model: ProductType,
+        where: { category: "merch" },
+      }],
+    })
+    .then(products => res.json(products))
+    .catch(next))
+
+  .get('/mother', (req, res, next) => 
+    Product.findAll({
+      include: [{
+        model: ProductType,
+        where: { category: "mother" },
+      }],
+    })
+    .then(products => res.json(products))
+    .catch(next))
+
   .param('productId', (req, res, next, productId) => {
     req.product = Product.findOne({
       where: {
@@ -22,6 +52,7 @@ module.exports = require('express').Router()
     });
     next();
   })
+  
   // Get all products
   .get('/', (req, res, next) =>
     Product.findAll({
@@ -47,4 +78,5 @@ module.exports = require('express').Router()
   .get('/:productId/reviews', (req, res, next) =>
     req.product
     .then(product => res.json(product.producttype.reviews))
-    .catch(next));
+    .catch(next))
+
