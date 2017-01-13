@@ -7,7 +7,6 @@ import Product from './SingleProduct';
 import Products from './Products'
 
 const SingleOrderModule = (props) => {
-  
   let order = props.order;
   let quantity = order.quantity;
   let product = order.product;

@@ -1,8 +1,15 @@
 import axios from 'axios';
 
 const initialOrderState = {
-	singleOrder: {},
-	allOrders: []
+	allOrders: [],
+	singleOrder: {
+		orderId: '',
+		orderTotal: '',
+		items: []
+		// product: {
+		// 	lineitemId: '' ==> should exist in items
+		// }
+	},
 }
 
 //reducer
@@ -13,9 +20,11 @@ const orderReducer = (state=initialOrderState, action) => {
   switch (action.type) {
     case GET_ALL_ORDERS:
       return (newState.allOrders = action.orders);
-
     case GET_SINGLE_ORDER:
-      return (newState.singleOrder = action.order);
+      newState.singleOrder.orderTotal = action.order.price
+      newState.singleOrder.items = action.order.lineitems
+      newState.singleOrder.orderId = action.order.id
+      return newState;
 
     default:
       return state;
@@ -23,22 +32,6 @@ const orderReducer = (state=initialOrderState, action) => {
 
   return state;
 };
-
-//All Orders
-const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
-export const allOrders = orders => ({
-	type: GET_ALL_ORDERS, orders,
-});
-
-//add axios calls
-export const getAllOrders = () => {
-	// console.log('called allOrders') //working
-	return dispatch => {
-		 axios.get('/api/orders')
-		.then(res => {
-			dispatch(allOrders(res.data)) })
-	}
-}
 
 //Single order
 const GET_SINGLE_ORDER = 'GET_SINGLE_ORDER';
@@ -55,6 +48,23 @@ export const getSingleOrder = (orderId) => {
 		})
 	}
 }
+
+//All Orders
+const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
+export const allOrders = orders => ({
+	type: GET_ALL_ORDERS, orders,
+});
+
+//add axios calls
+export const getAllOrders = () => {
+	// console.log('called allOrders') //working
+	return dispatch => {
+		 axios.get('/api/orders')
+		.then(res => {			
+			dispatch(allOrders(res.data)) })
+	}
+}
+
 
 //Create Order
 const CREATE_ORDER = 'CREATE_ORDER';
@@ -74,26 +84,6 @@ export const createOrder = () => {
 		})
 	}
 }
-
-// Add product to order ===> need to fetch line items
-// then set orderId of line item
-// const ADD_PRODUCT = 'ADD_PRODUCT';
-// export const fillOrder = (orderId, product) => {
-// 	return {
-// 		type: ADD_PRODUCT,
-// 		orderId, product
-// 	} 
-// };
-// //add axios calls
-// export const fillOrder = (orderId, product) => {
-// 	return dispatch => {
-// 		axios.post(`/api/order/${orderId}`, 
-// 			{orderId: orderId})
-// 		.then(res => {
-// 			dispatch(fillOrder(res.data)) 
-// 		})
-// 	}
-// }
 
 export default orderReducer;
 

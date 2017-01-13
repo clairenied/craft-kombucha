@@ -3,13 +3,14 @@ const db = require('APP/db'); // eslint-disable-line
 
 // const LineItem = db.model('lineitems');
 // const Product = db.model('products');
-
 const LineItem = require('./lineitem');
 const Product = require('./product');
 
+/*
+  Add method to change status
+*/
+
 const Order = db.define('orders', {
-  //why is this here again??
-  //Do we need to list each lineItem price per item in the order??? - NVM
   price: {
     type: Sequelize.STRING,
     allowNull: false,

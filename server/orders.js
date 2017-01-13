@@ -15,7 +15,6 @@ module.exports = require('express').Router()
   .get('/', (req, res, next) => {
     Order.findAll()
     .then(orders => {
-      // console.log('server orders: ', orders)
       res.json(orders)
     })
     .catch(next)
@@ -46,12 +45,26 @@ module.exports = require('express').Router()
     .catch(next)
   })
   //update order with product
-  .post('/:orderId', (req, res, next) => {
-    Order.findOne({ where: {id: req.params.orderId} })
+  .put('/:orderId', (req, res, next) => {
+    console.log('req.body', req.body)
+    Order.findOne({
+      where: {id: req.body.orderId}
+    })
     .then( order => {
-      //order.update()
-      res.status(201).json(order)
+      // console.log(item)
+      res.json(order)
     })
     .catch(next)
   })
+  // .post('/:orderId', (req, res, next) => {
+    
+  //   LineItem.findAll({ where: {order_id: req.body.orderId} })
+  //   .then( item => {
+  //     // console.log('req.body', req.body)
+  //     // console.log('item: ', item)
+  //     //order.update()
+  //     res.status(201).json(item)
+  //   })
+  //   .catch(next)
+  // })
 

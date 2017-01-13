@@ -6,8 +6,8 @@ import SingleOrderModule from './SingleOrderModule'
 
 const SingleOrder = (props) => {
 	const order = props.singleOrder;
-	const lineItems = order.lineitems
-	const price = order.price
+	const price = order.orderTotal;
+	const items = props.itemsInOrder;
 
 	return (
 		<div>
@@ -34,18 +34,19 @@ const SingleOrder = (props) => {
 			<div className="row">
 				<div>
 					{ 
-						lineItems && Object.values(lineItems).map((item, i) => {
+						items && Object.values(items).map((item, i) => {
 	            			return (<SingleOrderModule key={i} order={item}/>)
             			})
 					}
 				</div>
-				<br/>
-
-				<div className="row">
+				<div className="col-xs-12 col-sm-2">
 				 <medium>Total: ${price}</medium>
 				</div>
 				<br/>
-
+				<br/>
+				<div className="col-xs-12 col-sm-2">
+        			<a href="#" className="btn btn-default">Check Out</a>
+      			</div>
 		        <div className="col-xs-12 col-sm-2">
 		          <a href="#" className="btn btn-default">Cancel Order</a>
 		        </div>

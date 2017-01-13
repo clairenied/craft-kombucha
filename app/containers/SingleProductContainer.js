@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import SingleProduct from '../components/SingleProduct'
+import {addProductToOrder} from '../reducers/products'
 
 function mapStateToProps(state, ownProps){
   return {
@@ -13,6 +14,9 @@ function mapDispatchToProps(dispatch, ownProps){
   generateReviewTitle: (reviewString) => {
     let reviewArr = reviewString.split(' ').slice(0, 7)
     return reviewArr.join(' ')
+  },
+  addProductToOrder: function(lineitemId){
+    dispatch(addProductToOrder(lineitemId))
   }
  }
 }

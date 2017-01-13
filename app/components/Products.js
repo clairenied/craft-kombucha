@@ -6,6 +6,7 @@ import ProductModule from './ProductModule';
 
 const Products = (props) => {
   const allProducts = props.products.allProducts
+  const addProductToOrder = props.addProductToOrder
 
   return (
     <div>
@@ -41,7 +42,7 @@ const Products = (props) => {
       </div>
 
       {allProducts.map((singleProduct, i) => {
-        return (<ProductModule key={i} singleProduct={singleProduct}/>)
+        return (<ProductModule key={i} singleProduct={singleProduct} addToOrder={addProductToOrder} />)
       })}
     </div>
   )

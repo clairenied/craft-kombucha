@@ -7,7 +7,13 @@ import ReviewModule from './ReviewModule'
 const SingleProduct = (props) => {
   const singleProduct = props.products.singleProduct
   const reviews = props.reviews
-  
+  const addProductToOrder = props.addProductToOrder
+  const lineItemId = singleProduct.lineitem_id
+    
+  const handleSubmit = function(){
+    return addProductToOrder(singleProduct.lineitem_id)
+  }
+
   return(
 		<div>
 			<div className="page-header col-xs-12">
@@ -27,7 +33,8 @@ const SingleProduct = (props) => {
         <p>
           Act fast! Only <b>{singleProduct.remaining}</b> remaining
         </p>
-        <a href="#" className="btn btn-default">${singleProduct.price}</a>
+        <a className="btn btn-default" 
+           onClick={handleSubmit}>${singleProduct.price}</a>
       </div>
       <div className="row col-xs-12">
         <div className="page-header col-xs-12">
