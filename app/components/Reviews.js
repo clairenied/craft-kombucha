@@ -4,7 +4,15 @@ import ReviewModule from './ReviewModule';
 
 const Reviews = (props) => {
   const reviews = props.reviews.reviews
-  const name = reviews[0].producttype.name
+  let name = reviews[0].producttype.name
+  let allSame = true
+  for (let i = 0; i < reviews.length; i++){
+    if (reviews[i].producttype.name != name) {
+      allSame = false
+      break;
+    }
+  }
+  if(!allSame) name="ALL REVIEWS";
 
   return (
     <div>
