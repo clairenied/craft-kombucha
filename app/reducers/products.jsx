@@ -74,4 +74,15 @@ export const getSingleProduct = (productId) =>
     axios.get(`/api/products/${productId}`)
       .then( (res) => dispatch(setSingleProduct(res.data)) )
 
+export const createProduct = (productObj) => {
+  return dispatch => {
+    axios.post('/api/products/', productObj)
+    .then(res => { 
+      dispatch(setAllProducts(res.data))
+      browserHistory.push('/products')
+    })
+  }
+}
+
+
 export default reducer

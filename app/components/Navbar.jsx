@@ -29,6 +29,8 @@ class Navbar extends Component {
               {/* Admin link displays only for users logged in as admins */}
               <li><Link to="/admin">Admin</Link></li>
               {/* Logout link displays for all logged in users */}
+              <li><Link to="/products-create">Add Product</Link></li>
+              {/* Logout link displays for all logged in users */}
               <li><Link to="/">Log Out</Link></li>
             </ul>
           </div>

@@ -64,10 +64,35 @@ module.exports = require('express').Router()
       res.json(products)})
     .catch(next))
   // Add new product
-  .post('/', (req, res, next) =>
-    Product.create(req.body)
-    .then(product => res.status(201).json(product))
-    .catch(next))
+  .post('/', (req, res, next) => {
+
+    let newProduct = Product.create({
+      size: req.body.size,
+      remaining: req.body.remaining,
+      basePrice: req.body.basePrice,
+      photo: req.body.photo,
+    })
+
+    let newProductType = ProductType.create({
+      name: req.body.name,
+      category: req.body.category,
+      description: req.body.description,
+    })
+
+    return Promise.map(newProduct, newProductType)
+      .then(productsArr => { 
+        let tempNewProduct = productsArr[0]
+        let tempNewProductType = productsArr[1]
+
+        return tempNewProduct.setProductType(tempNewProductType)
+      })
+      .then(product => {
+        console.log(product)
+        res.status(201).json(product)
+      })
+      .catch(next)
+  })
+
   // Get one product by ID
   .get('/:productId', (req, res, next) => {
     req.product

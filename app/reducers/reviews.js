@@ -9,10 +9,10 @@ const initialState = {
     content: "",
     created_at: "",
     id: 0,
-    user:{
+    user: {}
     fullName: "",
     id: 0,
-    }
+    starRating: 0,
   }]
 }
 

@@ -13,10 +13,18 @@ const SingleProduct = (props) => {
 			<div className="page-header col-xs-12">
         <h1>{singleProduct.producttype.name}</h1>
       </div>
-      <div className="col-xs-12 col-sm-4">
+      <div className="col-xs-12 col-sm-6">
         <img src={singleProduct.photo} className="img-responsive"/>
       </div>
-      <div className="col-xs-12 col-sm-8">
+      <div className="col-xs-12 col-sm-6">
+        <div className="row">
+          <div className="col-xs-12 col-sm-6">
+            <Link to={`/products/${singleProduct.id}/update`}>Update</Link>
+          </div>
+          <div className="col-xs-12 col-sm-6 text-right">
+            <a href="#">Delete</a>
+          </div>
+        </div>
         <h4 className="text-uppercase">Product Description</h4>
         <p>
           {singleProduct.size}
