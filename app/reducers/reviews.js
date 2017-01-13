@@ -4,7 +4,13 @@ const initialState = {
   singleReview: {
     content: "",
     rating: 0,
-    created_at: ""
+    created_at: "",
+    user: {
+      fullName: ""
+    },
+    producttype: {
+      name: ""
+    }
   },
   reviews: [{
     content: "",
@@ -13,6 +19,9 @@ const initialState = {
     user:{
     fullName: "",
     id: 0,
+    },
+    producttype:{
+      name: ""
     }
   }]
 }
@@ -29,7 +38,6 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
-  console.log("nextState:" ,nextState)
   return nextState;
 }
 
