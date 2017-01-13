@@ -109,6 +109,7 @@ render (
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
+        <Route path="/products/:productId/reviews/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview} />
 
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />

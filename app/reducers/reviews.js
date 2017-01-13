@@ -3,7 +3,8 @@ import axios from 'axios'
 const initialState = {
   singleReview: {
     content: "",
-    rating: 0
+    rating: 0,
+    created_at: ""
   },
   reviews: [{
     content: "",
@@ -28,6 +29,7 @@ const reducer = (state = initialState, action) => {
     default:
       return state;
   }
+  console.log("nextState:" ,nextState)
   return nextState;
 }
 
@@ -44,10 +46,15 @@ export const setAllReviews = product => {
   }
 }
 
-export const fetchSingleReview = (reviewId) => 
+export const fetchSingleReview = (productId,reviewId) => 
   dispatch => 
     axios.get(`/api/products/${productId}/reviews/`)
-      .then( (res) => dispatch(setSingleReviews(res.data)) )
+      .then( res => res.data )
+      .then( reviews => {
+        let i = 0;
+        while(i < reviews.length && reviews[i].id != reviewId) {i++}
+        if(reviews[i]) dispatch(setSingleReview(reviews[i])) 
+      })
 
 
 export const fetchReviews = (productId) => 
