@@ -39,15 +39,17 @@ const Order = db.define('orders', {
       })
       .then(items => {
         items.map( item => {
+          const price = item.dataValues.lineItemPrice;
+          const quantity = item.dataValues.quantity
           if(item.dataValues.product === null){
             return '0';
           }
-          itemPrice += parseInt(item.dataValues.product.price)
+          itemPrice += parseInt(price*quantity)
         })
-       
         totalPrice = itemPrice.toString()
-        
-        order.update({
+        totalPrice = totalPrice.slice(0,2) + '.' + totalPrice.slice(2,4)
+
+        return order.update({
           price: totalPrice
         })
       })
@@ -58,7 +60,7 @@ const Order = db.define('orders', {
       if(this.status === 'processing'){
         this.set(orderPlacedDate, date.now())
       }
-    }
+    },
   }, 
   hooks: {
     beforeValidate: function(order){
