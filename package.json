@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/queerviolet/bones#readme",
   "dependencies": {
+    "async": "^2.1.4",
     "axios": "^0.15.2",
     "babel-preset-stage-2": "^6.18.0",
     "basscss": "^8.0.2",
