@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { login } from 'APP/app/reducers/auth'; // eslint-disable-line
 
-export const Login = ({ handleSubmit }) => (
+const Login = ({ handleSubmit }) => (
   <div className="container">
       <form
         onSubmit={handleSubmit}
@@ -21,7 +21,7 @@ export const Login = ({ handleSubmit }) => (
         </div>
         <div className="form-group">
           <span className="pull-left">
-            Don't have an account yet?<br />
+            Don&#39;t have an account yet?<br />
             <Link to="/">Sign up here.</Link>
           </span>
           <input type="submit" value="Log in" className="btn btn-primary pull-right" />
