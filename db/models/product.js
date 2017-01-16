@@ -12,7 +12,7 @@ const Product = db.define('products', {
   },
   basePrice: {
     // if we need a url path
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   photo: {

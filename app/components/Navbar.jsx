@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class Navbar extends Component {
-  renderAdminLink() {
-
+  renderLogInLogOut() {
+    return this.props.auth // @todo: define PropType later
+    ? <li><Link to="/">Log Out</Link></li>
+    : <li><Link to="/login">Log In</Link></li>;
   }
 
   render() {
+    console.log("here are navbar's props", this.props);
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
@@ -28,10 +32,8 @@ class Navbar extends Component {
               <li><Link to="/order">Order</Link></li>
               {/* Admin link displays only for users logged in as admins */}
               <li><Link to="/admin">Admin</Link></li>
-              {/* Logout link displays for all logged in users */}
-              <li><Link to="/products-create">Add Product</Link></li>
-              {/* Logout link displays for all logged in users */}
-              <li><Link to="/">Log Out</Link></li>
+              {/* Displays link to either log in or log out*/}
+              {this.renderLogInLogOut()}
             </ul>
           </div>
         </div>
@@ -40,4 +42,13 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  const { auth } = state;
+  return { auth };
+};
+
+// Navbar.propTypes = {
+//   auth: PropTypes.object??
+// };
+
+export default connect(mapStateToProps)(Navbar);

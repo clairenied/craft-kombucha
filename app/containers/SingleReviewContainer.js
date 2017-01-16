@@ -3,7 +3,7 @@ import SingleReview from '../components/SingleReview'
 
 function mapStateToProps(state, ownProps){
   return {
-    singleReview: state.singleReview
+    singleReview: state.reviews.singleReview
   }
 }
 

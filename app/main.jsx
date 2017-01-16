@@ -74,9 +74,8 @@ const loadSingleProduct = (nextRouterState) => {
 }
 
 const loadSingleReview = (nextRouterState) => {
-  const productId = nextRouterState.params.productId;
   const reviewId = nextRouterState.params.reviewId;
-  return store.dispatch(fetchSingleReview(productId, reviewId));
+  return store.dispatch(fetchSingleReview(reviewId));
 };
 
 const loadAllReviews = (nextRouterState) => {
@@ -117,7 +116,10 @@ render (
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
 
-        <Route path="/signup" component={Signup} />
+        <Route path="/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
+        <Route path="/reviews/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview} />
+
+        <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
       </Route>
     </Router>

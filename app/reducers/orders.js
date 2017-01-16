@@ -56,29 +56,27 @@ export const getSingleOrder = (orderId) => {
 	}
 }
 
-export default orderReducer;
-// //Create Order
-// const CREATE_ORDER = 'CREATE_ORDER';
-// export const newOrder = () => {
-// 	return {
-// 		type: CREATE_ORDER,
-// 		products
-// 	} 
-// };
+//Create Order
+const CREATE_ORDER = 'CREATE_ORDER';
+export const newOrder = () => {
+	return {
+		type: CREATE_ORDER,
+		products
+	} 
+};
 
-// //add axios calls
-// export const createOrder = () => {
-// 	return dispatch => {
-// 		return axios.post('/api/order/')
-// 		.then(res => {
-// 			dispatch(newOrder(res.data)) 
-// 		})
-// 	}
-// }
+//add axios calls
+export const createOrder = () => {
+	return dispatch => {
+		axios.post('/api/order/')
+		.then(res => {
+			dispatch(newOrder(res.data)) 
+		})
+	}
+}
 
-
-//Add product to order ===> need to fetch line items
-//then set orderId of line item
+// Add product to order ===> need to fetch line items
+// then set orderId of line item
 // const ADD_PRODUCT = 'ADD_PRODUCT';
 // export const fillOrder = (orderId, product) => {
 // 	return {
@@ -87,11 +85,16 @@ export default orderReducer;
 // 	} 
 // };
 // //add axios calls
-// export const fillOrder = (product) => {
+// export const fillOrder = (orderId, product) => {
 // 	return dispatch => {
-// 		return axios.post(`/api/order/${orderId}`, orderId: )
+// 		axios.post(`/api/order/${orderId}`, 
+// 			{orderId: orderId})
 // 		.then(res => {
 // 			dispatch(fillOrder(res.data)) 
 // 		})
 // 	}
 // }
+
+export default orderReducer;
+
+

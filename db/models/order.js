@@ -11,7 +11,7 @@ const Order = db.define('orders', {
   //why is this here again??
   //Do we need to list each lineItem price per item in the order??? - NVM
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   status: {
@@ -29,7 +29,8 @@ const Order = db.define('orders', {
 }, {
   classMethods: {
     totalPrice: (order) => {
-      let totalPrice = 0;
+      let totalPrice = '';
+      let itemPrice = 0; 
 
       LineItem.findAll({ 
         where: {order_id: order.id},
@@ -37,13 +38,27 @@ const Order = db.define('orders', {
       })
       .then(items => {
         items.map( item => {
-          totalPrice += (item.dataValues.product.price)
+          itemPrice += parseInt(item.dataValues.product.price)
         })
+       
+        totalPrice = itemPrice.toString()
         
         order.update({
           price: totalPrice
         })
       })
+    }
+  }, 
+  instanceMethods: {
+    setOrderPlacedDate: () => {
+      if(this.status === 'processing'){
+        this.set(orderPlacedDate, date.now())
+      }
+    }
+  }, 
+  hooks: {
+    beforeValidate: function(order){
+      order.setOrderPlacedDate()
     }
   }
 });

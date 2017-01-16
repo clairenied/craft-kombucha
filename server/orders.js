@@ -9,12 +9,6 @@ const LineItem = db.model('lineitems');
 
 module.exports = require('express').Router()
   .param('orderId', (req, res, next, orderId) => {
-    //gets single order
-    req.order = Order.findOne({
-      where: {
-        id: orderId
-      }
-    })
     next();
   })
   //get all orders
@@ -26,14 +20,6 @@ module.exports = require('express').Router()
     })
     .catch(next)
   })
-  //create new order
-  .post('/', (req, res, next) => {
-    Order.create(req.body)
-    .then( newOrder => {
-      res.status(201).json(order)
-    })
-    .catch(next)
-  })
   //get order by Id ==> here just in case
   .get('/:orderId', (req,res, next) => {
     Order.findOne({
@@ -42,7 +28,6 @@ module.exports = require('express').Router()
       }, 
       include: [
         { model: LineItem, 
-          where: {order_id: req.params.orderId},
           include: [ 
             { model: Product, 
               include: [ProductType]
@@ -52,43 +37,21 @@ module.exports = require('express').Router()
       ]
     })
     .then( order => {
-      // let orderId = order.dataValues.id;
-      // let lineItems = order.dataValues.lineitems;
-      // let product = lineItems[0].dataValues.product;
-      // let productType = product.dataValues.producttype
+      let orderId = order.dataValues.id;
+      let lineItems = order.dataValues.lineitems;
+
+      Order.totalPrice(order)      
       res.json(order)
     })
     .catch(next)
   })
+  //update order with product
+  .post('/:orderId', (req, res, next) => {
+    Order.findOne({ where: {id: req.params.orderId} })
+    .then( order => {
+      //order.update()
+      res.status(201).json(order)
+    })
+    .catch(next)
+  })
 
-
-// const router = require('express').Router()
-// router.get('/', (req, res, next) => {
-//   console.log('order route hit')
-//   Order.findAll({
-//       include: [Product]
-//     })
-//     .then(orders => res.json(orders))
-//     .catch(next)
-// })
-// router.get('/:orderId', (req, res, next) => {
-//   Order.findOne({
-//       where:{
-//         id: orderId
-//       }
-//     })
-//     .then( order => {
-//       console.log('order server: ', order)
-//       res.json(order)
-//     })
-//     .catch(next)
-// })
-// router.post('/', (req, res, next) => {
-//   Order.create(req.body)
-//     .then( newOrder => {
-//       res.status(201).json(order)
-//     })
-//     .catch(next)
-// })
-
-// module.exports = router

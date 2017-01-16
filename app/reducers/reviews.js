@@ -3,7 +3,14 @@ import axios from 'axios'
 const initialState = {
   singleReview: {
     content: "",
-    rating: 0
+    rating: 0,
+    created_at: "",
+    user: {
+      fullName: ""
+    },
+    producttype: {
+      name: ""
+    }
   },
   reviews: [{
     content: "",
@@ -13,6 +20,9 @@ const initialState = {
     fullName: "",
     id: 0,
     starRating: 0,
+    producttype:{
+      name: ""
+    }
   }]
 }
 
@@ -37,22 +47,34 @@ export const setSingleReview = singleReview => ({
 })
 
 const SET_ALL_REVIEWS = 'SET_ALL_REVIEWS';
-export const setAllReviews = product => {
-    let reviews = product.producttype.reviews
+export const setAllReviews = reviews => {
     return {
     type: SET_ALL_REVIEWS, reviews
   }
 }
 
-export const fetchSingleReview = (reviewId) => 
+export const fetchSingleReview = (reviewId) =>  
   dispatch => 
-    axios.get(`/api/products/${productId}/reviews/`)
-      .then( (res) => dispatch(setSingleReviews(res.data)) )
+    axios.get(`/api/reviews/${reviewId}`)
+    .then(res=>res.data)
+    .then(review=>{
+      if (review) dispatch(setSingleReview(review))
+    })
 
-
-export const fetchReviews = (productId) => 
-  dispatch => 
-    axios.get(`/api/products/${productId}`)
-      .then( (res) => dispatch(setAllReviews(res.data)) )
+export const fetchReviews = productId => 
+  dispatch => {
+    if (productId){
+      axios.get(`/api/products/${productId}`)
+        .then( res => res.data)
+        .then( product => {
+          let reviews = product.producttype.reviews
+          console.log("PR", reviews)
+          dispatch(setAllReviews(reviews))
+      })
+    } else {
+      axios.get('/api/reviews')
+        .then( res => dispatch(setAllReviews(res.data)))
+    }
+  }
 
 export default reducer
