@@ -16,10 +16,10 @@ const initialState = {
     content: "",
     created_at: "",
     id: 0,
-    user: {},
+    user:{
     fullName: "",
     id: 0,
-    starRating: 0,
+    },
     producttype:{
       name: ""
     }
@@ -68,7 +68,6 @@ export const fetchReviews = productId =>
         .then( res => res.data)
         .then( product => {
           let reviews = product.producttype.reviews
-          console.log("PR", reviews)
           dispatch(setAllReviews(reviews))
       })
     } else {
@@ -76,5 +75,12 @@ export const fetchReviews = productId =>
         .then( res => dispatch(setAllReviews(res.data)))
     }
   }
+
+export const addNewReview = (starRating, content, userId, productId) =>
+  dispatch => 
+    axios.post('api/reviews', { starRating: starRating, content: content, user_id: userId, producttype_id: productId})
+     .then( res => res.data)
+     //.then( review => )
+
 
 export default reducer
