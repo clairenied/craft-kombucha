@@ -5,7 +5,7 @@ const Order = db.model('orders');
 const LineItem = db.model('lineitems');
 const Review = db.model('reviews');
 
-const async = require('async')
+const async = require('async');
 
 const { mustBeLoggedIn, mustBeAdmin, forbidden } = require('./auth.filters');
 

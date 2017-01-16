@@ -22,7 +22,7 @@ const Login = ({ handleSubmit }) => (
       <div className="form-group">
         <span className="pull-left">
           Don&#39;t have an account yet?<br />
-          <Link to="/">Sign up here.</Link>
+          <Link to="/signup">Sign up here.</Link>
         </span>
         <input type="submit" value="Log in" className="btn btn-primary pull-right" />
       </div>
@@ -30,12 +30,11 @@ const Login = ({ handleSubmit }) => (
   </div>
 );
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     handleSubmit: (evt) => {
       evt.preventDefault();
-      console.log('you hit log in!');
-      // login(evt.target.username.value, evt.target.password.value);
+      dispatch(login(evt.target.email.value, evt.target.password.value));
     }
   };
 };
@@ -44,4 +43,4 @@ Login.propTypes = {
   handleSubmit: PropTypes.func,
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(() => ({}), mapDispatchToProps)(Login);
