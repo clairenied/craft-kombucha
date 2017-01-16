@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router';
-import { setAllReviews } from './reviews'
+import { setAllReviews } from './reviews';
+import { populateProductUpdateForm } from './productUpdateForm';
 
 function transformProduct(product) {
   product.reviews = product.reviews.map(review => review.id);
@@ -60,6 +61,7 @@ export const getAllProductsMother = () =>
 export const createProduct = (productObj) => {
   return dispatch => {
     axios.post('/api/products', productObj)
+    .then(() => axios.get('/api/products'))
     .then(res => { 
       dispatch(setAllProducts(res.data))
       browserHistory.push('/products')
@@ -69,7 +71,8 @@ export const createProduct = (productObj) => {
 
 export const updateProduct = (productObj, productId) => {
   return dispatch => {
-    axios.put(`/api/products/${productId}`, productObj)
+    axios.put(`/api/products/${productId}`, productObj.productUpdateForm)
+    .then(() => axios.get('/api/products'))
     .then(res => { 
       dispatch(setAllProducts(res.data))
       browserHistory.push('/products')
@@ -80,6 +83,9 @@ export const updateProduct = (productObj, productId) => {
 export const getSingleProduct = (productId) => 
   dispatch => 
     axios.get(`/api/products/${productId}`)
-      .then( (res) => dispatch(setSingleProduct(res.data)) )
+      .then( (res) => {
+        dispatch(setSingleProduct(res.data));
+        dispatch(populateProductUpdateForm(res.data));
+      } )
 
 export default reducer

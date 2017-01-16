@@ -30,6 +30,7 @@ class Navbar extends Component {
             <ul className="nav navbar-nav navbar-right">
               {/* Cart link displays everyone, including users not logged in */}
               <li><Link to="/order">Order</Link></li>
+              <li><Link to="/products-create">Add Product</Link></li>
               {/* Admin link displays only for users logged in as admins */}
               <li><Link to="/admin">Admin</Link></li>
               {/* Displays link to either log in or log out*/}
