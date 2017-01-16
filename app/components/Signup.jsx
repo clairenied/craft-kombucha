@@ -1,77 +1,117 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-const Signup = (props) => {
-  return (
-    <form>
-      <div className="page-header col-xs-12">
-        <h1>Create an Account</h1>
-      </div>
+import StateSelector from './StateSelector';
+import BirthdaySelector from './BirthdaySelector';
+import TextInput from './TextInput';
 
-      <div className="col-md-6">
-        <div className="form-group">
-          <label>Full Name</label>
-          <input 
-            type="text"
-            className="form-control"/>
+import { signUpForAccount } from '../reducers/user';
 
-          <label>Email</label>
-          <input 
-            type="text"
-            className="form-control"/>
+class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password1: '',
+      password2: '',
+      error: '',
+      dirty: false,
+    };
+  }
 
-          <label>Password</label>
-          <input 
-            type="text"
-            className="form-control"/>
+  onPassword1Change(evt) {
+    this.setState({ password1: evt.target.value });
+  }
 
-          <label>Confirm Password</label>
-          <input 
-            type="text"
-            className="form-control"/>
+  onPassword2Change(evt) {
+    this.setState({ password2: evt.target.value, dirty: true });
+  }
+
+  get passwordsMatch() {
+    return (this.state.password1 === this.state.password2 || !this.state.dirty);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.props.handleSubmit}>
+        <div className="page-header col-xs-12">
+          <h1>Create An Account</h1>
         </div>
-        <div className="form-group">
-          <label>Birthday</label>
-          <input 
-            type="text"
-            className="form-control"/>
+
+        <div className="col-md-6">
+          <TextInput htmlFor="firstName" label="First Name" inputType="text" />
+          <TextInput htmlFor="lastName" label="Last Name" inputType="text" />
+          <TextInput htmlFor="email" label="Email" inputType="text" />
+          <TextInput
+            htmlFor="password"
+            label="Password"
+            inputType="password"
+            onChange={evt => this.onPassword1Change(evt)}
+          />
+          <TextInput
+            htmlFor="confirmPassword"
+            label="Confirm Password"
+            inputType="password"
+            onChange={evt => this.onPassword2Change(evt)}
+            hasError={!this.passwordsMatch}
+            errorMessage="Passwords do not match."
+          />
         </div>
-      </div>
-      <div className="col-md-6">
 
-        <div>
-          <label>Address Number</label>
-          <input 
-            type="text"
-            className="form-control"/>
+        <div className="col-md-6">
+          <TextInput htmlFor="streetAddress" label="Street Address" inputType="text" />
+          <TextInput htmlFor="city" label="City" inputType="text" />
 
-          <label>Street</label>
-          <input 
-            type="text"
-            className="form-control"/>
+          <div className="form-group">
+            <label htmlFor="state">State</label>
+            <StateSelector className="form-control" id="state" />
+          </div>
 
-          <label>City</label>
-          <input 
-            type="text"
-            className="form-control"/>
+          <TextInput htmlFor="zip" label="Zip" inputType="text" />
 
-          <label>State</label>
-          <input 
-            type="text"
-            className="form-control"/>
-
-          <label>Zip</label>
-          <input 
-            type="text"
-            className="form-control"/>
+          <div className="form-group">
+            <label htmlFor="birthday">Birthday</label>
+            <BirthdaySelector />
+          </div>
         </div>
-      </div>
 
-      <div className="col-xs-12">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div>
-    </form>
-  )
+        <div className="col-xs-12">
+          <input type="submit" value="Sign up" className="btn btn-primary" />
+        </div>
+      </form>
+    );
+  }
 }
 
-export default Signup
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSubmit: (evt) => {
+      evt.preventDefault();
+
+      // Creates user object for database
+      const userKeys = ['firstName', 'lastName', 'email', 'password', 'birthday'];
+      const userInfo = { type: 'member' }; // Default type is member
+      userKeys.forEach((key) => {
+        userInfo[key] = evt.target[key].value;
+      });
+
+      console.log('user info:', userInfo);
+
+      // Creates address object for database
+      const addressKeys = ['streetAddress', 'city', 'state', 'zip'];
+      const addressInfo = {};
+      addressKeys.forEach((key) => {
+        addressInfo[key] = evt.target[key].value;
+      });
+
+      console.log('address:', addressInfo);
+
+      dispatch(signUpForAccount({ userInfo, addressInfo }));
+    }
+  };
+};
+
+Signup.propTypes = {
+  handleSubmit: PropTypes.func,
+};
+
+export default connect(() => ({}), mapDispatchToProps)(Signup);

@@ -17,7 +17,7 @@ const AdminModule = (props) => {
 
       <div className="col-xs-12 col-sm-4">
         <address>
-          {billingAddress.streetNumber} {billingAddress.streetName}<br />
+          {billingAddress.streetAddress}<br />
           {billingAddress.city}, {billingAddress.state} {billingAddress.zip}<br />
         </address>
       </div>

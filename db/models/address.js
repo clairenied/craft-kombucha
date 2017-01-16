@@ -2,11 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('APP/db'); // eslint-disable-line
 
 const Address = db.define('addresses', {
-  streetNumber: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
-  streetName: {
+  streetAddress: {
     type: Sequelize.STRING,
     allowNull: false,
   },
