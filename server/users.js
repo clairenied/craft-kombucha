@@ -44,10 +44,29 @@ module.exports = require('express').Router()
     .catch(next))
 
   // Add new user
-  .post('/', (req, res, next) =>
-    User.create(req.body)
-    .then(user => res.status(201).json(user))
-    .catch(next))
+  .post('/', async (req, res, next) => {
+    const { userInfo, addressInfo } = req.body;
+
+    // Create user instance
+    const user = await User.findOrCreate({
+      where: { email: userInfo.email },
+      defaults: userInfo,
+    });
+
+    let address;
+    // If user instance was newly created, create address instance
+    if (user[1]) {
+      address = await Address.create(addressInfo);
+    } else {
+      return res.status(403).message('User already exists').send();
+    }
+
+    // Associate user and address
+    user.addAddress(address, { through: 'billingAddress' });
+
+    console.log('wow we got here');
+    return res.json(user);
+  })
 
   // Get one user by ID
   .get('/:userId', mustBeLoggedIn, (req, res, next) =>

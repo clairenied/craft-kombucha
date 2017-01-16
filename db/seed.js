@@ -36,7 +36,7 @@ const seedProductType = () => db.Promise.map([
   { name: 'watermelon kombucha', description: 'Brewed from our Avalon strain (#398), flavored with fresh watermelon.', category:'kombucha', },
   { name: 'strawberry basil kombucha', description: 'Brewed from our Timbre strain (#441), flavored with fresh strawberries and basil.', category:'kombucha', },
   { name: 'blueberry ginger kombucha', description: 'Brewed from our Dakota strain (#1083), flavored with fresh blueberries and ginger.', category:'kombucha', },
-  
+
   { name: 't-shirt', description: 'Hand-knitted t-shirt. Materials: cotton, spandex, kombucha mothers', category:'merch', },
   { name: 'sweatshirt', description: 'Hand-knitted sweatshirt. Materials: cotton, spandex, kombucha mothers', category:'mother', },
 ], productType => db.model('producttypes').create(productType));
@@ -62,11 +62,11 @@ const seedOrders = () => db.Promise.map([
 
 // addresses
 const seedAddress = () => db.Promise.map([
-  { streetName: 'Blue St.', streetNumber: '1234', city: 'Chicago', state: 'IL', zip: '60660' },
-  { streetName: 'Green St.', streetNumber: '4321', city: 'Chicago', state: 'IL', zip: '60637' },
-  { streetName: 'Red Ave.', streetNumber: '2468', city: 'Chicago', state: 'IL', zip: '60601' },
-  { streetName: 'Yellow St.', streetNumber: '8642', city: 'Chicago', state: 'IL', zip: '60601' },
-  { streetName: 'Woof St.', streetNumber: '1111', city: 'Chicago', state: 'IL', zip: '60610' },
+  { streetAddress: '1234 Blue St.', city: 'Chicago', state: 'IL', zip: '60660' },
+  { streetAddress: '4321 Green St.', city: 'Chicago', state: 'IL', zip: '60637' },
+  { streetAddress: '2468 Red Ave.', city: 'Chicago', state: 'IL', zip: '60601' },
+  { streetAddress: '8642 Yellow St.', city: 'Chicago', state: 'IL', zip: '60601' },
+  { streetAddress: '1111 Woof St.', city: 'Chicago', state: 'IL', zip: '60610' },
 ], address => db.model('addresses').create(address));
 
 const groupOne = () =>
