@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import {browserHistory} from 'react-router'
+
 const initialState = {
   singleReview: {
     content: "",
@@ -80,6 +82,7 @@ export const addNewReview = (starRating, content, userId, productId) =>
   dispatch => 
     axios.post('api/reviews', { starRating: starRating, content: content, user_id: userId, producttype_id: productId})
      .then( res => res.data)
+     .then( review => browserHistory.push(`/reviews/${review.id}`))
      //.then( review => )
 
 
