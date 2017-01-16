@@ -49,25 +49,24 @@ module.exports = require('express').Router()
   .post('/', async (req, res, next) => {
     const { userInfo, addressInfo } = req.body;
 
-    // Create user instance
-    const user = await User.findOrCreate({
+    // Build address instance
+    const address = await Address.build(addressInfo);
+
+    // Build user instance
+    const [user, built] = await User.findOrBuild({
       where: { email: userInfo.email },
       defaults: userInfo,
     });
 
-    let address;
-    // If user instance was newly created, create address instance
-    if (user[1]) {
-      address = await Address.create(addressInfo);
+    // If user instance was newly built, associate user and address
+    if (built) {
+      await user.setBillingAddress(address);
+      await address.save();
+      await user.save();
+      res.json(user);
     } else {
-      return res.status(403).message('User already exists').send();
+      res.status(403).send('User already exists');
     }
-
-    // Associate user and address
-    user.addAddress(address, { through: 'billingAddress' });
-
-    console.log('wow we got here');
-    return res.json(user);
   })
 
   // Get one user by ID

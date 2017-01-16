@@ -13,7 +13,6 @@ class Signup extends Component {
     this.state = {
       password1: '',
       password2: '',
-      error: '',
       dirty: false,
     };
   }
@@ -88,13 +87,15 @@ const mapDispatchToProps = (dispatch) => {
       evt.preventDefault();
 
       // Creates user object for database
-      const userKeys = ['firstName', 'lastName', 'email', 'password', 'birthday'];
+      const userKeys = ['firstName', 'lastName', 'email', 'password'];
       const userInfo = { type: 'member' }; // Default type is member
       userKeys.forEach((key) => {
         userInfo[key] = evt.target[key].value;
       });
 
-      console.log('user info:', userInfo);
+      // Birthday handled separately
+      userInfo.birthday = `${evt.target.year.value}-${evt.target.month.value}-${evt.target.day.value}`;
+      // @todo: Add birthday validation
 
       // Creates address object for database
       const addressKeys = ['streetAddress', 'city', 'state', 'zip'];
@@ -102,8 +103,6 @@ const mapDispatchToProps = (dispatch) => {
       addressKeys.forEach((key) => {
         addressInfo[key] = evt.target[key].value;
       });
-
-      console.log('address:', addressInfo);
 
       dispatch(signUpForAccount({ userInfo, addressInfo }));
     }
