@@ -6,7 +6,6 @@ const User = require('APP/db/models/user'); // eslint-disable-line
 const OAuth = require('APP/db/models/oauth'); // eslint-disable-line
 const auth = require('express').Router();
 
-
 /**
  * Auth strategies
  *
