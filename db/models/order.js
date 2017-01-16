@@ -39,6 +39,9 @@ const Order = db.define('orders', {
       })
       .then(items => {
         items.map( item => {
+          if(item.dataValues.product === null){
+            return '0';
+          }
           itemPrice += parseInt(item.dataValues.product.price)
         })
        
