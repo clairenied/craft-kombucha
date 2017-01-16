@@ -1,4 +1,5 @@
 const db = require('APP/db');
+const Promise = require('bluebird')
 const Product = db.model('products');
 const ProductType = db.model('producttypes');
 const Review = db.model('reviews');
@@ -79,18 +80,36 @@ module.exports = require('express').Router()
       description: req.body.description,
     })
 
-    return Promise.map(newProduct, newProductType)
-      .then(productsArr => { 
-        let tempNewProduct = productsArr[0]
-        let tempNewProductType = productsArr[1]
-
-        return tempNewProduct.setProductType(tempNewProductType)
+    return Promise.all([newProduct, newProductType])
+      .then(createdProductsArr => { 
+        let newProduct = createdProductsArr[0]
+        let newProductType = createdProductsArr[1]
+        return newProduct.setProducttype(newProductType)
       })
-      .then(product => {
-        console.log(product)
-        res.status(201).json(product)
-      })
+      .then(product => res.status(201).json(product))
       .catch(next)
+  })
+
+    // Get all products
+  .put('/:productId', (req, res, next) => {
+    req.product
+    .then(product => {
+      return product.update({
+        size: req.body.size,
+        remaining: req.body.remaining,
+        basePrice: req.body.basePrice,
+        photo: req.body.photo,
+      })
+    })
+    .then(product => {
+      return product.producttype.updateAttributes({
+        name: req.body.name,
+        category: req.body.category,
+        description: req.body.description,
+      })
+    })
+    .then(product => res.json(product))
+    .catch(next)
   })
 
   // Get one product by ID

@@ -2,121 +2,184 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
+import { updateProduct } from '../reducers/products';
+
+import { updateAdminProductForm, resetProductUpdateFrom } from '../reducers/productUpdateForm';
+
+// const emptyForm = () => {
+//   return { 
+//     name: '',
+//     basePrice: 0,
+//     category: '',
+//     description: '',
+//     size: '',
+//     remaining: 0,
+//     photo: '',
+//   }
+// };
 // import { createUser } from '../action-creators/users'
 
-class CreateProduct extends React.Component {
-  constructor(props){
-    super(props)
+class UpdateProduct extends React.Component {
+  // constructor(props){
+  //   super(props)
+  //   this.state = emptyForm()
+  //   this.handleSubmit = this.handleSubmit.bind(this)
+  // }
 
-    this.state = {
-      name: '',
-      basePrice: 0,
-      category: '',
-      description: '',
-      size: '',
-      remaining: 0,
-      photo: '',
-    }
+  // componentDidMount() {
+  //   this.setState(this.props.products);
+  //   console.log('DID THE STATE GET SET', this.state)
+  // }
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+  // handleChange(field, evt){
+  //   console.log(this.state)
+  //   this.setState({
+  //     [field]: evt.target.value
+  //   })
+  // }
 
-  handleChange(field, evt){
-    this.setState({
-      [field]: evt.target.value
-    })
-  }
-
-  handleSubmit(evt){
-    evt.preventDefault()
-    const userToCreate = this.state
-    // this.props.createUser(this.state.email, this.state.password, this.state.firstName, this.state.lastName)
-    return
-  }
+  // handleSubmit(evt){
+  //   evt.preventDefault()
+  //   const productToUpdate = {
+  //     name: this.state.name,
+  //     basePrice: this.state.basePrice,
+  //     category: this.state.category,
+  //     description: this.state.description,
+  //     size: this.state.size,
+  //     remaining: this.state.remaining,
+  //     photo: this.state.photo,
+  //   }
+  //   this.props.updateProduct(productToUpdate, this.props.params.productId)
+  //   return
+  // }
 
   render(){
     return(
       <div>
         <div className="page-header col-xs-12">
-          <h1>Update Product</h1>
+          <h1>Update {this.props.name}</h1>
         </div>
         
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.updateProduct}>
           <div className="col-xs-12 col-sm-6">
             <div className="form-group">
               <label>Product Name</label>
               <input 
                 type="text" 
-                onChange={this.handleChange.bind(this, 'firstName')} 
+                onChange={(e) => this.props.updateField('name', e)} 
                 className="form-control"
-                value={this.state.firstName} 
-                name="firstName"/>
+                value={this.props.name} 
+                name="name"/>
             </div>
 
             <div className="form-group">    
               <label>Price</label>
               <input 
                 type="text" 
-                onChange={this.handleChange.bind(this, 'lastName')} 
+                onChange={(e) => this.props.updateField('basePrice', e)} 
                 className="form-control"
-                value={this.state.lastName} 
-                name="lastName" />
+                value={this.props.basePrice} 
+                name="basePrice" />
             </div>
           
-            <div className="form-group">
-              <label>Category</label>
-              <input 
-                type="text" 
-                onChange={this.handleChange.bind(this, 'email')} 
-                className="form-control"
-                value={this.state.email} 
-                name="email" />
-              </div>
 
             <div className="form-group">
               <label>Description</label>
               <textarea
-                onChange={this.handleChange.bind(this, 'password')} 
+                onChange={(e) => this.props.updateField('description', e)} 
                 className="form-control"
-                value={this.state.password} 
-                name="password" />
+                value={this.props.description} 
+                name="description" />
+            </div>
+
+            <div className="form-group">
+              <div>
+                <label>Category</label>
+              </div>
+              <select 
+                name="category"
+                onChange={(e) => this.props.updateField('category', e)}>
+                <option
+                  value="kombucha"
+                  name="category">
+                  Kombucha
+                </option>
+                <option 
+                  value="merch"
+                  name="category">
+                  Merch
+                </option>
+                <option 
+                  value="mother"
+                  name="category">
+                  Mother
+                </option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <div>
+                <label>Size</label>
+              </div>
+              
+              <select name="size"
+                onChange={(e) => this.props.updateField('size', e)}>
+                <option 
+                  value="small"
+                  name="size">
+                  Small
+                </option>
+                <option 
+                  value="medium"
+                  name="size">
+                  Medium
+                </option>
+                <option 
+                  value="large"
+                  name="size">
+                  Large
+                </option>
+                <option 
+                  value="12-pack"
+                  name="size">
+                  12-pack
+                </option>
+                <option 
+                  value="keg"
+                  name="size">
+                  Keg
+                </option>
+              </select>
             </div>
           </div>
 
           <div className="col-xs-12 col-sm-6">
-            <div className="form-group">
-              <label>Size</label>
-              <input 
-                type="password" 
-                onChange={this.handleChange.bind(this, 'confirmPassword')} 
-                className="form-control"
-                value={this.state.confirmPassword} 
-                name="confirmPassword" />
-            </div>
 
             <div className="form-group">
               <label>Remaining</label>
               <input 
-                type="password" 
-                onChange={this.handleChange.bind(this, 'confirmPassword')} 
+                type="text" 
+                onChange={(e) => this.props.updateField('remaining', e)} 
                 className="form-control"
-                value={this.state.confirmPassword} 
-                name="confirmPassword" />
+                value={this.props.remaining} 
+                name="remaining" />
             </div>
 
             <div className="form-group">          
               <label>Photo</label>
               <input 
-                type="password" 
-                onChange={this.handleChange.bind(this, 'confirmPassword')} 
+                type="text" 
+                onChange={(e) => this.props.updateField('photo', e)} 
                 className="form-control"
-                value={this.state.confirmPassword} 
-                name="confirmPassword" />
+                value={this.props.photo} 
+                name="photo" />
             </div>
+
+            <img src={this.props.photo} className="img-responsive"/>
           </div>
 
           <div className="col-xs-12">
-            <button type="submit" className="btn btn-primary">Create Product</button>
+            <button type="submit" className="btn btn-primary">Update Product</button>
           </div>
         </form>
       </div>
@@ -126,18 +189,28 @@ class CreateProduct extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  return state.products[ownProps.params.id];
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    // createUser: (email, password, firstName, lastName) => { dispatch(createUser(email, password, firstName, lastName)) }
+    updateProduct(productObj, productId) {
+      dispatch(updateProduct(productObj, productId))
+    },
+    
+    updateField(field, event) {
+      dispatch(updateAdminProductForm(field, event.target.value));
+    },
+
+    resetForm() {
+      dispatch(resetProductUpdateFrom());
+    }
   }
 }
 
-const CreateProductContainer = connect(
+const UpdateProductContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateProduct);
+)(UpdateProduct);
 
-export default CreateProductContainer
+export default UpdateProductContainer

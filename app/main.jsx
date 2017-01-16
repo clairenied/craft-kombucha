@@ -67,9 +67,11 @@ const loadAllProductsMother = () => {
 }
 
 const loadSingleProduct = (nextRouterState) => {
-  const productId = nextRouterState.params.productId;
-  return store.dispatch(getSingleProduct(productId));
-};
+  console.log(nextRouterState)
+  const productId = nextRouterState.params.productId
+  store.dispatch(getSingleProduct(productId))
+  store.dispatch(fetchReviews(productId))
+}
 
 const loadSingleReview = (nextRouterState) => {
   const productId = nextRouterState.params.productId;
@@ -109,7 +111,7 @@ render (
         <Route path="/products-mother" component={ProductsContainer} onEnter={loadAllProductsMother} />
 
         <Route path="/products-create" component={CreateProductContainer} />
-        <Route path="/products/:productId/update" component={UpdateProductContainer} />
+        <Route path="/products/:productId/update" component={UpdateProductContainer} onEnter={loadSingleProduct}/>
             
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />

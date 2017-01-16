@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-// import { createUser } from '../action-creators/users'
+import { createProduct } from '../reducers/products'
 
 class CreateProduct extends React.Component {
   constructor(props){
@@ -11,9 +11,9 @@ class CreateProduct extends React.Component {
     this.state = {
       name: '',
       basePrice: 0,
-      category: '',
+      category: 'kombucha',
       description: '',
-      size: '',
+      size: 'small',
       remaining: 0,
       photo: '',
     }
@@ -25,12 +25,13 @@ class CreateProduct extends React.Component {
     this.setState({
       [field]: evt.target.value
     })
+    console.log(this.state)
   }
 
   handleSubmit(evt){
     evt.preventDefault()
     const userToCreate = this.state
-    // this.props.createUser(this.state.email, this.state.password, this.state.firstName, this.state.lastName)
+    this.props.createProduct(userToCreate)
     return
   }
 
@@ -57,37 +58,12 @@ class CreateProduct extends React.Component {
               <label>Price</label>
               <input 
                 type="text" 
-                onChange={this.handleChange.bind(this, 'price')} 
+                onChange={this.handleChange.bind(this, 'basePrice')} 
                 className="form-control"
-                value={this.state.price} 
-                name="price" />
+                value={this.state.basePrice} 
+                name="basePrice" />
             </div>
           
-            <div className="form-group">
-              <div>
-                <label>Category</label>
-              </div>
-              <select name="category">
-                <option 
-                  onChange={this.handleChange.bind(this, 'category')}
-                  value="kombucha"
-                  name="category">
-                  Kombucha
-                </option>
-                <option 
-                  onChange={this.handleChange.bind(this, 'category')}
-                  value="merch"
-                  name="category">
-                  Merch
-                </option>
-                <option 
-                  onChange={this.handleChange.bind(this, 'category')}
-                  value="mother"
-                  name="category">
-                  Mother
-                </option>
-              </select>
-            </div>
 
             <div className="form-group">
               <label>Description</label>
@@ -97,52 +73,74 @@ class CreateProduct extends React.Component {
                 value={this.state.description} 
                 name="description" />
             </div>
+
+            <div className="form-group">
+              <div>
+                <label>Category</label>
+              </div>
+              <select 
+                name="category"
+                onChange={this.handleChange.bind(this, 'category')}>
+                <option
+                  value="kombucha"
+                  name="category">
+                  Kombucha
+                </option>
+                <option 
+                  value="merch"
+                  name="category">
+                  Merch
+                </option>
+                <option 
+                  value="mother"
+                  name="category">
+                  Mother
+                </option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <div>
+                <label>Size</label>
+              </div>
+              
+              <select name="size"
+                onChange={this.handleChange.bind(this, 'size')}>
+                <option 
+                  value="small"
+                  name="size">
+                  Small
+                </option>
+                <option 
+                  value="medium"
+                  name="size">
+                  Medium
+                </option>
+                <option 
+                  value="large"
+                  name="size">
+                  Large
+                </option>
+                <option 
+                  value="12-pack"
+                  name="size">
+                  12-pack
+                </option>
+                <option 
+                  value="keg"
+                  name="size">
+                  Keg
+                </option>
+              </select>
+            </div>
           </div>
 
           <div className="col-xs-12 col-sm-6">
-              <div className="form-group">
-                <div>
-                  <label>Size</label>
-                </div>
-                <select name="size">
-                  <option 
-                    onChange={this.handleChange.bind(this, 'size')}
-                    value="small"
-                    name="size">
-                    Small
-                  </option>
-                  <option 
-                    onChange={this.handleChange.bind(this, 'size')}
-                    value="medium"
-                    name="size">
-                    Medium
-                  </option>
-                  <option 
-                    onChange={this.handleChange.bind(this, 'size')}
-                    value="large"
-                    name="size">
-                    Large
-                  </option>
-                  <option 
-                    onChange={this.handleChange.bind(this, 'size')}
-                    value="12-pack"
-                    name="size">
-                    12-pack
-                  </option>
-                  <option 
-                    onChange={this.handleChange.bind(this, 'size')}
-                    value="keg"
-                    name="size">
-                    Keg
-                  </option>
-                </select>
-              </div>
-            </div>
 
             <div className="form-group">
               <label>Remaining</label>
               <input 
-                type="password" 
+                type="text" 
                 onChange={this.handleChange.bind(this, 'remaining')} 
                 className="form-control"
                 value={this.state.remaining} 
@@ -152,12 +150,19 @@ class CreateProduct extends React.Component {
             <div className="form-group">          
               <label>Photo</label>
               <input 
-                type="password" 
+                type="text" 
                 onChange={this.handleChange.bind(this, 'photo')} 
                 className="form-control"
                 value={this.state.photo} 
                 name="photo" />
             </div>
+
+            <img src={this.state.photo} className="img-responsive"/>
+          </div>
+
+          <div className="col-xs-12 col-sm-2">
+
+
           </div>
 
           <div className="col-xs-12">
@@ -176,7 +181,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    // createUser: (email, password, firstName, lastName) => { dispatch(createUser(email, password, firstName, lastName)) }
+    createProduct: (productObj) => { dispatch(createProduct(productObj)) }
   }
 }
 
