@@ -23,13 +23,26 @@ export default (state = initialState, action) => {
 };
 
 const RESET_PRODUCT_UPDATE_FORM = 'RESET_PRODUCT_UPDATE_FORM';
-export const resetProductUpdateFrom = () => ({
+export const resetProductUpdateForm = () => ({
   type: RESET_PRODUCT_UPDATE_FORM
 });
 
 const UPDATE_PRODUCT_UPDATE_FORM_FIELD = 'UPDATE_PRODUCT_UPDATE_FORM_FIELD';
-export const updateProductUpdateForm = (field, value) => ({
+export const updateAdminProductForm = (field, value) => ({
   type: UPDATE_PRODUCT_UPDATE_FORM_FIELD,
   field,
   value,
 });
+
+
+export const populateProductUpdateForm = product => {
+  return dispatch => {
+
+    Object.keys(product)
+      .forEach(key => dispatch(updateAdminProductForm(key, product[key])))
+
+    Object.keys(product.producttype)
+      .forEach(key => dispatch(updateAdminProductForm(key, product.producttype[key])))
+  }
+}
+
