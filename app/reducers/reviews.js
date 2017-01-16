@@ -53,6 +53,11 @@ export const setAllReviews = reviews => {
   }
 }
 
+// const ASSOCIATENEWREVIEW = 'ASSOCIATENEWREVIEW'
+// export const associateNewReview => (review, userId, productId){
+  
+// }
+
 export const fetchSingleReview = (reviewId) =>  
   dispatch => 
     axios.get(`/api/reviews/${reviewId}`)
@@ -68,7 +73,6 @@ export const fetchReviews = productId =>
         .then( res => res.data)
         .then( product => {
           let reviews = product.producttype.reviews
-          console.log("PR", reviews)
           dispatch(setAllReviews(reviews))
       })
     } else {
@@ -76,5 +80,12 @@ export const fetchReviews = productId =>
         .then( res => dispatch(setAllReviews(res.data)))
     }
   }
+
+// export const addNewReview = (starRating, content, userId, productId) =>
+//   dispatch => 
+//     axios.post('api/reviews', { starRating: starRating, content: content})
+//      .then( res => res.data)
+//      .then( review => dispatch(associateNewReview(res.data, userId, productId)))
+
 
 export default reducer

@@ -14,12 +14,14 @@ import ReviewsContainer from './containers/ReviewsContainer';
 import Signup from './components/Signup';
 import Orders from './components/Orders';
 import Admin from './components/Admin';
+import NewReview from './components/NewReview'
 
 // Containers
 import ProductsContainer from './containers/ProductsContainer';
 import SingleProductContainer from './containers/SingleProductContainer';
 import OrdersContainer from './containers/OrdersContainer';
 import SingleOrderContainer from './containers/SingleOrderContainer';
+import NewReviewContainer from './containers/NewReviewContainer';
 
 // Actions
 import { fetchUsers } from './reducers/users';
@@ -111,6 +113,8 @@ render (
 
         <Route path="/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
         <Route path="/reviews/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview} />
+
+        <Route path="/new-review" component={NewReviewContainer} />
 
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />

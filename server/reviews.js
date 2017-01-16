@@ -25,10 +25,12 @@ module.exports = require('express').Router()
       res.json(reviews)})
     .catch(next))
   // Add new review
-  .post('/', (req, res, next) =>
+  .post('/', (req, res, next) =>{
+    console.log("REQ",req.body)
     Review.create(req.body)
     .then(review => res.status(201).json(review))
-    .catch(next))
+    .catch(next)
+  })
 
   .get('/:reviewId', (req, res, next) => {
     req.review
@@ -36,5 +38,10 @@ module.exports = require('express').Router()
     .catch(next);
   })
 
+  .delete('/:reviewId', (req, res, next) => {
+    req.review
+    .then (review => review.destroy())
+    .catch(next)
+  })
   
 
