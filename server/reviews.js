@@ -26,7 +26,6 @@ module.exports = require('express').Router()
     .catch(next))
   // Add new review
   .post('/', (req, res, next) =>{
-    console.log("REQ",req.body)
     Review.create(req.body)
     .then(review => res.status(201).json(review))
     .catch(next)

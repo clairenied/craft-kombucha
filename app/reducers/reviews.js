@@ -16,10 +16,10 @@ const initialState = {
     content: "",
     created_at: "",
     id: 0,
-    user: {},
+    user:{
     fullName: "",
     id: 0,
-    starRating: 0,
+    },
     producttype:{
       name: ""
     }
@@ -53,11 +53,6 @@ export const setAllReviews = reviews => {
   }
 }
 
-// const ASSOCIATENEWREVIEW = 'ASSOCIATENEWREVIEW'
-// export const associateNewReview => (review, userId, productId){
-  
-// }
-
 export const fetchSingleReview = (reviewId) =>  
   dispatch => 
     axios.get(`/api/reviews/${reviewId}`)
@@ -81,11 +76,11 @@ export const fetchReviews = productId =>
     }
   }
 
-// export const addNewReview = (starRating, content, userId, productId) =>
-//   dispatch => 
-//     axios.post('api/reviews', { starRating: starRating, content: content})
-//      .then( res => res.data)
-//      .then( review => dispatch(associateNewReview(res.data, userId, productId)))
+export const addNewReview = (starRating, content, userId, productId) =>
+  dispatch => 
+    axios.post('api/reviews', { starRating: starRating, content: content, user_id: userId, producttype_id: productId})
+     .then( res => res.data)
+     //.then( review => )
 
 
 export default reducer
