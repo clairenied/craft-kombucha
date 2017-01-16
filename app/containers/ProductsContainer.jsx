@@ -3,7 +3,7 @@ import Products from '../components/Products'
 
 function mapStateToProps(state){
   return {
-    products: state.products
+    products: Object.values(state.products)
   }
 }
 
