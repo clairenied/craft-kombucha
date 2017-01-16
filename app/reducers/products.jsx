@@ -27,7 +27,7 @@ const SET_PRODUCT = 'SET_PRODUCT';
 export const setSingleProduct = product => 
   dispatch => {
     // dispatch(setAllReviews(product.reviews));
-    dispatch({
+    return dispatch({
       // type: SET_PRODUCT, product: transformProduct(product)
       type: SET_PRODUCT, 
       product: product,
@@ -75,7 +75,6 @@ export const updateProduct = (productObj, productId) => {
     .then(() => axios.get('/api/products'))
     .then(res => { 
       dispatch(setAllProducts(res.data))
-      browserHistory.push('/products')
     })
   }
 }
@@ -86,6 +85,21 @@ export const getSingleProduct = (productId) =>
       .then( (res) => {
         dispatch(setSingleProduct(res.data));
         dispatch(populateProductUpdateForm(res.data));
-      } )
+      })
+
+export const deleteProduct = (productId) => {
+  return dispatch => {
+    console.log('DELETE PRODUCT PRODUCT ID', productId)
+    return axios.delete(`/api/products/${productId}`)
+    .then(() => axios.get('/api/products'))
+    .then(res => { 
+      return dispatch(setAllProducts(res.data))
+    })
+    .then(() => {
+      console.log("this is being called")
+      browserHistory.push('/products')
+    })
+  }
+}
 
 export default reducer

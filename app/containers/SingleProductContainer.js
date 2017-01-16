@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import SingleProduct from '../components/SingleProduct'
 
+import { deleteProduct } from '../reducers/products'
 
 function dummyProduct() {
   return {
@@ -25,12 +26,14 @@ function mapStateToProps(state, ownProps){
 }
 
 function mapDispatchToProps(dispatch, ownProps){
- return{
-  generateReviewTitle: (reviewString) => {
-    let reviewArr = reviewString.split(' ').slice(0, 7)
-    return reviewArr.join(' ')
+  return {
+    generateReviewTitle: (reviewString) => {
+      let reviewArr = reviewString.split(' ').slice(0, 7)
+      return reviewArr.join(' ')
+    },
+    deleteProduct: (productObj) => { 
+      return dispatch(deleteProduct(ownProps.params.productId)) },
   }
- }
 }
 
 const SingleProductContainer = connect(

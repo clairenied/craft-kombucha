@@ -14,7 +14,7 @@ User.hasMany(Order);
 Order.belongsTo(User);
 
 User.hasMany(Review);
-Review.belongsTo(User);
+Review.belongsTo(User); 
 
 // Users have one shipping address and one billing address
 User.belongsTo(Address, { as: 'shippingAddress' });
