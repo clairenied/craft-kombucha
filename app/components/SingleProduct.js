@@ -20,7 +20,7 @@ const SingleProduct = (props) => {
             <Link to={`/products/${singleProduct.id}/update`}>Update</Link>
           </div>
           <div className="col-xs-12 col-sm-6 text-right">
-            <a href="#">Delete</a>
+            <a onClick={props.deleteProduct}>Delete</a>
           </div>
         </div>
         <h4 className="text-uppercase">Product Description</h4>

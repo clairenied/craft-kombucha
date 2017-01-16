@@ -118,6 +118,15 @@ module.exports = require('express').Router()
     .then(product => res.json(product))
     .catch(next);
   })
+
+  // Delete one product by ID
+  .delete('/:productId', (req, res, next) => {
+    req.product
+    .then(product => product.destroy())
+    .then(() => res.sendStatus(200))
+    .catch(next);
+  })
+
   // Get reviews for one product
   .get('/:productId/reviews', (req, res, next) =>
     req.product
