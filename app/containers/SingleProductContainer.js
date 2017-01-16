@@ -1,10 +1,26 @@
 import { connect } from 'react-redux'
 import SingleProduct from '../components/SingleProduct'
 
-function mapStateToProps(state, ownProps){
+
+function dummyProduct() {
   return {
-    products: state.products,
-    reviews: state.products.singleProduct.producttype.reviews
+    basePrice: 0,
+    id: 0,
+    lineitem_id: 0,
+    photo: "",
+    price: "",
+    producttype: {},
+    producttype_id: 0,
+    remaining: 0,
+    size: "",
+    updated_at: "",
+  }
+}
+
+function mapStateToProps(state, ownProps){
+  let productId = ownProps.params.productId
+  return {
+    product: state.products[productId] || dummyProduct(),
   }
 }
 

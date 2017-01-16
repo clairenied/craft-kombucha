@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 const ReviewModule = (props) => {
 	const review = props.review
 	return (
-		<div>
+		<div className="page-header">
 			<h4><b>{props.generateReviewTitle(review.content)}...</b></h4>
 			<h4><b></b></h4>
 			<p><b>{review.user.firstName}</b></p>
