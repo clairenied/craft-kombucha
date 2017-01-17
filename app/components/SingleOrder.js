@@ -1,7 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import { Link } from 'react-router'
-
 import SingleOrderModule from './SingleOrderModule'
 
 const SingleOrder = (props) => {
