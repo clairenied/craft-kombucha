@@ -1,22 +1,16 @@
 import axios from 'axios';
+import whoami from './auth'
 
-const initialOrderState = {
-	singleOrder: {},
-	allOrders: []
-}
+const initialState =  {}
 
 //reducer
-const orderReducer = (state=initialOrderState, action) => {
+const orderReducer = (state= initialState, action) => {
 
   const newState = Object.assign({}, state);
-
   switch (action.type) {
-    case GET_ALL_ORDERS:
-      return (newState.allOrders = action.orders);
-
     case GET_SINGLE_ORDER:
-      return (newState.singleOrder = action.order);
-
+      newState[action.order.id] = action.order
+      return newState;
     default:
       return state;
   }
@@ -24,21 +18,6 @@ const orderReducer = (state=initialOrderState, action) => {
   return state;
 };
 
-//All Orders
-const GET_ALL_ORDERS = 'GET_ALL_ORDERS';
-export const allOrders = orders => ({
-	type: GET_ALL_ORDERS, orders,
-});
-
-//add axios calls
-export const getAllOrders = () => {
-	// console.log('called allOrders') //working
-	return dispatch => {
-		 axios.get('/api/orders')
-		.then(res => {
-			dispatch(allOrders(res.data)) })
-	}
-}
 
 //Single order
 const GET_SINGLE_ORDER = 'GET_SINGLE_ORDER';
@@ -46,33 +25,37 @@ export const singleOrder = (order) => ({
 	type: GET_SINGLE_ORDER, order
 });
 
-//add axios calls  ==> get axios calls working
 export const getSingleOrder = (orderId) => {
-	return dispatch => {
+	return (dispatch, getState) => {
 		axios.get(`/api/orders/${orderId}`)
 		.then(res => {
-			dispatch(singleOrder(res.data)) 
+			const order = res.data;
+			dispatch(singleOrder(order))
 		})
 	}
 }
 
-//Create Order
-const CREATE_ORDER = 'CREATE_ORDER';
-export const newOrder = () => {
-	return {
-		type: CREATE_ORDER,
-		products
-	} 
-};
-
 //add axios calls
-export const createOrder = () => {
+export const getAllOrders = () => {
 	return dispatch => {
-		axios.post('/api/order/')
-		.then(res => {
-			dispatch(newOrder(res.data)) 
+		 axios.get('/api/orders')
+		.then(res => {	
+			const orders = res.data
+			orders.forEach( order => {
+				dispatch(singleOrder(order))
+			})
 		})
 	}
+}
+
+export const addProductToOrder = (productId) => {
+  return dispatch => {
+    return axios.get(`/api/orders/list/${productId}`)
+    .then( res => {
+      //res returns the lineitem id
+      // console.log('reducer res: ', res)
+    })
+  }
 }
 
 // Add product to order ===> need to fetch line items
