@@ -103,7 +103,6 @@ const mapDispatchToProps = (dispatch) => {
       addressKeys.forEach((key) => {
         addressInfo[key] = evt.target[key].value;
       });
-
       dispatch(signUpForAccount({ userInfo, addressInfo }));
     }
   };

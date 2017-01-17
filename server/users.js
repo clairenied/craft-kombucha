@@ -60,9 +60,9 @@ module.exports = require('express').Router()
 
     // If user instance was newly built, associate user and address
     if (built) {
-      await user.setBillingAddress(address);
       await address.save();
       await user.save();
+      await user.setBillingAddress(address);
       res.json(user);
     } else {
       res.status(403).send('User already exists');
