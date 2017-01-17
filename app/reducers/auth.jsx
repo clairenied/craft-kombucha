@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
+import { signUpSuccess, signUpFail } from './errors';
+
 const AUTHENTICATED = 'AUTHENTICATED';
 
 export const authenticated = user => ({
@@ -21,7 +23,10 @@ export const login = (username, password) =>
 export const logout = () =>
   dispatch =>
     axios.post('/api/auth/logout')
-      .then(() => dispatch(whoami()))
+      .then(() => {
+        dispatch(whoami());
+        browserHistory.push('/login');
+      })
       .catch(() => dispatch(whoami()));
 
 export const whoami = () =>
@@ -32,6 +37,19 @@ export const whoami = () =>
         dispatch(authenticated(user));
       })
       .catch(failed => dispatch(authenticated(null)));
+
+export const signUpForAccount = (userAndAddress) => {
+  return (dispatch) => {
+    const { email, password } = userAndAddress.userInfo;
+    axios.post('/api/users', userAndAddress)
+      .then(() => {
+        dispatch(signUpSuccess());
+        dispatch(login(email, password));
+        browserHistory.push('/products');
+      })
+      .catch(err => dispatch(signUpFail(err)));
+  };
+};
 
 export default (state = null, action) => {
   switch (action.type) {

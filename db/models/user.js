@@ -22,7 +22,7 @@ const User = db.define('users', {
     type: Sequelize.DATEONLY,
   },
   type: {
-    type: Sequelize.ENUM('guest', 'member', 'admin'),
+    type: Sequelize.ENUM('member', 'admin'),
   },
 
   // We support oauth, so users may or may not have passwords.

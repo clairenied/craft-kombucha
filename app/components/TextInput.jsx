@@ -8,6 +8,7 @@ const TextInput = props => ( // eslint-disable-line
       className="form-control"
       id={props.htmlFor}
       onChange={props.onChange}
+      value={props.value}
     />
     {
       props.hasError
@@ -24,6 +25,7 @@ TextInput.propTypes = {
   errorMessage: PropTypes.string,
   hasError: PropTypes.bool,
   onChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default TextInput;

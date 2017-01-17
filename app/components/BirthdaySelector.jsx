@@ -22,7 +22,6 @@ class BirthdaySelector extends Component {
       </Selector>
     );
   }
-
   renderDaySelector() {
     return (
       <Selector name="day" className="form-control" id="day" value="null">

@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import StateSelector from './StateSelector';
+import Selector from './Selector';
 import BirthdaySelector from './BirthdaySelector';
 import TextInput from './TextInput';
 
-import { signUpForAccount } from '../reducers/user';
+import { signUpForAccount } from '../reducers/auth';
 
 class Signup extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class Signup extends Component {
       password2: '',
       dirty: false,
     };
+    this.stateAbbrevs = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
   }
 
   onPassword1Change(evt) {
@@ -62,7 +63,11 @@ class Signup extends Component {
 
           <div className="form-group">
             <label htmlFor="state">State</label>
-            <StateSelector className="form-control" id="state" />
+            <Selector name="state" className="form-control" id="state">
+              {
+                this.stateAbbrevs.map(state => <option value={state} key={state}>{state}</option>)
+              }
+            </Selector>
           </div>
 
           <TextInput htmlFor="zip" label="Zip" inputType="text" />

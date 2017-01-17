@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { resolve } = require('path');
 const passport = require('passport');
+const session = require('express-session');
 
 // Bones has a symlink from node_modules/APP to the root of the app.
 // That means that we can require paths relative to the app root by
@@ -19,9 +20,9 @@ if (!pkg.isProduction && !pkg.isTesting) {
 
 module.exports = app
   // We'll store the whole session in a cookie
-  .use(require('cookie-session')({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
+  .use(session({
+    secret: process.env.SESSION_SECRET || 'an insecure secret key',
+    maxAge: 345600000, // 96 hours
   }))
 
   // Body parsing middleware
