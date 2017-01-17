@@ -5,12 +5,9 @@ import { Link } from 'react-router'
 import ProductModule from './ProductModule';
 
 const Products = (props) => {
-  const allProducts = props.products.allProducts
-  const addProductToOrder = props.addProductToOrder
-
+  const products = props.products
   return (
     <div>
-
       <div className="page-header col-xs-12">
         <h1>Categories</h1>
         <div className="row">
@@ -41,8 +38,8 @@ const Products = (props) => {
         <h1>Products</h1>
       </div>
 
-      {allProducts.map((singleProduct, i) => {
-        return (<ProductModule key={i} singleProduct={singleProduct} addToOrder={addProductToOrder} />)
+      {products.map((singleProduct, i) => {
+        return (<ProductModule key={i} singleProduct={singleProduct}/>)
       })}
     </div>
   )

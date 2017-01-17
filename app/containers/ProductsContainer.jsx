@@ -4,7 +4,7 @@ import {addProductToOrder} from '../reducers/products'
 
 function mapStateToProps(state){
   return {
-    products: state.products
+    products: Object.values(state.products)
   }
 }
 

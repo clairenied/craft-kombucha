@@ -1,38 +1,21 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router';
+import { setAllReviews } from './reviews';
+import { populateProductUpdateForm } from './productUpdateForm';
 
-const initialState = {
-  allProducts: [{
-    photo: "",
-    producttype: {
-      category: "",
-    }  
-  }],
-  singleProduct: {
-    lineitem_id: '',
-    producttype: {
-      name: "",
-      category: "",
-      reviews: [{
-        content: "",
-        starRating: 0,
-        created_at: "",
-        user: {
-          id: 0
-        }
-      }]
-    }
-  }
+function transformProduct(product) {
+  product.reviews = product.reviews.map(review => review.id);
+  return product;
 }
+
+const initialState = {}
 
 const reducer = (state = initialState, action) => {
   const nextState = Object.assign({}, state);
   
   switch (action.type) {
-    case SET_ALL_PRODUCTS:
-      nextState.allProducts = action.allProducts;
-      break;
-    case SET_SINGLE_PRODUCT:
-      nextState.singleProduct = action.singleProduct;
+    case SET_PRODUCT:
+      nextState[action.product.id] = action.product;
       break;
     default:
       return state;
@@ -40,15 +23,20 @@ const reducer = (state = initialState, action) => {
   return nextState;
 }
 
-const SET_ALL_PRODUCTS = 'SET_ALL_PRODUCTS';
-export const setAllProducts = allProducts => ({
-  type: SET_ALL_PRODUCTS, allProducts,
-})
+const SET_PRODUCT = 'SET_PRODUCT';
+export const setSingleProduct = product => 
+  dispatch => {
+    // dispatch(setAllReviews(product.reviews));
+    return dispatch({
+      // type: SET_PRODUCT, product: transformProduct(product)
+      type: SET_PRODUCT, 
+      product: product,
+    })
+  }
 
-const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT';
-export const setSingleProduct = singleProduct => ({
-  type: SET_SINGLE_PRODUCT, singleProduct
-})
+export const setAllProducts = allProducts =>
+  dispatch => 
+    allProducts.forEach(product => dispatch(setSingleProduct(product)))
 
 export const getAllProducts = () => 
   dispatch => 
@@ -70,30 +58,46 @@ export const getAllProductsMother = () =>
     axios.get('/api/products/mother')
       .then( (res) => dispatch(setAllProducts(res.data)) )
 
+export const createProduct = (productObj) => {
+  return dispatch => {
+    axios.post('/api/products', productObj)
+    .then(() => axios.get('/api/products'))
+    .then(res => { 
+      dispatch(setAllProducts(res.data))
+      browserHistory.push('/products')
+    })
+  }
+}
+
+export const updateProduct = (productObj, productId) => {
+  return dispatch => {
+    axios.put(`/api/products/${productId}`, productObj.productUpdateForm)
+    .then(() => axios.get('/api/products'))
+    .then(res => { 
+      dispatch(setAllProducts(res.data))
+    })
+  }
+}
+
 export const getSingleProduct = (productId) => 
   dispatch => 
     axios.get(`/api/products/${productId}`)
-      .then( (res) => dispatch(setSingleProduct(res.data)) )
+      .then( (res) => {
+        dispatch(setSingleProduct(res.data));
+        dispatch(populateProductUpdateForm(res.data));
+      })
 
-
-//Adding product to order
-export const addProductToOrder = (productId) => {
-  return (dispatch, getState) => {
-    axios.get(`/api/orders/list/${productId}`,
-      {productId: productId})
-    .then(res => {
-      const targetOrderId = res.data.order_id
-      const newOrder = getState().orders.singleOrder
-      const orderId = getState().orders.singleOrder.orderId
-      const orderListItems = getState().orders.singleOrder.items
-      
-      //FIX ME ==> still adding repeat listItem ids
-      if(!orderListItems[res.data.id]){
-        orderListItems.push(res.data.id)
-      }
-      // =============================================
-
-      const updatedOrder = Object.assign({}, newOrder, {orderId: targetOrderId, items: orderListItems})
+export const deleteProduct = (productId) => {
+  return dispatch => {
+    console.log('DELETE PRODUCT PRODUCT ID', productId)
+    return axios.delete(`/api/products/${productId}`)
+    .then(() => axios.get('/api/products'))
+    .then(res => { 
+      return dispatch(setAllProducts(res.data))
+    })
+    .then(() => {
+      console.log("this is being called")
+      browserHistory.push('/products')
     })
   }
 }

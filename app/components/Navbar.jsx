@@ -2,11 +2,25 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import { logout } from 'APP/app/reducers/auth'; // eslint-disable-line
+
 class Navbar extends Component {
+  renderAdminLink() {
+    return (this.props.auth && this.props.auth.type === 'admin')
+    ? <li><Link to="/admin">Admin</Link></li>
+    : null;
+  }
+
   renderLogInLogOut() {
     return this.props.auth // @todo: define PropType later
-    ? <li><Link to="/">Log Out</Link></li>
+    ? <li><Link to="/" onClick={this.props.logout}>Log Out</Link></li>
     : <li><Link to="/login">Log In</Link></li>;
+  }
+
+  renderWelcome() {
+    return this.props.auth
+    ? <li><Link><strong>Welcome, {this.props.auth.firstName}!</strong></Link></li>
+    : null;
   }
 
   render() {
@@ -28,11 +42,14 @@ class Navbar extends Component {
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
+              {/* Welcome message displays for logged in users */}
+              {this.renderWelcome()}
               {/* Cart link displays everyone, including users not logged in */}
               <li><Link to="/order">Order</Link></li>
+              <li><Link to="/products-create">Add Product</Link></li>
               {/* Admin link displays only for users logged in as admins */}
-              <li><Link to="/admin">Admin</Link></li>
-              {/* Displays link to either log in or log out*/}
+              {this.renderAdminLink()}
+              {/* Always displays link to either log in or log out*/}
               {this.renderLogInLogOut()}
             </ul>
           </div>
@@ -47,8 +64,12 @@ const mapStateToProps = (state) => {
   return { auth };
 };
 
-// Navbar.propTypes = {
-//   auth: PropTypes.object??
-// };
+Navbar.propTypes = {
+  auth: PropTypes.shape({
+    firstName: PropTypes.string,
+    type: PropTypes.string,
+  }),
+  logout: PropTypes.func
+};
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

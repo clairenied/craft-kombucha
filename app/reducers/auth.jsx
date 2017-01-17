@@ -1,26 +1,21 @@
 import axios from 'axios';
-
-const reducer = (state = null, action) => {
-
-  switch (action.type) {
-    case AUTHENTICATED:
-      return action.user;
-    default:
-      return state;
-  }
-  return state;
-};
+import { browserHistory } from 'react-router';
 
 const AUTHENTICATED = 'AUTHENTICATED';
+
 export const authenticated = user => ({
-  type: AUTHENTICATED, user,
+  type: AUTHENTICATED,
+  user, // user instance object from Sequelize
 });
 
 export const login = (username, password) =>
   dispatch =>
     axios.post('/api/auth/local/login',
       { username, password })
-      .then(() => dispatch(whoami()))
+      .then(() => {
+        dispatch(whoami());
+        browserHistory.push('/products');
+      })
       .catch(() => dispatch(whoami()));
 
 export const logout = () =>
@@ -32,10 +27,17 @@ export const logout = () =>
 export const whoami = () =>
   dispatch =>
     axios.get('/api/auth/whoami')
-      .then(response => {
-        const user = response.data;
+      .then((res) => {
+        const user = res.data;
         dispatch(authenticated(user));
       })
       .catch(failed => dispatch(authenticated(null)));
 
-export default reducer;
+export default (state = null, action) => {
+  switch (action.type) {
+    case AUTHENTICATED:
+      return action.user;
+    default:
+      return state;
+  }
+};

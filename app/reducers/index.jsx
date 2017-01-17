@@ -6,6 +6,8 @@ const rootReducer = combineReducers({
   reviews: require('./reviews').default,
   orders: require('./orders.js').default,
   users: require('./users').default,
+  user: require('./user').default,
+  productUpdateForm: require('./productUpdateForm').default,
 });
 
 export default rootReducer;

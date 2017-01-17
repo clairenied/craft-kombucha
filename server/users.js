@@ -5,6 +5,8 @@ const Order = db.model('orders');
 const LineItem = db.model('lineitems');
 const Review = db.model('reviews');
 
+const async = require('async');
+
 const { mustBeLoggedIn, mustBeAdmin, forbidden } = require('./auth.filters');
 
 module.exports = require('express').Router()
@@ -44,10 +46,28 @@ module.exports = require('express').Router()
     .catch(next))
 
   // Add new user
-  .post('/', (req, res, next) =>
-    User.create(req.body)
-    .then(user => res.status(201).json(user))
-    .catch(next))
+  .post('/', async (req, res, next) => {
+    const { userInfo, addressInfo } = req.body;
+
+    // Build address instance
+    const address = await Address.build(addressInfo);
+
+    // Build user instance
+    const [user, built] = await User.findOrBuild({
+      where: { email: userInfo.email },
+      defaults: userInfo,
+    });
+
+    // If user instance was newly built, associate user and address
+    if (built) {
+      await user.setBillingAddress(address);
+      await address.save();
+      await user.save();
+      res.json(user);
+    } else {
+      res.status(403).send('User already exists');
+    }
+  })
 
   // Get one user by ID
   .get('/:userId', mustBeLoggedIn, (req, res, next) =>
