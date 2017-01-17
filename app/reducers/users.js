@@ -1,8 +1,4 @@
-  import axios from 'axios';
-
-// const initialState = {
-//   allUsers: [],
-// };
+import axios from 'axios';
 
 const FETCH_USERS = 'FETCH_USERS';
 export const fetchUsers = () =>
@@ -22,7 +18,6 @@ export const switchRole = (userId, newRole) =>
     axios.put(`/api/users/${userId}`, { type: newRole })
       .then(res => res.data)
       .then((payload) => {
-        console.log('payload:', payload);
         dispatch(fetchUsers());
       })
       .catch((err) => {
@@ -42,15 +37,3 @@ export default (state = [], action) => {
   }
   return newState;
 };
-
-// export default (state = initialState, action) => {
-//   const newState = Object.assign({}, state);
-//   switch (action.type) {
-//     case FETCH_USERS:
-//       newState.allUsers = action.payload;
-//       break;
-//     default:
-//       return state;
-//   }
-//   return newState;
-// };

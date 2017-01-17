@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 
 import { switchRole } from '../reducers/users';
 
-const AdminModule = (props) => {
-  const { fullName, email, billingAddress, type } = props.user;
+const SingleUser = ({ user, toggleRole }) => {
+  const { fullName, email, billingAddress, type } = user;
 
   return (
     <div className="row col-xs-12">
       <div className="col-xs-12 col-sm-4">
-        <address>
-          <strong>{fullName}</strong><br />
-          <a href="mailto:#">{email}</a>
-        </address>
+        <strong>{fullName}</strong><br />
+        <a href={`mailto:${email}`}>{email}</a>
       </div>
 
       <div className="col-xs-12 col-sm-4">
@@ -25,7 +23,7 @@ const AdminModule = (props) => {
       <div className="col-xs-12 col-sm-4">
         <div>
           <strong>Role</strong><br />
-          <select name="role" value={type} onChange={evt => props.toggleRole(evt)}>
+          <select name="role" value={type} onChange={evt => toggleRole(evt)}>
             <option value="admin">Admin</option>
             <option value="member">Member</option>
           </select>
@@ -33,11 +31,6 @@ const AdminModule = (props) => {
       </div>
     </div>
   );
-};
-
-const mapStateToProps = (state, ownProps) => {
-  const { user } = ownProps;
-  return { user };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -49,7 +42,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-AdminModule.propTypes = {
+SingleUser.propTypes = {
   user: PropTypes.shape({
     fullName: PropTypes.string,
     email: PropTypes.string,
@@ -59,4 +52,4 @@ AdminModule.propTypes = {
   toggleRole: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminModule);
+export default connect(() => ({}), mapDispatchToProps)(SingleUser);

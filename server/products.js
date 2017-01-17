@@ -7,7 +7,7 @@ const User = db.model('users');
 
 module.exports = require('express').Router()
   // Route parameter middleware for product id
-  .get('/kombucha', (req, res, next) => 
+  .get('/kombucha', (req, res, next) =>
     Product.findAll({
       include: [{
         model: ProductType,
@@ -17,7 +17,7 @@ module.exports = require('express').Router()
     .then(products => res.json(products))
     .catch(next))
 
-  .get('/merch', (req, res, next) => 
+  .get('/merch', (req, res, next) =>
     Product.findAll({
       include: [{
         model: ProductType,
@@ -27,7 +27,7 @@ module.exports = require('express').Router()
     .then(products => res.json(products))
     .catch(next))
 
-  .get('/mother', (req, res, next) => 
+  .get('/mother', (req, res, next) =>
     Product.findAll({
       include: [{
         model: ProductType,
@@ -53,7 +53,7 @@ module.exports = require('express').Router()
     });
     next();
   })
-  
+
   // Get all products
   .get('/', (req, res, next) =>
     Product.findAll({
@@ -61,7 +61,7 @@ module.exports = require('express').Router()
       // (Don't need reviews if rating is stored on product model)
       include: [ProductType],
     })
-    .then(products => {  
+    .then(products => {
       res.json(products)})
     .catch(next))
   // Add new product
@@ -81,7 +81,7 @@ module.exports = require('express').Router()
     })
 
     return Promise.all([newProduct, newProductType])
-      .then(createdProductsArr => { 
+      .then(createdProductsArr => {
         let newProduct = createdProductsArr[0]
         let newProductType = createdProductsArr[1]
         return newProduct.setProducttype(newProductType)

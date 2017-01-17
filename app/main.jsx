@@ -13,7 +13,7 @@ import SingleReviewContainer from './containers/SingleReviewContainer';
 import ReviewsContainer from './containers/ReviewsContainer';
 import Signup from './components/Signup';
 import Orders from './components/Orders';
-import Admin from './components/Admin';
+import AdminPanel from './components/AdminPanel';
 import NewReview from './components/NewReview'
 
 // Containers
@@ -57,15 +57,15 @@ const loadAllProducts = () => {
 };
 
 const loadAllProductsKombucha = () => {
-  return store.dispatch(getAllProductsKombucha()) 
+  return store.dispatch(getAllProductsKombucha())
 }
 
 const loadAllProductsMerch = () => {
-  return store.dispatch(getAllProductsMerch()) 
+  return store.dispatch(getAllProductsMerch())
 }
 
 const loadAllProductsMother = () => {
-  return store.dispatch(getAllProductsMother()) 
+  return store.dispatch(getAllProductsMother())
 }
 
 const loadSingleProduct = (nextRouterState) => {
@@ -113,7 +113,7 @@ render (
 
         <Route path="/products-create" component={CreateProductContainer} />
         <Route path="/products/:productId/update" component={UpdateProductContainer} onEnter={loadSingleProduct}/>
-            
+
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
@@ -124,7 +124,7 @@ render (
         <Route path="/new-review" component={NewReviewContainer} />
 
         <Route path="/login" component={Login} />
-        <Route path="/admin" component={Admin} onEnter={adminOnEnter} />
+        <Route path="/admin" component={AdminPanel} onEnter={adminOnEnter} />
       </Route>
     </Router>
   </Provider>,
