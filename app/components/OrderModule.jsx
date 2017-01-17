@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router'
 
 const OrderModule = (props) => {
@@ -10,7 +9,6 @@ const OrderModule = (props) => {
   let datePlaced = order.orderPlacedDate;
   let status = order.status;
   let payment = order.paymentMethod;
-  let shipping = order.shippingMethod;
 
   return (
     <div>
@@ -20,16 +18,16 @@ const OrderModule = (props) => {
             <small>Order #{orderId}</small>
           </div>
           <div className="col-xs-12 col-sm-2">
-            <small>{order.lineItemPrice}</small>
+            <small>{price}</small>
           </div>
           <div className="col-xs-12 col-sm-2">
-            <small>{order.orderPlacedDate}</small>
+            <small>{datePlaced}</small>
           </div>
           <div className="col-xs-12 col-sm-2">
-             <small>{order.status}</small>
+             <small>{status}</small>
           </div>
           <div className="col-xs-12 col-sm-2">
-             <small>{order.paymentMethod}</small>
+             <small>{payment}</small>
           </div>
         </Link>
         <div className="col-xs-12 col-sm-2">

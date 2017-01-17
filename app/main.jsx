@@ -12,8 +12,6 @@ import WhoAmI from './components/WhoAmI';
 import SingleReviewContainer from './containers/SingleReviewContainer';
 import ReviewsContainer from './containers/ReviewsContainer';
 import Signup from './components/Signup';
-import Orders from './components/Orders';
-import SingleOrder from './components/SingleOrder';
 import Admin from './components/Admin';
 import NewReview from './components/NewReview'
 

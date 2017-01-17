@@ -1,10 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router'
-
-import SingleOrder from './SingleOrder'
-import Product from './SingleProduct';
-import Products from './Products'
 
 const SingleOrderModule = (props) => {
   let order = props.order

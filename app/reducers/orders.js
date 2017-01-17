@@ -1,5 +1,5 @@
 import axios from 'axios';
-import whoami from './auth'
+import { browserHistory } from 'react-router';
 
 const initialState =  {}
 
@@ -14,70 +14,78 @@ const orderReducer = (state= initialState, action) => {
     default:
       return state;
   }
-
-  return state;
 };
 
 
 //Single order
 const GET_SINGLE_ORDER = 'GET_SINGLE_ORDER';
 export const singleOrder = (order) => ({
-	type: GET_SINGLE_ORDER, order
+  type: GET_SINGLE_ORDER, order
 });
 
 export const getSingleOrder = (orderId) => {
-	return (dispatch, getState) => {
-		axios.get(`/api/orders/${orderId}`)
-		.then(res => {
-			const order = res.data;
-			dispatch(singleOrder(order))
-		})
-	}
-}
+  return (dispatch, getState) => {
+    axios.get(`/api/orders/${orderId}`)
+  .then(res => {
+    const order = res.data;
+    dispatch(singleOrder(order))
+  });
+  };
+};
 
 //add axios calls
 export const getAllOrders = () => {
-	return dispatch => {
-		 axios.get('/api/orders')
-		.then(res => {	
-			const orders = res.data
-			orders.forEach( order => {
-				dispatch(singleOrder(order))
-			})
-		})
-	}
-}
+  return (dispatch) => {
+    axios.get('/api/orders')
+    .then((res) => { 
+      const orders = res.data;
+      orders.forEach((order) => {
+        dispatch(singleOrder(order));
+      });
+    });
+  };
+};
 
-export const addProductToOrder = (productId) => {
-  return dispatch => {
-    return axios.get(`/api/orders/list/${productId}`)
-    .then( res => {
-      //res returns the lineitem id
-      // console.log('reducer res: ', res)
-    })
-  }
-}
+// export const addProductToOrder = (productId) => {
+//   return dispatch => {
+//     return axios.get(`/api/orders/list/${productId}`)
+//     .then( res => {
+//       //res returns the lineitem id
+//       // console.log('reducer res: ', res)
+//     });
+//   };
+// };
 
 // Add product to order ===> need to fetch line items
 // then set orderId of line item
 // const ADD_PRODUCT = 'ADD_PRODUCT';
 // export const fillOrder = (orderId, product) => {
-// 	return {
-// 		type: ADD_PRODUCT,
-// 		orderId, product
-// 	} 
+//  return {
+//    type: ADD_PRODUCT,
+//    orderId, product
+//  }
 // };
 // //add axios calls
 // export const fillOrder = (orderId, product) => {
-// 	return dispatch => {
-// 		axios.post(`/api/order/${orderId}`, 
-// 			{orderId: orderId})
-// 		.then(res => {
-// 			dispatch(fillOrder(res.data)) 
-// 		})
-// 	}
+//  return dispatch => {
+//    axios.post(`/api/order/${orderId}`,
+//      {orderId: orderId})
+//    .then(res => {
+//      dispatch(fillOrder(res.data))
+//    })
+//  }
+// }
+
+// export const createOrder = () => {
+//   return (dispatch) => {
+//     axios.post('/api/orders')
+//     .then(() => axios.get('/api/orders'))
+//     .then((res) => {
+//       dispatch(setAllOrders(res.data))
+//       browserHistory.push('/orders')
+//     })
+//   }
 // }
 
 export default orderReducer;
-
 

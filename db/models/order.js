@@ -8,8 +8,8 @@ const LineItem = require('./lineitem');
 const Product = require('./product');
 
 const Order = db.define('orders', {
-  //why is this here again??
-  //Do we need to list each lineItem price per item in the order??? - NVM
+  // why is this here again??
+  // Do we need to list each lineItem price per item in the order??? - NVM
   price: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -30,11 +30,11 @@ const Order = db.define('orders', {
   classMethods: {
     totalPrice: (order) => {
       let totalPrice = '';
-      let itemPrice = 0; 
+      let itemPrice = 0;
 
-      LineItem.findAll({ 
+      LineItem.findAll({
         where: {order_id: order.id},
-        include: [Product] 
+        include: [Product]
       })
       .then(items => {
         items.map( item => {

@@ -1,16 +1,12 @@
 const db = require('APP/db');
 const Product = db.model('products');
-const ProductType = db.model('producttypes');
-const Review = db.model('reviews');
-const User = db.model('users');
-const Order = db.model('orders');
 const LineItem = db.model('lineitems');
+const Order = db.model('orders');
+const ProductType = db.model('producttypes');
+// const User = db.model('users');
 // const Order = require('../db/models/order');
 
 module.exports = require('express').Router()
-  .param('orderId', (req, res, next, orderId) => {
-    next();
-  })
   //get all orders
   .get('/', (req, res, next) => {
     Order.findAll()
@@ -19,7 +15,7 @@ module.exports = require('express').Router()
     })
     .catch(next)
   })
-  //get order by Id ==> here just in case
+  // get order by Id ==> here just in case
   .get('/:orderId', (req,res, next) => {
     Order.findOne({
       where:{
@@ -36,9 +32,6 @@ module.exports = require('express').Router()
       ]
     })
     .then( order => {
-      let orderId = order.dataValues.id;
-      let lineItems = order.dataValues.lineitems;
-
       Order.totalPrice(order)      
       res.json(order)
     })
@@ -63,7 +56,7 @@ module.exports = require('express').Router()
       itemId = product.dataValues.lineitem_id;
       itemPrice = product.dataValues.basePrice;
 
-        //if listitem id is null, create line item
+        //if listitem_id is null, create lineItem
         if(itemId === null){
           LineItem.create({
             lineItemPrice: itemPrice,
@@ -78,19 +71,19 @@ module.exports = require('express').Router()
             })
             .then( updatedProduct => {
               /***** NOTE: cart should be created upon page access ****/
-              lineItemOrder = updatedProduct.dataValues.lineitem_id
-              
-              //If order has associated user id
-                //associate line item id with that order id
+              lineItemInOrder = updatedProduct.dataValues.lineitem_id
                 
-              //If lineitem has no order Id, create order and with lineitem
+              /***** NOTE: don't create a new cart, associate lineitem w/ current orderId ****/
+
+              //with new lineItem, order_Id will always be null!
+              // instead, lets check for the current order ==> By date create? 
               if(lineItem.dataValues.order_id === null){
                 Order.create({
                   price: itemPrice, 
                   status: 'cart'
                 })
                 .then( order => {
-                  lineItemOrder = order.dataValues.id
+                  lineItemInOrder = order.dataValues.id
                   lineItem.update({
                     order_id: lineItemOrder
                   })
@@ -109,7 +102,6 @@ module.exports = require('express').Router()
             where: { id: itemId }
           })
           .then( lineItem => {
-            // console.log('lineitem: ', lineItem)
             newQuantity = lineItem.dataValues.quantity + 1;
             lineItem.update({
               quantity: newQuantity
@@ -122,19 +114,15 @@ module.exports = require('express').Router()
     })
 
   })
-  // .post('/:orderId', (req, res, next) => {
-    
-  //   LineItem.findAll({ where: {order_id: req.body.orderId} })
-  //   .then( item => {
-  //     // console.log('req.body', req.body)
-  //     // console.log('item: ', item)
-  //     //order.update()
-  //     res.status(201).json(item)
-  //   })
-  //   .catch(next)
-  // })
+  .post('/', (req, res, next) => {  
+    Order.create({
+      price: '0', 
+      status: 'cart'
+    })
+    .then( order => {
+      console.log('order Created', order)
+      res.status(201).json(order)
+    })
+    .catch(next)
+  })
 
-
-  // use autho on front end to find Id (already in reducers)
-  // pass that user Id products
-  // pass that info to orders
