@@ -24,7 +24,7 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log("here are navbar's props", this.props);
+    // console.log("here are navbar's props", this.props);
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
@@ -45,7 +45,7 @@ class Navbar extends Component {
               {/* Welcome message displays for logged in users */}
               {this.renderWelcome()}
               {/* Cart link displays everyone, including users not logged in */}
-              <li><Link to="/order">Order</Link></li>
+              <li><Link to="/orders">Order</Link></li>
               <li><Link to="/products-create">Add Product</Link></li>
               {/* Admin link displays only for users logged in as admins */}
               {this.renderAdminLink()}

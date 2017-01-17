@@ -80,7 +80,7 @@ export const fetchReviews = productId =>
 
 export const addNewReview = (starRating, content, userId, productId) =>
   dispatch => 
-    axios.post('api/reviews', { starRating: starRating, content: content, user_id: userId, producttype_id: productId})
+    axios.post('/api/reviews', { starRating: starRating, content: content, user_id: userId, producttype_id: productId})
      .then( res => res.data)
      .then( review => browserHistory.push(`/reviews/${review.id}`))
      //.then( review => )

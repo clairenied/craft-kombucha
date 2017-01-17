@@ -1,6 +1,4 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-
+import React from 'react';
 import OrderModule from './OrderModule';
 
 /*
@@ -9,8 +7,9 @@ import OrderModule from './OrderModule';
 */
 
 const Order = (props) => {
-  
-  const allOrders = props.allOrders;  
+  const userId = props.state.auth
+  const allOrders = props.allOrders; 
+
   return (
     <div>
       <div className="page-header col-xs-12">

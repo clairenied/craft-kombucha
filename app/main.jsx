@@ -12,9 +12,8 @@ import WhoAmI from './components/WhoAmI';
 import SingleReviewContainer from './containers/SingleReviewContainer';
 import ReviewsContainer from './containers/ReviewsContainer';
 import Signup from './components/Signup';
-import Orders from './components/Orders';
 import AdminPanel from './components/AdminPanel';
-import NewReview from './components/NewReview'
+import NewReview from './components/NewReview';
 
 // Containers
 import ProductsContainer from './containers/ProductsContainer';
@@ -36,20 +35,13 @@ const adminOnEnter = (nextRouterState) => {
   store.dispatch(fetchUsers());
 };
 
-const onOrdersEnter = function() {
-  axios.get('/api/orders')
-  .then((res) => {
-    store.dispatch(getAllOrders(res.data));
-  });
+const onOrdersEnter = () => {
+  return store.dispatch(getAllOrders())
 };
 
 const onSingleOrderEnter = function(nextRouterState) {
   const orderId = nextRouterState.params.orderId;
   return store.dispatch(getSingleOrder(orderId));
-  // axios.get(`/api/orders/${orderId}`)
-  // .then( res => {
-  //   store.dispatch(getSingleOrder(res.data))
-  // })
 };
 
 const loadAllProducts = () => {
@@ -69,7 +61,7 @@ const loadAllProductsMother = () => {
 }
 
 const loadSingleProduct = (nextRouterState) => {
-  console.log(nextRouterState)
+  // console.log(nextRouterState)
   const productId = nextRouterState.params.productId
   store.dispatch(getSingleProduct(productId))
   store.dispatch(fetchReviews(productId))
@@ -84,6 +76,7 @@ const loadAllReviews = (nextRouterState) => {
   const productId = nextRouterState.params.productId;
   return store.dispatch(fetchReviews(productId));
 };
+
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -117,11 +110,10 @@ render (
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
+        <Route path="/products/:productId/new-review" component={NewReviewContainer} />
 
         <Route path="/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
         <Route path="/reviews/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview} />
-
-        <Route path="/new-review" component={NewReviewContainer} />
 
         <Route path="/login" component={Login} />
         <Route path="/admin" component={AdminPanel} onEnter={adminOnEnter} />
