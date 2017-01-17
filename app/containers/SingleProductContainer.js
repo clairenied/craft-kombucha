@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import SingleProduct from '../components/SingleProduct'
-
 import { deleteProduct } from '../reducers/products'
+
+import {addProductToOrder} from '../reducers/orders'
 
 function dummyProduct() {
   return {
@@ -32,7 +33,11 @@ function mapDispatchToProps(dispatch, ownProps){
       return reviewArr.join(' ')
     },
     deleteProduct: (productObj) => { 
-      return dispatch(deleteProduct(ownProps.params.productId)) },
+      return dispatch(deleteProduct(ownProps.params.productId)) 
+    },
+    addProductToOrder: (productObj) => { 
+      return dispatch(addProductToOrder(ownProps.params.productId))
+    }
   }
 }
 

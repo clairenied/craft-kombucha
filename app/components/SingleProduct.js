@@ -3,9 +3,11 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router'
 
 import ReviewModule from './ReviewModule'
+// import {addProductToOrder} from '../reducers/products'
 
 const SingleProduct = (props) => {
   const singleProduct = props.product
+
   return(
 		<div>
       <div className="page-header col-xs-12">
@@ -33,7 +35,8 @@ const SingleProduct = (props) => {
         <p>
           Act fast! Only <b>{singleProduct.remaining}</b> remaining
         </p>
-        <a href="#" className="btn btn-default">${singleProduct.price}</a>
+        <a className="btn btn-default"
+           onClick={props.addProductToOrder}>${singleProduct.price}</a>
       </div>
        
     </div>
