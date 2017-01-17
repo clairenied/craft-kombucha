@@ -6,8 +6,10 @@ import SingleOrderModule from './SingleOrderModule'
 
 const SingleOrder = (props) => {
 	const order = props.singleOrder;
-	const price = order.orderTotal;
-	const items = props.itemsInOrder;
+	const items = order;
+	const totalPrice = Object.values(order).map( order => {
+		return order.price
+	});
 
 	return (
 		<div>
@@ -33,14 +35,15 @@ const SingleOrder = (props) => {
 		    <br/>
 			<div className="row">
 				<div>
-					{ 
-						items && Object.values(items).map((item, i) => {
-	            			return (<SingleOrderModule key={i} order={item}/>)
-            			})
-					}
-				</div>
-				<div className="col-xs-12 col-sm-2">
-				 <medium>Total: ${price}</medium>
+				{
+					order && Object.values(order).map((singleOrder, i) => {
+            			return (<SingleOrderModule key={i} order={singleOrder}/>)
+        			})
+				} 
+        		<br/>
+			        <div className="col-xs-12 col-sm-2">
+			         <medium>Total: ${totalPrice}</medium>
+			        </div>
 				</div>
 				<br/>
 				<br/>

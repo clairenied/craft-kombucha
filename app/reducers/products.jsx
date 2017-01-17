@@ -34,54 +34,11 @@ const reducer = (state = initialState, action) => {
     case SET_SINGLE_PRODUCT:
       nextState.singleProduct = action.singleProduct;
       break;
-    case ADD_PRODUCT_TO_ORDER:
-      nextState.item = action.item;
     default:
       return state;
   }
   return nextState;
 }
-
-const ADD_PRODUCT_TO_ORDER = 'ADD_PRODUCT_TO_ORDER';
-export const fillOrder = (listItemId) => {
-  return {
-    type: ADD_PRODUCT_TO_ORDER,
-    listItemId
-  } 
-};
-
-// // how will we get orderId to see if it exists?
-// pushes to array but need to update the listItem and order to reflect the changes
-export const addProductToOrder = (item) => {
-  return (dispatch, getState) => {
-    let order = '1'
-    axios.get(`/api/orders/${order}`, //fill in order number later
-      {listitem_id: item})
-    .then(res => res )
-    .then( r => { 
-      const targetOrder = r.data
-      const targetLineItem = getState().products.singleProduct //saving 
-      targetOrder.lineitems.push(targetLineItem)
-      
-    })
-  }
-}
-
-// ==> Can we create an api route for list items ==> tap in to list items <== ????
-// export const addProductToOrder = (item) => {
-//   return (dispatch, getState) => {
-//     let item = '1'
-//     axios.get(`/api/listitem/${item}`, //fill in order number later
-//       {listitem_id: item})
-//     .then(res => res )
-//     .then( r => { 
-//       const targetOrder = r.data
-//       const targetLineItem = getState().products.singleProduct //saving 
-//       targetOrder.lineitems.push(targetLineItem)
-      
-//     })
-//   }
-// }
 
 const SET_ALL_PRODUCTS = 'SET_ALL_PRODUCTS';
 export const setAllProducts = allProducts => ({
@@ -117,5 +74,28 @@ export const getSingleProduct = (productId) =>
   dispatch => 
     axios.get(`/api/products/${productId}`)
       .then( (res) => dispatch(setSingleProduct(res.data)) )
+
+
+//Adding product to order
+export const addProductToOrder = (productId) => {
+  return (dispatch, getState) => {
+    axios.get(`/api/orders/list/${productId}`,
+      {productId: productId})
+    .then(res => {
+      const targetOrderId = res.data.order_id
+      const newOrder = getState().orders.singleOrder
+      const orderId = getState().orders.singleOrder.orderId
+      const orderListItems = getState().orders.singleOrder.items
+      
+      //FIX ME ==> still adding repeat listItem ids
+      if(!orderListItems[res.data.id]){
+        orderListItems.push(res.data.id)
+      }
+      // =============================================
+
+      const updatedOrder = Object.assign({}, newOrder, {orderId: targetOrderId, items: orderListItems})
+    })
+  }
+}
 
 export default reducer

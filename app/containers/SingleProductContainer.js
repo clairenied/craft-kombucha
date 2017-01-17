@@ -15,8 +15,8 @@ function mapDispatchToProps(dispatch, ownProps){
     let reviewArr = reviewString.split(' ').slice(0, 7)
     return reviewArr.join(' ')
   },
-  addProductToOrder: function(lineitemId){
-    dispatch(addProductToOrder(lineitemId))
+  addProductToOrder: function(productId){
+    dispatch(addProductToOrder(productId))
   }
  }
 }

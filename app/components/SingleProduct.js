@@ -8,10 +8,10 @@ const SingleProduct = (props) => {
   const singleProduct = props.products.singleProduct
   const reviews = props.reviews
   const addProductToOrder = props.addProductToOrder
-  const lineItemId = singleProduct.lineitem_id
+  const productId = singleProduct.id
     
   const handleSubmit = function(){
-    return addProductToOrder(singleProduct.lineitem_id)
+    return addProductToOrder(productId)
   }
 
   return(

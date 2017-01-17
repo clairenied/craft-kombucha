@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import SingleOrder from '../components/SingleOrder'
+import {getSingleProduct} from '../reducers/products'
 
 function mapStateToProps(state){
     return {
-        singleOrder: state.orders.singleOrder,
-        itemsInOrder: state.orders.singleOrder.items
+        singleOrder: state.orders,
     }
 }
 

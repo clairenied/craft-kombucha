@@ -45,16 +45,82 @@ module.exports = require('express').Router()
     .catch(next)
   })
   //update order with product
-  .put('/:orderId', (req, res, next) => {
-    console.log('req.body', req.body)
-    Order.findOne({
-      where: {id: req.body.orderId}
+  .get('/list/:productId', (req, res, next) => {
+    //check for productId
+
+    Product.findOne({ 
+      where: {id: req.params.productId}
     })
-    .then( order => {
-      // console.log(item)
-      res.json(order)
+    .then( product => {
+      //if no Product, throw error
+      if(!product) { 
+        var err = new Error('Not Found')
+        err.status = 404
+        throw err
+      }
+
+      //if product, check for listId
+      itemId = product.dataValues.lineitem_id;
+      itemPrice = product.dataValues.basePrice;
+
+        //if listitem id is null, create line item
+        if(itemId === null){
+          LineItem.create({
+            lineItemPrice: itemPrice,
+            quantity: 1
+          })
+          .then( lineItem => {
+
+            lineItemId = lineItem.dataValues.id;
+            // update product line item
+            product.update({
+              lineitem_id: lineItemId
+            })
+            .then( updatedProduct => {
+              //check for current user id
+              //If order has associated user id
+                //associate line item id with that order id
+                
+              //Else create order. Associate new orderId with line item id
+              lineItemOrder = updatedProduct.dataValues.lineitem_id
+              Order.create({
+                price: itemPrice, 
+                status: 'cart'
+              })
+              .then( order => {
+                lineItemOrder = order.dataValues.id
+                lineItem.update({
+                  order_id: lineItemOrder
+                })
+                .then(item => {
+                  res.json(item)
+                })
+              })
+            })               
+          })       
+        }
+        //if listitem id exists, increment quantity by one
+        else {
+          LineItem.findOne({
+            where: { id: itemId }
+          })
+          .then( lineItem => {
+            // console.log('lineitem: ', lineItem)
+            newQuantity = lineItem.dataValues.quantity + 1;
+            lineItem.update({
+              quantity: newQuantity
+            })
+            .then( updatedLineItem => {
+              res.json(updatedLineItem)
+            })
+          })
+        }
+
+
+      
+
     })
-    .catch(next)
+
   })
   // .post('/:orderId', (req, res, next) => {
     
