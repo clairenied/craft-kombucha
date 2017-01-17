@@ -13,6 +13,7 @@ import SingleReviewContainer from './containers/SingleReviewContainer';
 import ReviewsContainer from './containers/ReviewsContainer';
 import Signup from './components/Signup';
 import Orders from './components/Orders';
+import SingleOrder from './components/SingleOrder';
 import Admin from './components/Admin';
 import NewReview from './components/NewReview'
 
@@ -36,20 +37,14 @@ const adminOnEnter = (nextRouterState) => {
   store.dispatch(fetchUsers());
 };
 
-const onOrdersEnter = function() {
-  axios.get('/api/orders')
-  .then((res) => {
-    store.dispatch(getAllOrders(res.data));
-  });
+const onOrdersEnter = (nextRouterState) => {
+  const orderId = nextRouterState.params.orderId;
+  return store.dispatch(getAllOrders())
 };
 
 const onSingleOrderEnter = function(nextRouterState) {
   const orderId = nextRouterState.params.orderId;
   return store.dispatch(getSingleOrder(orderId));
-  // axios.get(`/api/orders/${orderId}`)
-  // .then( res => {
-  //   store.dispatch(getSingleOrder(res.data))
-  // })
 };
 
 const loadAllProducts = () => {

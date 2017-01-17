@@ -24,7 +24,7 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log("here are navbar's props", this.props);
+    // console.log("here are navbar's props", this.props);
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">

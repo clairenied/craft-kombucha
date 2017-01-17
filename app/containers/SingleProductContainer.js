@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import SingleProduct from '../components/SingleProduct'
+import {addProductToOrder} from '../reducers/products'
 
 import { deleteProduct } from '../reducers/products'
 

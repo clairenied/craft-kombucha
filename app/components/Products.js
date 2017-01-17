@@ -6,7 +6,6 @@ import ProductModule from './ProductModule';
 
 const Products = (props) => {
   const products = props.products
-
   return (
     <div>
       <div className="page-header col-xs-12">

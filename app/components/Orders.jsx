@@ -8,7 +8,7 @@ import OrderModule from './OrderModule';
   import {getSingleOrder, getAllOrders} from '../reducers/orders'; 
 */
 
-const Order = (props) => {
+const Orders = (props) => {
   
   const allOrders = props.allOrders;  
   return (
@@ -21,11 +21,8 @@ const Order = (props) => {
             return (<OrderModule key={i} order={singleOrder}/>)
         })
       }
-      <div className="row col-xs-12">
-        <a href="#" className="btn btn-default">Check Out</a>
-      </div>
     </div>
   )
 }
 
-export default Order;
+export default Orders;

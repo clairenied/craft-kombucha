@@ -3,13 +3,14 @@ const db = require('APP/db'); // eslint-disable-line
 
 // const LineItem = db.model('lineitems');
 // const Product = db.model('products');
-
 const LineItem = require('./lineitem');
 const Product = require('./product');
 
+/*
+  Add method to change status
+*/
+
 const Order = db.define('orders', {
-  //why is this here again??
-  //Do we need to list each lineItem price per item in the order??? - NVM
   price: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -38,12 +39,17 @@ const Order = db.define('orders', {
       })
       .then(items => {
         items.map( item => {
-          itemPrice += parseInt(item.dataValues.product.price)
+          const price = item.dataValues.lineItemPrice;
+          const quantity = item.dataValues.quantity
+          if(item.dataValues.product === null){
+            return '0';
+          }
+          itemPrice += parseInt(price*quantity)
         })
-       
         totalPrice = itemPrice.toString()
-        
-        order.update({
+        totalPrice = totalPrice.slice(0,2) + '.' + totalPrice.slice(2,4)
+
+        return order.update({
           price: totalPrice
         })
       })
@@ -54,7 +60,7 @@ const Order = db.define('orders', {
       if(this.status === 'processing'){
         this.set(orderPlacedDate, date.now())
       }
-    }
+    },
   }, 
   hooks: {
     beforeValidate: function(order){

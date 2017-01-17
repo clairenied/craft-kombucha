@@ -6,6 +6,7 @@ import ReviewModule from './ReviewModule'
 
 const SingleProduct = (props) => {
   const singleProduct = props.product
+
   return(
 		<div>
       <div className="page-header col-xs-12">
@@ -33,7 +34,8 @@ const SingleProduct = (props) => {
         <p>
           Act fast! Only <b>{singleProduct.remaining}</b> remaining
         </p>
-        <a href="#" className="btn btn-default">${singleProduct.price}</a>
+        <a className="btn btn-default" 
+           onClick={handleSubmit}>${singleProduct.price}</a>
       </div>
        
     </div>
