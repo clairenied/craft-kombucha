@@ -14,15 +14,19 @@ export default function (props) {
       <form className="form-horizontal" onSubmit={handleSubmit}>
         <fieldset>
           <legend>New Review</legend>
+
           <div className="form-group">
-            <label className="col-xs-2 control-label">Rating (1-5)</label>
+            <label className="col-xs-2 control-label">Rating</label>
             <div className="col-xs-10">
-              <input
-                className="StarRating-form-control"
-                type="text"
-                onChange={handleChange}
-                value={starRatingValue}
-              />
+              <h4 >
+                <select className="StarRating-form-control" value={starRatingValue} onChange={handleChange}>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </h4>
             </div>
           </div>
           <div className="form-group">
