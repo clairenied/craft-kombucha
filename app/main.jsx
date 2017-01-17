@@ -85,6 +85,7 @@ const loadAllReviews = (nextRouterState) => {
   return store.dispatch(fetchReviews(productId));
 };
 
+
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
 )(
@@ -117,11 +118,10 @@ render (
         <Route path="/products" component={ProductsContainer} onEnter={loadAllProducts} />
         <Route path="/products/:productId" component={SingleProductContainer} onEnter={loadSingleProduct} />
         <Route path="/products/:productId/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
+        <Route path="/products/:productId/new-review" component={NewReviewContainer} />
 
         <Route path="/reviews" component={ReviewsContainer} onEnter={loadAllReviews} />
         <Route path="/reviews/:reviewId" component={SingleReviewContainer} onEnter={loadSingleReview} />
-
-        <Route path="/new-review" component={NewReviewContainer} />
 
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} onEnter={adminOnEnter} />

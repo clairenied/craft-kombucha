@@ -41,7 +41,6 @@ class NewReviewContainer extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log("STORE", store.getState())
     store.dispatch(addNewReview(this.state.starRatingValue, this.state.contentValue, this.state.userId, this.state.productTypeId));
 
     this.setState({
